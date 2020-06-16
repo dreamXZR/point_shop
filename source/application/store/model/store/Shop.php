@@ -47,12 +47,19 @@ class Shop extends ShopModel
      * @param $data
      * @return false|int
      */
-    public function edit($data)
+    public function edit($data,$is_store_shop = true)
     {
-        if (!$this->validateForm($data)) {
-            return false;
+        //验证
+//        if (!$this->validateForm($data)) {
+//            return false;
+//        }
+        //
+        if($is_store_shop){
+            return $this->allowField(true)->save($this->createData($data)) !== false;
+        }else{
+            return $this->allowField(true)->save($data) !== false;
         }
-        return $this->allowField(true)->save($this->createData($data)) !== false;
+
     }
 
     /**

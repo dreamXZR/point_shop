@@ -25,7 +25,6 @@ class RoleAccess extends RoleAccessModel
             $data[] = [
                 'role_id' => $role_id,
                 'access_id' => $access_id,
-                'wxapp_id' => self::$wxapp_id,
             ];
         }
         return $this->saveAll($data);
@@ -65,7 +64,6 @@ class RoleAccess extends RoleAccessModel
             $data[] = [
                 'role_id' => $role_id,
                 'access_id' => $access_id,
-                'wxapp_id' => self::$wxapp_id,
             ];
         }
         return $this->saveAll($data);

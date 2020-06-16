@@ -28,14 +28,6 @@ class User extends StoreUserModel
             $this->error = '登录失败, 用户名或密码错误';
             return false;
         }
-        if (empty($user['wxapp'])) {
-            $this->error = '登录失败, 未找到小程序信息';
-            return false;
-        }
-        if ($user['wxapp']['is_recycle']) {
-            $this->error = '登录失败, 当前小程序商城已删除';
-            return false;
-        }
         // 保存登录状态
         $this->loginState($user);
         return true;
@@ -52,7 +44,7 @@ class User extends StoreUserModel
      */
     private function getLoginUser($user_name, $password)
     {
-        return self::useGlobalScope(false)->with(['wxapp'])->where([
+        return self::useGlobalScope(false)->where([
             'user_name' => $user_name,
             'password' => yoshop_hash($password),
             'is_delete' => 0
@@ -97,7 +89,6 @@ class User extends StoreUserModel
         try {
             // 新增管理员记录
             $data['password'] = yoshop_hash($data['password']);
-            $data['wxapp_id'] = self::$wxapp_id;
             $data['is_super'] = 0;
             $this->allowField(true)->save($data);
             // 新增角色关系记录
@@ -106,6 +97,7 @@ class User extends StoreUserModel
             return true;
         } catch (\Exception $e) {
             $this->error = $e->getMessage();
+            var_dump($e->getMessage());
             $this->rollback();
             return false;
         }

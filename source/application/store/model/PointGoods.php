@@ -3,14 +3,16 @@
 namespace app\store\model;
 
 use app\common\model\Goods as GoodsModel;
+use think\Db;
 
 /**
  * 商品模型
  * Class Goods
  * @package app\store\model
  */
-class Goods extends GoodsModel
+class PointGoods extends GoodsModel
 {
+    protected $name = 'point_goods';
     /**
      * 添加商品
      * @param array $data
@@ -29,8 +31,10 @@ class Goods extends GoodsModel
         $this->startTrans();
         try {
             // 添加商品
+
             $this->allowField(true)->save($data);
             // 商品规格
+
             $this->addGoodsSpec($data);
             // 商品图片
             $this->addGoodsImages($data['images']);
@@ -107,8 +111,8 @@ class Goods extends GoodsModel
         $isUpdate && $model->removeAll($this['goods_id']);
         // 添加规格数据
         if ($data['spec_type'] == '10') {
-            // 单规格
             $this->sku()->save($data['sku']);
+
         } else if ($data['spec_type'] == '20') {
             // 添加商品与规格关系记录
             $model->addGoodsSpecRel($this['goods_id'], $data['spec_many']['spec_attr']);
@@ -147,5 +151,6 @@ class Goods extends GoodsModel
         !empty($where) && $this->where($where);
         return $this->count();
     }
+
 
 }

@@ -32,7 +32,6 @@ class Role extends RoleModel
      */
     public function add($data)
     {
-        $data['wxapp_id'] = self::$wxapp_id;
         if (empty($data['access'])) {
             $this->error = '请选择权限';
             return false;

@@ -25,7 +25,6 @@ class UserRole extends UserRoleModel
             $data[] = [
                 'store_user_id' => $store_user_id,
                 'role_id' => $role_id,
-                'wxapp_id' => self::$wxapp_id,
             ];
         }
         return $this->saveAll($data);

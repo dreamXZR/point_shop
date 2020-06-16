@@ -3,22 +3,22 @@
         <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
             <div class="widget am-cf">
                 <div class="widget-head am-cf">
-                    <div class="widget-title a m-cf">商家入驻</div>
+                    <div class="widget-title a m-cf">店铺管理</div>
                 </div>
                 <div class="widget-body am-fr">
                     <!-- 工具栏 -->
-                    <div class="page_toolbar am-margin-bottom-xs am-cf">
-                        <div class="am-form-group">
-                            <?php if (checkPrivilege('shop/add')): ?>
-                                <div class="am-btn-group am-btn-group-xs">
-                                    <a class="am-btn am-btn-default am-btn-success"
-                                       href="<?= url('shop/add') ?>">
-                                        <span class="am-icon-plus"></span> 新增
-                                    </a>
-                                </div>
-                            <?php endif; ?>
-                        </div>
-                    </div>
+<!--                    <div class="page_toolbar am-margin-bottom-xs am-cf">-->
+<!--                        <div class="am-form-group">-->
+<!--                            --><?php //if (checkPrivilege('shop/add')): ?>
+<!--                                <div class="am-btn-group am-btn-group-xs">-->
+<!--                                    <a class="am-btn am-btn-default am-btn-success"-->
+<!--                                       href="--><?//= url('shop/add') ?><!--">-->
+<!--                                        <span class="am-icon-plus"></span> 新增-->
+<!--                                    </a>-->
+<!--                                </div>-->
+<!--                            --><?php //endif; ?>
+<!--                        </div>-->
+<!--                    </div>-->
                     <div class="am-scrollable-horizontal am-u-sm-12">
                         <table width="100%" class="am-table am-table-compact am-table-striped
                          tpl-table-black am-text-nowrap">
@@ -27,11 +27,11 @@
                                 <th>门店ID</th>
                                 <th>门店名称</th>
                                 <th>门店logo</th>
-                                <th>营业时间</th>
+                                <th>拥有积分</th>
                                 <th>联系人</th>
                                 <th>联系电话</th>
                                 <th>门店地址</th>
-                                <th>自提核销</th>
+<!--                                <th>自提核销</th>-->
                                 <th>门店状态</th>
                                 <th>创建时间</th>
                                 <th>操作</th>
@@ -47,18 +47,18 @@
                                             <img src="<?= $item['logo']['file_path'] ?>" width="72" height="72" alt="">
                                         </a>
                                     </td>
-                                    <td class="am-text-middle"><?= $item['shop_hours'] ?></td>
+                                    <td class="am-text-middle"><?= $item['points'] ?></td>
                                     <td class="am-text-middle"><?= $item['linkman'] ?></td>
                                     <td class="am-text-middle"><?= $item['phone'] ?></td>
                                     <td class="am-text-middle">
                                         <?= $item['region']['province'] ?>  <?= $item['region']['city'] ?>  <?= $item['region']['region'] ?>
                                         <?= $item['address'] ?>
                                     </td>
-                                    <td class="am-text-middle">
-                                            <span class="am-badge am-badge-<?= $item['is_check'] ? 'success' : 'warning' ?>">
-                                               <?= $item['is_check'] ? '支持' : '不支持' ?>
-                                           </span>
-                                    </td>
+<!--                                    <td class="am-text-middle">-->
+<!--                                            <span class="am-badge am-badge---><?//= $item['is_check'] ? 'success' : 'warning' ?><!--">-->
+<!--                                               --><?//= $item['is_check'] ? '支持' : '不支持' ?>
+<!--                                           </span>-->
+<!--                                    </td>-->
                                     <td class="am-text-middle">
                                             <span class="am-badge am-badge-<?= $item['status'] ? 'success' : 'warning' ?>">
                                                <?= $item['status'] ? '启用' : '禁用' ?>

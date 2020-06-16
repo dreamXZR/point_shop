@@ -11,111 +11,22 @@
                             <div class="am-form-group">
                                 <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require"> 门店名称 </label>
                                 <div class="am-u-sm-9 am-u-end">
-                                    <input type="text" class="tpl-form-input" name="shop[shop_name]"
+                                    <input disabled type="text" class="tpl-form-input" name="shop[shop_name]"
                                            placeholder="请输入门店名称" value="<?= $model['shop_name'] ?>" required>
-                                </div>
-                            </div>
-                            <div class="am-form-group">
-                                <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require"> 门店logo </label>
-                                <div class="am-u-sm-9 am-u-end">
-                                    <div class="am-form-file">
-                                        <div class="am-form-file">
-                                            <button type="button"
-                                                    class="upload-file am-btn am-btn-secondary am-radius">
-                                                <i class="am-icon-cloud-upload"></i> 选择图片
-                                            </button>
-                                            <div class="uploader-list am-cf">
-                                                <div class="file-item">
-                                                    <a href="<?= $model['logo']['file_path'] ?>"
-                                                       title="点击查看大图" target="_blank">
-                                                        <img src="<?= $model['logo']['file_path'] ?>">
-                                                    </a>
-                                                    <input type="hidden" name="shop[logo_image_id]"
-                                                           value="<?= $model['logo_image_id'] ?>">
-                                                    <i class="iconfont icon-shanchu file-item-delete"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                             <div class="am-form-group am-padding-top">
                                 <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require"> 联系人 </label>
                                 <div class="am-u-sm-9 am-u-end">
-                                    <input type="text" class="tpl-form-input" name="shop[linkman]"
+                                    <input disabled type="text" class="tpl-form-input" name="shop[linkman]"
                                            placeholder="请输入门店联系人" value="<?= $model['linkman'] ?>" required>
-                                </div>
-                            </div>
-                            <div class="am-form-group">
-                                <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require"> 营业时间 </label>
-                                <div class="am-u-sm-9 am-u-end">
-                                    <input type="text" class="tpl-form-input" name="shop[shop_hours]"
-                                           placeholder="请输入门店营业时间" value="<?= $model['shop_hours'] ?>" required>
-                                    <small>例如：8:30-17:30</small>
                                 </div>
                             </div>
                             <div class="am-form-group">
                                 <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require"> 联系电话 </label>
                                 <div class="am-u-sm-9 am-u-end">
-                                    <input type="text" class="tpl-form-input" name="shop[phone]"
+                                    <input disabled type="text" class="tpl-form-input" name="shop[phone]"
                                            placeholder="请输入门店联系电话" value="<?= $model['phone'] ?>" required>
-                                </div>
-                            </div>
-                            <div class="am-form-group am-padding-top">
-                                <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require"> 门店区域 </label>
-                                <div class="am-u-sm-9 am-u-end">
-                                    <div class="x-region-select" data-region-selected>
-                                        <select name="shop[province_id]"
-                                                data-province
-                                                data-id="<?= $model['province_id'] ?>"
-                                                required>
-                                            <option value="">请选择省份</option>
-                                        </select>
-                                        <select name="shop[city_id]"
-                                                data-city
-                                                data-id="<?= $model['city_id'] ?>"
-                                                required>
-                                            <option value="">请选择城市</option>
-                                        </select>
-                                        <select name="shop[region_id]"
-                                                data-region
-                                                data-id="<?= $model['region_id'] ?>"
-                                                required>
-                                            <option value="">请选择地区</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="am-form-group">
-                                <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require"> 详细地址 </label>
-                                <div class="am-u-sm-9 am-u-end">
-                                    <input type="text" class="tpl-form-input" name="shop[address]"
-                                           placeholder="请输入详细地址" value="<?= $model['address'] ?>" required>
-                                </div>
-                            </div>
-                            <div class="am-form-group">
-                                <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require"> 门店坐标 </label>
-                                <div class="am-u-sm-9 am-u-end">
-                                    <div class="am-block">
-                                        <input type="text" style="background: none !important;" id="coordinate"
-                                               class="tpl-form-input" name="shop[coordinate]"
-                                               placeholder="请选择门店坐标"
-                                               value="<?= $model['longitude'] ?>,<?= $model['latitude'] ?>"
-                                               readonly=""
-                                               required>
-                                    </div>
-                                    <div class="am-block am-padding-top-xs">
-                                        <iframe id="map" src="<?= url('shop/getpoint') ?>"
-                                                width="915"
-                                                height="610"></iframe>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="am-form-group am-padding-top">
-                                <label class="am-u-sm-3 am-u-lg-2 am-form-label"> 门店简介 </label>
-                                <div class="am-u-sm-9 am-u-end">
-                                    <textarea class="am-field-valid" rows="5" placeholder="请输入门店简介"
-                                              name="shop[summary]"><?= $model['summary'] ?></textarea>
                                 </div>
                             </div>
                             <div class="am-form-group">
@@ -127,18 +38,10 @@
                                 </div>
                             </div>
                             <div class="am-form-group">
-                                <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require"> 自提核销 </label>
+                                <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">积分 </label>
                                 <div class="am-u-sm-9 am-u-end">
-                                    <label class="am-radio-inline">
-                                        <input type="radio" name="shop[is_check]" value="1" data-am-ucheck
-                                            <?= $model['is_check'] == 1 ? 'checked' : '' ?>>
-                                        支持
-                                    </label>
-                                    <label class="am-radio-inline">
-                                        <input type="radio" name="shop[is_check]" value="0" data-am-ucheck
-                                            <?= $model['is_check'] == 0 ? 'checked' : '' ?>>
-                                        不支持
-                                    </label>
+                                    <input type="number" class="tpl-form-input" name="shop[points]"
+                                           value="<?= $model['points'] ?>" required>
                                 </div>
                             </div>
                             <div class="am-form-group">

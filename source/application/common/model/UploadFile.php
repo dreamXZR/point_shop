@@ -56,7 +56,6 @@ class UploadFile extends BaseModel
      */
     public function add($data)
     {
-        $data['wxapp_id'] = self::$wxapp_id;
         return $this->save($data);
     }
 

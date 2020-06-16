@@ -74,6 +74,31 @@ return [
             ]
         ],
     ],
+    'point_goods' => [
+        'name' => '积分商品',
+        'icon' => 'icon-goods',
+        'index' => 'point_goods/index',
+        'submenu' => [
+            [
+                'name' => '积分商品列表',
+                'index' => 'point_goods/index',
+                'uris' => [
+                    'point_goods/index',
+                    'point_goods/add',
+                    'point_goods/edit',
+                ],
+            ],
+            [
+                'name' => '商品分类',
+                'index' => 'point_goods.category/index',
+                'uris' => [
+                    'point_goods.category/index',
+                    'point_goods.category/add',
+                    'point_goods.category/edit',
+                ],
+            ],
+        ],
+    ],
     'order' => [
         'name' => '订单管理',
         'icon' => 'icon-order',
@@ -130,7 +155,7 @@ return [
                 'index' => 'shop/index',
                 'submenu' => [
                     [
-                        'name' => '入驻审核',
+                        'name' => '店铺管理',
                         'index' => 'shop/index',
                         'uris' => [
                             'shop/index',
@@ -139,10 +164,10 @@ return [
                         ]
                     ],
                     [
-                        'name' => '店铺管理',
-                        'index' => 'shop/manage',
+                        'name' => '入驻审核',
+                        'index' => 'shop.settled/index',
                         'uris' => [
-                            'shop/manage',
+                            'shop.settled/index',
                         ]
                     ],
 //                    [
@@ -161,6 +186,11 @@ return [
                 'index' => 'shop.order/index',
             ]
         ]
+    ],
+    'store_shop' => [
+        'name' => '门店管理',
+        'icon' => 'icon-shop',
+        'index' => 'store_shop/edit',
     ],
     'content' => [
         'name' => '内容管理',
