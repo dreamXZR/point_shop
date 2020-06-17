@@ -5,6 +5,7 @@ namespace app\store\controller;
 use app\store\model\Category;
 use app\store\model\Delivery;
 use app\store\model\Goods as GoodsModel;
+use think\Session;
 
 /**
  * 商品管理控制器
@@ -38,12 +39,13 @@ class Goods extends Controller
      */
     public function add()
     {
+
         if (!$this->request->isAjax()) {
             // 商品分类
             $catgory = Category::getCacheTree();
             // 配送模板
-            $delivery = Delivery::getAll();
-            return $this->fetch('add', compact('catgory', 'delivery'));
+            //$delivery = Delivery::getAll();
+            return $this->fetch('add', compact('catgory'));
         }
         $model = new GoodsModel;
         if ($model->add($this->postData('goods'))) {

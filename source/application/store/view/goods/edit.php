@@ -316,24 +316,6 @@
                                 <div class="widget-title am-fl">其他设置</div>
                             </div>
                             <div class="am-form-group">
-                                <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">运费模板 </label>
-                                <div class="am-u-sm-9 am-u-end">
-                                    <select name="goods[delivery_id]" required
-                                            data-am-selected="{searchBox: 1, btnSize: 'sm',  placeholder:'请选择运费模板'}">
-                                        <option value="">请选择运费模板</option>
-                                        <?php foreach ($delivery as $item): ?>
-                                            <option value="<?= $item['delivery_id'] ?>"
-                                                <?= $model['delivery_id'] == $item['delivery_id'] ? 'selected' : '' ?>>
-                                                <?= $item['name'] ?> (<?= $item['method']['text'] ?>)
-                                            </option>
-                                        <?php endforeach; ?>
-                                    </select>
-                                    <small class="am-margin-left-xs">
-                                        <a href="<?= url('setting.delivery/add') ?>">去添加</a>
-                                    </small>
-                                </div>
-                            </div>
-                            <div class="am-form-group">
                                 <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">商品状态 </label>
                                 <div class="am-u-sm-9 am-u-end">
                                     <label class="am-radio-inline">
@@ -349,10 +331,10 @@
                                 </div>
                             </div>
                             <div class="am-form-group">
-                                <label class="am-u-sm-3 am-u-lg-2 am-form-label">初始销量</label>
+                                <label class="am-u-sm-3 am-u-lg-2 am-form-label">购买获取积分</label>
                                 <div class="am-u-sm-9 am-u-end">
-                                    <input type="number" class="tpl-form-input" name="goods[sales_initial]"
-                                           value="<?= $model['sales_initial'] ?>">
+                                    <input type="number" class="tpl-form-input" name="goods[exchange_points]"
+                                           value="<?= $model['exchange_points'] ?>">
                                 </div>
                             </div>
                             <div class="am-form-group">
@@ -364,24 +346,24 @@
                                 </div>
                             </div>
 
-                            <div class="widget-head am-cf">
-                                <div class="widget-title am-fl">分销设置</div>
-                            </div>
-                            <div class="am-form-group">
-                                <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">是否开启单独分销 </label>
-                                <div class="am-u-sm-9 am-u-end">
-                                    <label class="am-radio-inline">
-                                        <input type="radio" name="goods[is_ind_dealer]" value="0" data-am-ucheck
-                                            <?= $model['is_ind_dealer'] == false ? 'checked' : '' ?>>
-                                        关闭
-                                    </label>
-                                    <label class="am-radio-inline">
-                                        <input type="radio" name="goods[is_ind_dealer]" value="1" data-am-ucheck
-                                            <?= $model['is_ind_dealer'] == true ? 'checked' : '' ?>>
-                                        开启
-                                    </label>
-                                </div>
-                            </div>
+<!--                            <div class="widget-head am-cf">-->
+<!--                                <div class="widget-title am-fl">分销设置</div>-->
+<!--                            </div>-->
+<!--                            <div class="am-form-group">-->
+<!--                                <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">是否开启单独分销 </label>-->
+<!--                                <div class="am-u-sm-9 am-u-end">-->
+<!--                                    <label class="am-radio-inline">-->
+<!--                                        <input type="radio" name="goods[is_ind_dealer]" value="0" data-am-ucheck-->
+<!--                                            --><?//= $model['is_ind_dealer'] == false ? 'checked' : '' ?><!-->-->
+<!--                                        关闭-->
+<!--                                    </label>-->
+<!--                                    <label class="am-radio-inline">-->
+<!--                                        <input type="radio" name="goods[is_ind_dealer]" value="1" data-am-ucheck-->
+<!--                                            --><?//= $model['is_ind_dealer'] == true ? 'checked' : '' ?><!-->-->
+<!--                                        开启-->
+<!--                                    </label>-->
+<!--                                </div>-->
+<!--                            </div>-->
                             <div class="widget-dealer__content <?= $model['is_ind_dealer'] == false ? 'hide' : '' ?>">
                                 <div class="am-form-group">
                                     <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">分销佣金类型 </label>

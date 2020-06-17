@@ -72,6 +72,7 @@ class User extends BaseModel
             'user' => [
                 'store_user_id' => $user['store_user_id'],
                 'user_name' => $user['user_name'],
+                'store_shop_id' => $user['store_shop_id']
             ],
             'wxapp' => $wxapp->toArray(),
             'is_login' => true,

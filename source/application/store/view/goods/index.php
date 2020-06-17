@@ -3,7 +3,7 @@
         <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
             <div class="widget am-cf">
                 <div class="widget-head am-cf">
-                    <div class="widget-title am-cf">出售中的商品</div>
+                    <div class="widget-title am-cf">商家展示商品</div>
                 </div>
                 <div class="widget-body am-fr">
                     <!-- 工具栏 -->
@@ -84,8 +84,8 @@
                                 <th>商品图片</th>
                                 <th>商品名称</th>
                                 <th>商品分类</th>
-                                <th>实际销量</th>
                                 <th>商品排序</th>
+                                <th>可获取积分</th>
                                 <th>商品状态</th>
                                 <th>添加时间</th>
                                 <th>操作</th>
@@ -106,8 +106,8 @@
                                         <p class="item-title"><?= $item['goods_name'] ?></p>
                                     </td>
                                     <td class="am-text-middle"><?= $item['category']['name'] ?></td>
-                                    <td class="am-text-middle"><?= $item['sales_actual'] ?></td>
                                     <td class="am-text-middle"><?= $item['goods_sort'] ?></td>
+                                    <td class="am-text-middle"><?= $item['exchange_points'] ?></td>
                                     <td class="am-text-middle">
                                            <span class="j-state am-badge x-cur-p
                                            am-badge-<?= $item['goods_status']['value'] == 10 ? 'success' : 'warning' ?>"
@@ -129,12 +129,6 @@
                                                 <a href="javascript:;" class="item-delete tpl-table-black-operation-del"
                                                    data-id="<?= $item['goods_id'] ?>">
                                                     <i class="am-icon-trash"></i> 删除
-                                                </a>
-                                            <?php endif; ?>
-                                            <?php if (checkPrivilege('goods/copy')): ?>
-                                                <a class="tpl-table-black-operation-green" href="<?= url('goods/copy',
-                                                    ['goods_id' => $item['goods_id']]) ?>">
-                                                    一键复制
                                                 </a>
                                             <?php endif; ?>
                                         </div>

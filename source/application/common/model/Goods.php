@@ -2,6 +2,8 @@
 
 namespace app\common\model;
 
+use think\Session;
+
 /**
  * 商品模型
  * Class Goods
@@ -115,6 +117,11 @@ class Goods extends BaseModel
         $status > 0 && $filter['goods_status'] = $status;
         !empty($search) && $filter['goods_name'] = ['like', '%' . trim($search) . '%'];
         $filter['is_point_goods'] = $is_point_goods;
+        //判断是商家还是超管
+        $admin_user = Session::get('yoshop_store.user');
+        if($admin_user['store_shop_id']){
+            $filter['shop_id'] = $admin_user['store_shop_id'];
+        }
         // 排序规则
         $sort = [];
         if ($sortType === 'all') {

@@ -3,6 +3,7 @@
 namespace app\store\model;
 
 use app\common\model\Goods as GoodsModel;
+use think\Session;
 
 /**
  * 商品模型
@@ -28,6 +29,9 @@ class Goods extends GoodsModel
         // 开启事务
         $this->startTrans();
         try {
+            //获取用户所属店铺id
+            $admin_user = Session::get('yoshop_store.user');
+            $data['shop_id'] = $admin_user['store_shop_id'];
             // 添加商品
             $this->allowField(true)->save($data);
             // 商品规格
