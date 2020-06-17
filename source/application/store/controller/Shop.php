@@ -2,6 +2,8 @@
 
 namespace app\store\controller;
 
+use app\store\controller\shop\Classify;
+use app\store\model\ShopClassify;
 use app\store\model\store\Shop as ShopModel;
 
 /**
@@ -62,10 +64,12 @@ class Shop extends Controller
         // 门店详情
         $model = ShopModel::detail($shop_id);
         if (!$this->request->isAjax()) {
-            return $this->fetch('edit', compact('model'));
+            // 店铺分类
+            $catgory = ShopClassify::getCacheTree();
+            return $this->fetch('edit', compact('model','catgory'));
         }
         // 新增记录
-        if ($model->edit($this->postData('shop'))) {
+        if ($model->edit($this->postData('shop'),false)) {
             return $this->renderSuccess('更新成功', url('shop/index'));
         }
         return $this->renderError($model->getError() ?: '更新失败');
@@ -86,5 +90,7 @@ class Shop extends Controller
         }
         return $this->renderSuccess('删除成功');
     }
+
+
 
 }

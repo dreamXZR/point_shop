@@ -30,6 +30,31 @@
                                 </div>
                             </div>
                             <div class="am-form-group">
+                                <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">店铺分类 </label>
+                                <div class="am-u-sm-9 am-u-end">
+                                    <select name="shop[shop_classify_id]" required
+                                            data-am-selected="{searchBox: 1, btnSize: 'sm',
+                                             placeholder:'请选择店铺分类', maxHeight: 400}">
+                                        <option value=""></option>
+                                        <?php if (isset($catgory)): foreach ($catgory as $first): ?>
+                                            <option value="<?= $first['category_id'] ?>"
+                                                <?= $model['shop_classify_id'] == $first['category_id'] ? 'selected' : '' ?>>
+                                                <?= $first['name'] ?></option>
+                                            <?php if (isset($first['child'])): foreach ($first['child'] as $two): ?>
+                                                <option value="<?= $two['category_id'] ?>"
+                                                    <?= $model['shop_classify_id'] == $two['category_id'] ? 'selected' : '' ?>>
+                                                    　　<?= $two['name'] ?></option>
+                                                <?php if (isset($two['child'])): foreach ($two['child'] as $three): ?>
+                                                    <option value="<?= $three['category_id'] ?>"
+                                                        <?= $model['shop_classify_id'] == $three['category_id'] ? 'selected' : '' ?>>
+                                                        　　　<?= $three['name'] ?></option>
+                                                <?php endforeach; endif; ?>
+                                            <?php endforeach; endif; ?>
+                                        <?php endforeach; endif; ?>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="am-form-group">
                                 <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">门店排序 </label>
                                 <div class="am-u-sm-9 am-u-end">
                                     <input type="number" class="tpl-form-input" name="shop[sort]"

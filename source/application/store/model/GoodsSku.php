@@ -47,7 +47,6 @@ class GoodsSku extends GoodsSkuModel
                     'goods_id' => $goods_id,
                     'spec_id' => $val['group_id'],
                     'spec_value_id' => $item['item_id'],
-                    'wxapp_id' => self::$wxapp_id,
                 ];
             }, $val['spec_items']);
         }, $spec_attr);

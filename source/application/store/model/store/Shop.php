@@ -103,4 +103,16 @@ class Shop extends ShopModel
         return true;
     }
 
+    /**
+     * 获取当前店铺总数
+     * @param array $where
+     * @return int|string
+     */
+    public function getShopTotal($where = [])
+    {
+        $this->where('is_delete', '=', 0);
+        !empty($where) && $this->where($where);
+        return $this->count();
+    }
+
 }

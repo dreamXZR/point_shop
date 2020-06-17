@@ -4,7 +4,7 @@ namespace app\store\controller;
 
 use app\store\model\PointCategory;
 use app\store\model\Delivery;
-use app\store\model\PointGoods as GoodsModel;
+use app\store\model\Goods as GoodsModel;
 
 /**
  * 商品管理控制器
@@ -27,7 +27,7 @@ class PointGoods extends Controller
         $catgory = PointCategory::getCacheTree();
         // 商品列表
         $model = new GoodsModel;
-        $list = $model->getList($goods_status, $category_id, $goods_name);
+        $list = $model->getList($goods_status, $category_id, $goods_name,1);
         return $this->fetch('index', compact('list', 'catgory'));
     }
 
@@ -41,13 +41,13 @@ class PointGoods extends Controller
         if (!$this->request->isAjax()) {
             // 商品分类
             $catgory = PointCategory::getCacheTree();
-            // 配送模板
-            //$delivery = Delivery::getAll();
             return $this->fetch('add', compact('catgory'));
         }
         $model = new GoodsModel;
-        if ($model->add($this->postData('goods'))) {
-            return $this->renderSuccess('添加成功', url('goods/index'));
+        $goods_data =  $this->postData('goods');
+        $goods_data['is_point_goods'] = 1;
+        if ($model->add($goods_data)) {
+            return $this->renderSuccess('添加成功', url('point_goods/index'));
         }
         return $this->renderError($model->getError() ?: '添加失败');
     }
@@ -94,18 +94,16 @@ class PointGoods extends Controller
         if (!$this->request->isAjax()) {
             // 商品分类
             $catgory = PointCategory::getCacheTree();
-            // 配送模板
-            $delivery = Delivery::getAll();
             // 商品sku数据
             $specData = 'null';
             if ($model['spec_type'] == 20) {
                 $specData = json_encode($model->getManySpecData($model['spec_rel'], $model['sku']), JSON_UNESCAPED_SLASHES);
             }
-            return $this->fetch('edit', compact('model', 'catgory', 'delivery', 'specData'));
+            return $this->fetch('edit', compact('model', 'catgory', 'specData'));
         }
         // 更新记录
         if ($model->edit($this->postData('goods'))) {
-            return $this->renderSuccess('更新成功', url('goods/index'));
+            return $this->renderSuccess('更新成功', url('point_goods/index'));
         }
         return $this->renderError($model->getError() ?: '更新失败');
     }
@@ -134,7 +132,7 @@ class PointGoods extends Controller
     public function delete($goods_id)
     {
         // 商品详情
-        $model = GoodsModel::detail($goods_id);
+        $model = GoodsModel::get($goods_id);
         if (!$model->setDelete()) {
             return $this->renderError('删除失败');
         }

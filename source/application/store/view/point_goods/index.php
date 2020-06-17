@@ -3,7 +3,7 @@
         <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
             <div class="widget am-cf">
                 <div class="widget-head am-cf">
-                    <div class="widget-title am-cf">出售中的商品</div>
+                    <div class="widget-title am-cf">积分兑换商品</div>
                 </div>
                 <div class="widget-body am-fr">
                     <!-- 工具栏 -->
@@ -85,6 +85,7 @@
                                 <th>商品名称</th>
                                 <th>商品分类</th>
                                 <th>商品排序</th>
+                                <th>兑换积分</th>
                                 <th>商品状态</th>
                                 <th>添加时间</th>
                                 <th>操作</th>
@@ -106,6 +107,7 @@
                                     </td>
                                     <td class="am-text-middle"><?= $item['category']['name'] ?></td>
                                     <td class="am-text-middle"><?= $item['goods_sort'] ?></td>
+                                    <td class="am-text-middle"><?= $item['exchange_points'] ?></td>
                                     <td class="am-text-middle">
                                            <span class="j-state am-badge x-cur-p
                                            am-badge-<?= $item['goods_status']['value'] == 10 ? 'success' : 'warning' ?>"

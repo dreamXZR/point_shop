@@ -103,6 +103,7 @@ class Goods extends BaseModel
         $status = null,
         $category_id = 0,
         $search = '',
+        $is_point_goods = 0,
         $sortType = 'all',
         $sortPrice = false,
         $listRows = 15
@@ -113,6 +114,7 @@ class Goods extends BaseModel
         $category_id > 0 && $filter['category_id'] = ['IN', Category::getSubCategoryId($category_id)];
         $status > 0 && $filter['goods_status'] = $status;
         !empty($search) && $filter['goods_name'] = ['like', '%' . trim($search) . '%'];
+        $filter['is_point_goods'] = $is_point_goods;
         // 排序规则
         $sort = [];
         if ($sortType === 'all') {

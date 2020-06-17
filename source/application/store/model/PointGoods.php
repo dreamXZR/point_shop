@@ -34,10 +34,11 @@ class PointGoods extends GoodsModel
 
             $this->allowField(true)->save($data);
             // 商品规格
-
             $this->addGoodsSpec($data);
+            var_dump(222222);
             // 商品图片
             $this->addGoodsImages($data['images']);
+            var_dump(3333333);
             $this->commit();
             return true;
         } catch (\Exception $e) {
@@ -78,7 +79,6 @@ class PointGoods extends GoodsModel
             return false;
         }
         $data['content'] = isset($data['content']) ? $data['content'] : '';
-        $data['wxapp_id'] = $data['sku']['wxapp_id'] = self::$wxapp_id;
 
         // 开启事务
         $this->startTrans();

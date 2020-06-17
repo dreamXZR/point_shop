@@ -86,7 +86,7 @@ class Setting extends BaseModel
                 'key' => 'store',
                 'describe' => '商城设置',
                 'values' => [
-                    'name' => $store_name ?: '萤火小程序商城',
+                    'name' => $store_name ?: '积分小程序商城',
                     'kuaidi100' => [
                         'customer' => '',
                         'key' => '',

@@ -31,8 +31,7 @@ class SpecValue extends SpecValueModel
      */
     public function add($spec_id, $spec_value)
     {
-        $wxapp_id = self::$wxapp_id;
-        return $this->save(compact('spec_value', 'spec_id', 'wxapp_id'));
+        return $this->save(compact('spec_value', 'spec_id'));
     }
 
 }

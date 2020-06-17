@@ -13,6 +13,11 @@ return [
         'icon' => 'icon-home',
         'index' => 'index/index',
     ],
+    'banner' => [
+        'name' => '轮播图',
+        'icon' => 'icon-wenzhang',
+        'index' => 'banner/index',
+    ],
     'store' => [
         'name' => '管理员',
         'icon' => 'icon-guanliyuan',
@@ -64,14 +69,14 @@ return [
                     'goods.category/edit',
                 ],
             ],
-            [
-                'name' => '商品评价',
-                'index' => 'goods.comment/index',
-                'uris' => [
-                    'goods.comment/index',
-                    'goods.comment/detail',
-                ],
-            ]
+//            [
+//                'name' => '商品评价',
+//                'index' => 'goods.comment/index',
+//                'uris' => [
+//                    'goods.comment/index',
+//                    'goods.comment/detail',
+//                ],
+//            ]
         ],
     ],
     'point_goods' => [
@@ -89,7 +94,7 @@ return [
                 ],
             ],
             [
-                'name' => '商品分类',
+                'name' => '积分商品分类',
                 'index' => 'point_goods.category/index',
                 'uris' => [
                     'point_goods.category/index',
@@ -168,6 +173,15 @@ return [
                         'index' => 'shop.settled/index',
                         'uris' => [
                             'shop.settled/index',
+                        ]
+                    ],
+                    [
+                        'name' => '店铺分类',
+                        'index' => 'shop.classify/index',
+                        'uris' => [
+                            'shop.classify/index',
+                            'shop.classify/add',
+                            'shop.classify/edit',
                         ]
                     ],
 //                    [

@@ -3,15 +3,16 @@
 namespace app\store\model;
 
 use think\Cache;
-use app\common\model\Category as CategoryModel;
+use think\Model;
 
 /**
  * 商品分类模型
  * Class Category
  * @package app\store\model
  */
-class Category extends CategoryModel
+class Banner extends Model
 {
+    protected $name = 'banner';
     /**
      * 添加新记录
      * @param $data
@@ -19,10 +20,10 @@ class Category extends CategoryModel
      */
     public function add($data)
     {
+
         if (!empty($data['image'])) {
-            $data['image_id'] = UploadFile::getFildIdByName($data['image']);
+            $data['image_url'] = UploadFile::getFildIdByName($data['image']);
         }
-        $this->deleteCache();
         return $this->allowField(true)->save($data);
     }
 
@@ -33,7 +34,6 @@ class Category extends CategoryModel
      */
     public function edit($data)
     {
-        $this->deleteCache();
         !array_key_exists('image_id', $data) && $data['image_id'] = 0;
         return $this->allowField(true)->save($data) !== false;
     }
@@ -60,13 +60,14 @@ class Category extends CategoryModel
         return $this->delete();
     }
 
-    /**
-     * 删除缓存
-     * @return bool
-     */
-    private function deleteCache()
+    public function getList()
     {
-        return Cache::rm('category_' . self::$wxapp_id);
+        return $this->order('image_type asc,sort asc')->select();
+    }
+
+    public function banner()
+    {
+        return $this->hasOne("app\\store\\model\\UploadFile", 'file_id', 'image_id');
     }
 
 }

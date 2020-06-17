@@ -345,7 +345,7 @@
                             <div class="am-form-group">
                                 <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">兑换积分</label>
                                 <div class="am-u-sm-9 am-u-end">
-                                    <input type="number" class="tpl-form-input" name="goods[goods_exchange_points]"
+                                    <input type="number" class="tpl-form-input" name="goods[exchange_points]"
                                            value="0" required>
                                 </div>
                             </div>

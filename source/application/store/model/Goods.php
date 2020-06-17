@@ -74,7 +74,6 @@ class Goods extends GoodsModel
             return false;
         }
         $data['content'] = isset($data['content']) ? $data['content'] : '';
-        $data['wxapp_id'] = $data['sku']['wxapp_id'] = self::$wxapp_id;
 
         // 开启事务
         $this->startTrans();
