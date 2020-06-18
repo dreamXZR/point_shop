@@ -54,8 +54,7 @@ class Wxapp extends BaseModel
     public static function getWxappCache($wxapp_id = null)
     {
         if (is_null($wxapp_id)) {
-            $self = new static();
-            $wxapp_id = $self::$wxapp_id;
+            $wxapp_id = config('mini_weixin.wxapp_id');
         }
         if (!$data = Cache::get('wxapp_' . $wxapp_id)) {
             $data = self::get($wxapp_id);

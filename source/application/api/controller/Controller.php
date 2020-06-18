@@ -27,9 +27,9 @@ class Controller extends \think\Controller
     public function _initialize()
     {
         // 当前小程序id
-        $this->wxapp_id = $this->getWxappId();
+        //$this->wxapp_id = $this->getWxappId();
         // 验证当前小程序状态
-        $this->checkWxapp();
+        //$this->checkWxapp();
     }
 
     /**

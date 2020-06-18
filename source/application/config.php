@@ -238,4 +238,9 @@ return [
         'var_page' => 'page',
         'list_rows' => 15,
     ],
+
+    //微信小程序配置
+    'mini_weixin' => [
+        'wxapp_id' => 10001,  //当前小程序编号
+    ],
 ];

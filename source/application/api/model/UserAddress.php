@@ -58,13 +58,13 @@ class UserAddress extends UserAddressModel
                 'detail' => $data['detail'],
                 'district' => ($region_id === 0 && !empty($region[2])) ? $region[2] : '',
                 'user_id' => $user['user_id'],
-                'wxapp_id' => self::$wxapp_id
             ]);
             // 设为默认收货地址
             !$user['address_id'] && $user->save(['address_id' => $this['address_id']]);
             $this->commit();
             return true;
         } catch (\Exception $e) {
+            var_dump($e->getMessage());
             $this->error = $e->getMessage();
             $this->rollback();
             return false;

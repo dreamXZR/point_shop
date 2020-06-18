@@ -154,25 +154,10 @@ class User extends UserModel
                 'url' => 'pages/address/index',
                 'icon' => 'map'
             ],
-            'coupon' => [
-                'name' => '领券中心',
-                'url' => 'pages/coupon/coupon',
-                'icon' => 'lingquan'
-            ],
             'sharing_order' => [
                 'name' => '拼团订单',
                 'url' => 'pages/sharing/order/index',
                 'icon' => 'pintuan'
-            ],
-            'my_coupon' => [
-                'name' => '我的优惠券',
-                'url' => 'pages/user/coupon/coupon',
-                'icon' => 'youhuiquan'
-            ],
-            'dealer' => [
-                'name' => '分销中心',
-                'url' => 'pages/dealer/index/index',
-                'icon' => 'fenxiaozhongxin'
             ],
             'help' => [
                 'name' => '我的帮助',
@@ -187,6 +172,16 @@ class User extends UserModel
             unset($menus['dealer']);
         }
         return $menus;
+    }
+
+    public function incrPoints($num)
+    {
+        $this->setInc('points',$num);
+    }
+
+    public function decrPoints($num)
+    {
+        $this->setDec('points',$num);
     }
 
 }

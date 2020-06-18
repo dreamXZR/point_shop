@@ -12,7 +12,7 @@ use think\Db;
  */
 class PointGoods extends GoodsModel
 {
-    protected $name = 'point_goods';
+    protected $name = 'goods';
     /**
      * 添加商品
      * @param array $data
@@ -35,10 +35,8 @@ class PointGoods extends GoodsModel
             $this->allowField(true)->save($data);
             // 商品规格
             $this->addGoodsSpec($data);
-            var_dump(222222);
             // 商品图片
             $this->addGoodsImages($data['images']);
-            var_dump(3333333);
             $this->commit();
             return true;
         } catch (\Exception $e) {

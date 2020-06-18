@@ -60,9 +60,13 @@ class Banner extends Model
         return $this->delete();
     }
 
-    public function getList()
+    public function getList($banner_type = 0)
     {
-        return $this->order('image_type asc,sort asc')->select();
+        $filter = [];
+        if($banner_type){
+            $filter['image_type'] = $banner_type;
+        }
+        return $this->where($filter)->order('image_type asc,sort asc')->select();
     }
 
     public function banner()

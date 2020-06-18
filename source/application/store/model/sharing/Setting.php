@@ -31,12 +31,12 @@ class Setting extends SettingModel
     {
         $model = self::detail($key) ?: $this;
         // 删除系统设置缓存
-        Cache::rm('sharing_setting_' . self::$wxapp_id);
+        Cache::rm('sharing_setting_' .config('mini_weixin.wxapp_id'));
         return $model->save([
                 'key' => $key,
                 'describe' => $this->describe[$key],
                 'values' => $values,
-                'wxapp_id' => self::$wxapp_id,
+                'wxapp_id' => config('mini_weixin.wxapp_id'),
             ]) !== false;
     }
 

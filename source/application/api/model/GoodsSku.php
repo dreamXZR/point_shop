@@ -21,4 +21,9 @@ class GoodsSku extends GoodsSkuModel
         'update_time'
     ];
 
+    public function decrStockNum($num)
+    {
+        $this->dec('stock_num',$num);
+    }
+
 }

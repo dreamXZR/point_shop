@@ -31,7 +31,7 @@ class Category extends CategoryModel
      */
     public function add($data)
     {
-        $data['wxapp_id'] = self::$wxapp_id;
+        $data['wxapp_id'] = config('mini_weixin.wxapp_id');
         $this->deleteCache();
         return $this->allowField(true)->save($data);
     }
@@ -70,7 +70,7 @@ class Category extends CategoryModel
      */
     private function deleteCache()
     {
-        return Cache::rm('article_category_' . self::$wxapp_id);
+        return Cache::rm('article_category_' .  config('mini_weixin.wxapp_id'));
     }
 
 }

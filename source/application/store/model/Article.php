@@ -42,7 +42,7 @@ class Article extends ArticleModel
             $this->error = '请输入文章内容';
             return false;
         }
-        $data['wxapp_id'] = self::$wxapp_id;
+        $data['wxapp_id'] = config('mini_weixin.wxapp_id');
         return $this->allowField(true)->save($data);
     }
 
