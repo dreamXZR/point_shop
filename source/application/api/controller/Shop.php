@@ -3,6 +3,7 @@
 namespace app\api\controller;
 
 use app\api\model\store\Shop as ShopModel;
+use app\store\model\store\ShopSettled;
 
 
 /**
@@ -19,10 +20,10 @@ class Shop extends Controller
      * @return array
      * @throws \think\exception\DbException
      */
-    public function lists($longitude = '', $latitude = '')
+    public function lists($longitude = '', $latitude = '',$shop_classify_id = 0)
     {
         $model = new ShopModel;
-        $list = $model->getList(true, $longitude, $latitude);
+        $list = $model->getList(true, $longitude, $latitude,$shop_classify_id);
         return $this->renderSuccess(compact('list'));
     }
 
@@ -36,6 +37,42 @@ class Shop extends Controller
     {
         $detail = ShopModel::detail($shop_id);
         return $this->renderSuccess(compact('detail'));
+    }
+
+    /**
+     * 商家入驻
+     * @throws \app\common\exception\BaseException
+     * @throws \think\exception\DbException
+     */
+    public function shopSettled()
+    {
+        //获取用户信息
+        $user = $this->getUser();
+        $model = new ShopSettled();
+        if(!$this->request->isPost()){
+            $info = $model->where(['user_id'=>$user['user_id'],'is_pass'=>0])->find();
+            if($info){
+                return $this->renderError('您已经申请，请耐心等待');
+            }else{
+                return $this->renderSuccess('您可以申请');
+            }
+        }
+        $data = $this->postData();
+        $model->save([
+            'user_id' => $user['user_id'],
+            'shop_name' => $data['shop_name'],
+            'linkman' => $data['linkman'],
+            'phone' => $data['phone']
+        ]);
+        return $this->renderError('您已经申请，请耐心等待');
+    }
+
+    /**
+     * 获取商家积分信息
+     */
+    public function pointsInfo()
+    {
+
     }
 
 }

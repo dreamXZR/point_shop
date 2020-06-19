@@ -471,24 +471,24 @@ return [
                 'name' => '上传设置',
                 'index' => 'setting/storage',
             ],
-            [
-                'name' => '小票打印机',
-                'submenu' => [
-                    [
-                        'name' => '打印机管理',
-                        'index' => 'setting.printer/index',
-                        'uris' => [
-                            'setting.printer/index',
-                            'setting.printer/add',
-                            'setting.printer/edit'
-                        ]
-                    ],
-                    [
-                        'name' => '打印设置',
-                        'index' => 'setting/printer'
-                    ]
-                ]
-            ],
+//            [
+//                'name' => '小票打印机',
+//                'submenu' => [
+//                    [
+//                        'name' => '打印机管理',
+//                        'index' => 'setting.printer/index',
+//                        'uris' => [
+//                            'setting.printer/index',
+//                            'setting.printer/add',
+//                            'setting.printer/edit'
+//                        ]
+//                    ],
+//                    [
+//                        'name' => '打印设置',
+//                        'index' => 'setting/printer'
+//                    ]
+//                ]
+//            ],
             [
                 'name' => '其他',
                 'submenu' => [

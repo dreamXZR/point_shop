@@ -108,6 +108,7 @@ class Goods extends BaseModel
         $is_point_goods = 0,
         $sortType = 'all',
         $sortPrice = false,
+        $shop_id = 0,
         $listRows = 15
     )
     {
@@ -121,6 +122,9 @@ class Goods extends BaseModel
         $admin_user = Session::get('yoshop_store.user');
         if($admin_user['store_shop_id']){
             $filter['shop_id'] = $admin_user['store_shop_id'];
+        }
+        if($shop_id){
+            $filter['shop_id'] = $shop_id;
         }
         // 排序规则
         $sort = [];

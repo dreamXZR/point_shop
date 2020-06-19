@@ -119,7 +119,7 @@ class Setting extends Controller
     private function updateEvent($key, $vars = [])
     {
         if (!$this->request->isAjax()) {
-            $vars['values'] = SettingModel::getItem($key);
+            $vars['values'] = SettingModel::getItem($key,config('mini_weixin.wxaapp_id'));
             return $this->fetch($key, $vars);
         }
         $model = new SettingModel;

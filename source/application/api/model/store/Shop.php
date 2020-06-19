@@ -33,15 +33,21 @@ class Shop extends ShopModel
      * @throws \think\db\exception\ModelNotFoundException
      * @throws \think\exception\DbException
      */
-    public function getList($is_check = null, $longitude = '', $latitude = '', $limit = false)
+    public function getList($is_check = null, $longitude = '', $latitude = '', $shop_classify_id = 0,$limit = false)
     {
         // 是否支持自提核销
         $is_check && $this->where('is_check', '=', $is_check);
         // 获取数量
         $limit != false && $this->limit($limit);
+        $where = [
+            'is_delete' => 0,
+            'status' => 1,
+        ];
+        if($shop_classify_id){
+            $where['shop_classify_id'] = $shop_classify_id;
+        }
         // 获取门店列表数据
-        $data = $this->where('is_delete', '=', '0')
-            ->where('status', '=', '1')
+        $data = $this->where($where)
             ->order(['sort' => 'asc', 'create_time' => 'desc'])
             ->select();
         // 根据距离排序

@@ -24,7 +24,7 @@ class Delivery extends DeliveryModel
             $this->error = '请选择可配送区域';
             return false;
         }
-        $data['wxapp_id'] = self::$wxapp_id;
+        $data['wxapp_id'] = config('mini_weixin.wxapp_id');
         if ($this->allowField(true)->save($data)) {
             return $this->createDeliveryRule($data['rule']);
         }
@@ -97,7 +97,7 @@ class Delivery extends DeliveryModel
                 'first_fee' => $data['first_fee'][$i],
                 'additional' => $data['additional'][$i],
                 'additional_fee' => $data['additional_fee'][$i],
-                'wxapp_id' => self::$wxapp_id
+                'wxapp_id' => config('mini_weixin.wxapp_id')
             ];
         }
         $this->rule()->delete();
