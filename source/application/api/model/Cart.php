@@ -42,7 +42,7 @@ class Cart
     {
         $this->user = $user;
         $this->user_id = $this->user['user_id'];
-        $this->wxapp_id = $this->user['wxapp_id'];
+        //$this->wxapp_id = $this->user['wxapp_id'];
         $this->cart = Cache::get('cart_' . $this->user_id) ?: [];
     }
 
@@ -72,11 +72,11 @@ class Cart
         // 订单商品总金额
         $orderTotalPrice = array_sum(array_column($goodsList, 'total_price'));
         // 处理配送方式
-        if ($delivery == DeliveryTypeEnum::EXPRESS) {
-            $this->orderExpress($returnData, $goodsList, $orderTotalPrice);
-        } elseif ($delivery == DeliveryTypeEnum::EXTRACT) {
-            $shop_id > 0 && $returnData['extract_shop'] = ShopModel::detail($shop_id);
-        }
+//        if ($delivery == DeliveryTypeEnum::EXPRESS) {
+//            $this->orderExpress($returnData, $goodsList, $orderTotalPrice);
+//        } elseif ($delivery == DeliveryTypeEnum::EXTRACT) {
+//            $shop_id > 0 && $returnData['extract_shop'] = ShopModel::detail($shop_id);
+//        }
         // 可用优惠券列表
         $couponList = UserCoupon::getUserCouponList($this->user['user_id'], $orderTotalPrice);
         return array_merge([

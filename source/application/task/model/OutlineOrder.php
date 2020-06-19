@@ -15,7 +15,7 @@ use app\task\model\WxappPrepayId as WxappPrepayIdModel;
  * Class Order
  * @package app\common\model
  */
-class Order extends OrderModel
+class OutlineOrder extends OrderModel
 {
     /**
      * 待支付订单详情
@@ -25,7 +25,7 @@ class Order extends OrderModel
      */
     public function payDetail($order_no)
     {
-        return self::get(['order_no' => $order_no, 'pay_status' => 10], ['goods', 'user']);
+        return self::get(['order_no' => $order_no, 'pay_status' => 10], ['user']);
     }
 
     /**
@@ -42,8 +42,8 @@ class Order extends OrderModel
         $Message = new Message;
         $Message->payment($this);
         // 小票打印
-        $Printer = new Printer;
-        $Printer->printTicket($this, OrderStatusEnum::ORDER_PAYMENT);
+//        $Printer = new Printer;
+//        $Printer->printTicket($this, OrderStatusEnum::ORDER_PAYMENT);
     }
 
     /**
@@ -56,8 +56,6 @@ class Order extends OrderModel
     {
         $this->startTrans();
         try {
-            // 更新商品库存、销量
-            (new Goods)->updateStockSales($this['goods']);
             // 更新订单状态
             $this->save([
                 'pay_status' => 20,
@@ -75,8 +73,6 @@ class Order extends OrderModel
             // 更新prepay_id记录
             $prepayId = WxappPrepayIdModel::detail($this['order_id']);
             $prepayId->updatePayStatus();
-            // 购买指定商品成为分销商
-            $this->becomeDealerUser($this['user_id'], $this['goods'], $this['wxapp_id']);
             // 事务提交
             $this->commit();
             return true;

@@ -73,11 +73,12 @@ class Order extends OrderModel
         // 商品详情
         $goodsList = [$goods['goods_id'] => $goods->toArray()];
         // 处理配送方式
-        if ($delivery == DeliveryTypeEnum::EXPRESS) {
-            $this->orderExpress($returnData, $user, $goodsList, $goodsTotalPrice);
-        } elseif ($delivery == DeliveryTypeEnum::EXTRACT) {
-            $shop_id > 0 && $returnData['extract_shop'] = ShopModel::detail($shop_id);
-        }
+//        if ($delivery == DeliveryTypeEnum::EXPRESS) {
+//            $this->orderExpress($returnData, $user, $goodsList, $goodsTotalPrice);
+//        }
+//        } elseif ($delivery == DeliveryTypeEnum::EXTRACT) {
+//            $shop_id > 0 && $returnData['extract_shop'] = ShopModel::detail($shop_id);
+//        }
         // 可用优惠券列表
         $couponList = UserCoupon::getUserCouponList($user['user_id'], $goodsTotalPrice);
         return array_merge([
@@ -110,7 +111,7 @@ class Order extends OrderModel
         $cityId = $user['address_default'] ? $user['address_default']['city_id'] : null;
         // 初始化配送服务类
         $ExpressService = new ExpressService(
-            static::$wxapp_id,
+            config('mini_weixin.wxapp_id'),
             $cityId,
             $goodsList,
             OrderTypeEnum::MASTER
@@ -145,7 +146,8 @@ class Order extends OrderModel
         $user_id,
         $order,
         $coupon_id = null,
-        $remark = '')
+        $remark = '',
+        $shop_id = 0)
     {
         // 表单验证
         if (!$this->validateOrderForm($order)) {
@@ -156,7 +158,7 @@ class Order extends OrderModel
             // 设置订单优惠券信息
             $this->setCouponPrice($order, $coupon_id);
             // 记录订单信息
-            $this->add($user_id, $order, $remark);
+            $this->add($user_id, $order, $remark,$shop_id);
             // 记录收货地址
             if ($order['delivery'] == DeliveryTypeEnum::EXPRESS) {
                 $this->saveOrderAddress($user_id, $order['address']);
@@ -168,7 +170,7 @@ class Order extends OrderModel
             // 获取订单详情
             $detail = self::getUserOrderDetail($this['order_id'], $user_id);
             // 记录分销商订单
-            DealerOrderModel::createOrder($detail);
+            //DealerOrderModel::createOrder($detail);
             // 事务提交
             $this->commit();
             return true;
@@ -241,7 +243,7 @@ class Order extends OrderModel
      * @param string $remark
      * @return false|int
      */
-    private function add($user_id, &$order, $remark = '')
+    private function add($user_id, &$order, $remark = '',$shop_id = 0)
     {
         $data = [
             'user_id' => $user_id,
@@ -252,7 +254,8 @@ class Order extends OrderModel
             'pay_price' => $order['order_pay_price'],
             'delivery_type' => $order['delivery'],
             'buyer_remark' => trim($remark),
-            'wxapp_id' => self::$wxapp_id,
+            'wxapp_id' => config('mini_weixin.wxapp_id'),
+            'shop_id' => $shop_id
         ];
         if ($order['delivery'] == DeliveryTypeEnum::EXPRESS) {
             $data['express_price'] = $order['express_price'];
@@ -280,7 +283,7 @@ class Order extends OrderModel
             $total_pay_price = $realTotalPrice * $goods['total_price'] / $order['order_total_price'];
             $goodsList[] = [
                 'user_id' => $user_id,
-                'wxapp_id' => self::$wxapp_id,
+                'wxapp_id' => config('mini_weixin.wxapp_id'),
                 'goods_id' => $goods['goods_id'],
                 'goods_name' => $goods['goods_name'],
                 'image_id' => $goods['image'][0]['image_id'],
@@ -338,7 +341,7 @@ class Order extends OrderModel
         }
         return $this->address()->save([
             'user_id' => $user_id,
-            'wxapp_id' => self::$wxapp_id,
+            'wxapp_id' => config('mini_weixin.wxapp_id'),
             'name' => $address['name'],
             'phone' => $address['phone'],
             'province_id' => $address['province_id'],

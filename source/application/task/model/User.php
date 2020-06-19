@@ -33,4 +33,14 @@ class User extends UserModel
         return $this->setInc('money', $money);
     }
 
+    public function incPoints($points)
+    {
+        return $this->setInc('points',$points);
+    }
+
+    public function decPoints($points)
+    {
+        return $this->setDec('points',$points);
+    }
+
 }

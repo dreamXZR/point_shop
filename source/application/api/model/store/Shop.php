@@ -128,4 +128,9 @@ class Shop extends ShopModel
             ->select();
     }
 
+    public function decPoints($points)
+    {
+        $this->dec('points',$points);
+    }
+
 }

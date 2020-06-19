@@ -2,6 +2,7 @@
 
 namespace app\common\library\wechat;
 
+use app\api\model\OutlineOrder;
 use app\common\model\Wxapp as WxappModel;
 use app\common\exception\BaseException;
 
@@ -268,6 +269,9 @@ class WxPay extends WxBase
         } elseif ($orderType === 'sharing') {
             // 拼团订单模型
             return (new \app\task\model\sharing\Order);
+        } elseif ($orderType === 'outline') {
+            // 线下购买订单模型
+            return (new \app\task\model\OutlineOrder);
         }
         return null;
     }

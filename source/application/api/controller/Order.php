@@ -63,7 +63,7 @@ class Order extends Controller
             return $this->renderError($model->getError());
         }
         // 创建订单
-        if ($model->createOrder($this->user['user_id'], $order, $coupon_id, $remark)) {
+        if ($model->createOrder($this->user['user_id'], $order, $coupon_id, $remark,$shop_id)) {
             // 发起微信支付
             return $this->renderSuccess([
                 'payment' => $this->unifiedorder($model),
