@@ -34,7 +34,7 @@ class Cache extends Controller
      */
     private function getItems()
     {
-        $wxapp_id = $this->store['wxapp']['wxapp_id'];
+        $wxapp_id = config('mini_weixin.wxapp_id');
         return [
             'category' => [
                 'type' => 'cache',

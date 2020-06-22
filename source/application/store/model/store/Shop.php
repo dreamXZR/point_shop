@@ -115,4 +115,36 @@ class Shop extends ShopModel
         return $this->count();
     }
 
+    /**
+     * 提现打款成功：累积提现佣金
+     * @param $user_id
+     * @param $money
+     * @return false|int
+     * @throws \think\exception\DbException
+     */
+    public static function totalMoney($user_id, $money)
+    {
+        $model = self::detail($user_id);
+        return $model->save([
+            'freeze_money' => $model['freeze_money'] - $money,
+            'total_money' => $model['total_money'] + $money,
+        ]);
+    }
+
+    /**
+     * 提现驳回：解冻店家资金
+     * @param $user_id
+     * @param $money
+     * @return false|int
+     * @throws \think\exception\DbException
+     */
+    public static function backFreezeMoney($shop_id, $money)
+    {
+        $model = self::detail($shop_id);
+        return $model->save([
+            'money' => $model['money'] + $money,
+            'freeze_money' => $model['freeze_money'] - $money,
+        ]);
+    }
+
 }

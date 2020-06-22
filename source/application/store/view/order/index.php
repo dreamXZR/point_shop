@@ -26,7 +26,7 @@ use app\common\enum\DeliveryType as DeliveryTypeEnum;
                                                     <i class="iconfont icon-daochu am-margin-right-xs"></i>订单导出
                                                 </a>
                                             <?php endif; ?>
-                                            <?php if (checkPrivilege('order.operate/batchdelivery') && $dataType == 'delivery'): ?>
+                                            <?php if (checkPrivilege('order.operate/batchdelivery') && $dataType == 'fail'): ?>
                                                 <a class="j-export am-btn am-btn-secondary am-radius"
                                                    href="<?= url('order.operate/batchdelivery') ?>">
                                                     <i class="iconfont icon-daoru am-margin-right-xs"></i>批量发货

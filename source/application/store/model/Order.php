@@ -8,6 +8,7 @@ use app\common\service\Message;
 use app\common\library\wechat\WxPay;
 use app\common\enum\DeliveryType as DeliveryTypeEnum;
 use app\common\exception\BaseException;
+use think\Session;
 
 /**
  * 订单管理
@@ -157,6 +158,11 @@ class Order extends OrderModel
         if (isset($query['end_time'])) {
             !empty($query['end_time']) && $this->where('create_time', '<', strtotime($query['end_time']) + 86400);
         }
+        //展示商家自己订单，超管可以看所有订单
+        $admin_user = Session::get('yoshop_store.user');
+        if($admin_user['store_shop_id']){
+            $this->where('shop_id', '=', $admin_user['store_shop_id']);
+        }
     }
 
     /**
@@ -195,6 +201,11 @@ class Order extends OrderModel
             case 'all':
                 $filter = [];
                 break;
+        }
+        //判断后台是商家还是超管，超管全部导出
+        $admin_user = Session::get('yoshop_store.user');
+        if($admin_user['store_shop_id']){
+            $filter[] = ['shop_id' => $admin_user['store_shop_id']];
         }
         return $filter;
     }

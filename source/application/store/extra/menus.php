@@ -184,6 +184,10 @@ return [
                             'shop.classify/edit',
                         ]
                     ],
+                    [
+                        'name' => '提现申请',
+                        'index' => 'shop.withdraw/index',
+                    ],
 //                    [
 //                        'name' => '店员管理',
 //                        'index' => 'shop.clerk/index',
@@ -195,10 +199,10 @@ return [
 //                    ],
                 ]
             ],
-            [
-                'name' => '订单核销记录',
-                'index' => 'shop.order/index',
-            ]
+//            [
+//                'name' => '订单核销记录',
+//                'index' => 'shop.order/index',
+//            ]
         ]
     ],
     'store_shop' => [
@@ -237,36 +241,36 @@ return [
             ],
         ]
     ],
-    'market' => [
-        'name' => '营销设置',
-        'icon' => 'icon-marketing',
-        'index' => 'market.coupon/index',
-        'submenu' => [
-            [
-                'name' => '优惠券',
-                'active' => true,
-                'submenu' => [
-                    [
-                        'name' => '优惠券列表',
-                        'index' => 'market.coupon/index',
-                        'uris' => [
-                            'market.coupon/index',
-                            'market.coupon/add',
-                            'market.coupon/edit',
-                        ]
-                    ],
-                    [
-                        'name' => '领取记录',
-                        'index' => 'market.coupon/receive'
-                    ],
-                ]
-            ],
-            [
-                'name' => '满额包邮',
-                'index' => 'market.basic/full_free',
-            ],
-        ],
-    ],
+//    'market' => [
+//        'name' => '营销设置',
+//        'icon' => 'icon-marketing',
+//        'index' => 'market.coupon/index',
+//        'submenu' => [
+//            [
+//                'name' => '优惠券',
+//                'active' => true,
+//                'submenu' => [
+//                    [
+//                        'name' => '优惠券列表',
+//                        'index' => 'market.coupon/index',
+//                        'uris' => [
+//                            'market.coupon/index',
+//                            'market.coupon/add',
+//                            'market.coupon/edit',
+//                        ]
+//                    ],
+//                    [
+//                        'name' => '领取记录',
+//                        'index' => 'market.coupon/receive'
+//                    ],
+//                ]
+//            ],
+//            [
+//                'name' => '满额包邮',
+//                'index' => 'market.basic/full_free',
+//            ],
+//        ],
+//    ],
     'wxapp' => [
         'name' => '小程序',
         'icon' => 'icon-wxapp',
@@ -495,8 +499,12 @@ return [
                     [
                         'name' => '清理缓存',
                         'index' => 'setting.cache/clear'
+                    ],
+                    [
+                        'name' => '密码修改',
+                        'index' => 'setting.password/edit'
                     ]
-                ]
+                ],
             ]
         ],
     ],

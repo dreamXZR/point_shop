@@ -144,7 +144,7 @@ class Setting extends BaseModel
                 'describe' => '结算',
                 'values' => [
                     // 提现方式
-                    'pay_type' => [],   // 参数值：10微信支付 20支付宝支付 30银行卡支付
+                    'pay_type' => [10,20,30],   // 参数值：10微信支付 20支付宝支付 30银行卡支付
                     // 微信支付自动打款
                     'wechat_pay_auto' => '0',       // 微信支付自动打款：1开启 0关闭
                     // 最低提现额度
@@ -326,6 +326,9 @@ class Setting extends BaseModel
                             'default' => '推广二维码',
                             'value' => '推广二维码'
                         ]
+                    ],
+                    'settled' => [
+                        'title'
                     ],
                 ]
             ],

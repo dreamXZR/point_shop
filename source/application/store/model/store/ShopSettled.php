@@ -38,7 +38,7 @@ class ShopSettled extends Model
             $this->save(['is_pass'=>1],['id'=>$id]);
             //创建店铺
             $store_shop_id = Db::table('yoshop_store_shop')->insertGetId([
-                'user_id' => $id,
+                'user_id' => $info['user_id'],
                 'shop_name' => $info['shop_name'],
                 'linkman' => $info['linkman'],
                 'phone' => $info['phone'],

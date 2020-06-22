@@ -109,7 +109,7 @@ class User extends StoreUserModel
      * @return bool
      * @throws \think\exception\DbException
      */
-    public function edit($data)
+    public function edit($data,$is_check_role = true)
     {
         if ($this['user_name'] !== $data['user_name']
             && !!self::detail(['user_name' => $data['user_name']])) {
@@ -120,10 +120,13 @@ class User extends StoreUserModel
             $this->error = '确认密码不正确';
             return false;
         }
-        if (empty($data['role_id'])) {
-            $this->error = '请选择所属角色';
-            return false;
+        if($is_check_role){
+            if (empty($data['role_id'])) {
+                $this->error = '请选择所属角色';
+                return false;
+            }
         }
+
         if (!empty($data['password'])) {
             $data['password'] = yoshop_hash($data['password']);
         } else {
@@ -134,7 +137,9 @@ class User extends StoreUserModel
             // 更新管理员记录
             $this->allowField(true)->save($data);
             // 更新角色关系记录
-            (new UserRole)->edit($this['store_user_id'], $data['role_id']);
+            if(isset($data['role_id'])){
+                (new UserRole)->edit($this['store_user_id'], $data['role_id']);
+            }
             $this->commit();
             return true;
         } catch (\Exception $e) {
@@ -181,6 +186,7 @@ class User extends StoreUserModel
         Session::set('yoshop_store.user', [
             'store_user_id' => $this['store_user_id'],
             'user_name' => $data['user_name'],
+            'store_shop_id' => $data['store_shop_id']
         ]);
         return true;
     }

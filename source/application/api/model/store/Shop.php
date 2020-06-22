@@ -139,4 +139,17 @@ class Shop extends ShopModel
         $this->dec('points',$points);
     }
 
+    /**
+     * 资金冻结
+     * @param $money
+     * @return false|int
+     */
+    public function freezeMoney($money)
+    {
+        return $this->save([
+            'money' => $this['money'] - $money,
+            'freeze_money' => $this['freeze_money'] + $money,
+        ]);
+    }
+
 }

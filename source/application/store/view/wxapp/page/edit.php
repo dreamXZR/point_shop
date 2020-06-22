@@ -55,14 +55,14 @@
                                     <p class="item-icon"><i class="iconfont icon-shangpin5"></i></p>
                                     <p>商品组</p>
                                 </nav>
-                                <nav class="special" @click="onAddItem('coupon')">
-                                    <p class="item-icon"><i class="iconfont icon-youhuiquan2"></i></p>
-                                    <p>优惠券组</p>
-                                </nav>
-                                <nav class="special" @click="onAddItem('sharingGoods')">
-                                    <p class="item-icon"><i class="iconfont icon-shangpin5"></i></p>
-                                    <p>拼团商品</p>
-                                </nav>
+<!--                                <nav class="special" @click="onAddItem('coupon')">-->
+<!--                                    <p class="item-icon"><i class="iconfont icon-youhuiquan2"></i></p>-->
+<!--                                    <p>优惠券组</p>-->
+<!--                                </nav>-->
+<!--                                <nav class="special" @click="onAddItem('sharingGoods')">-->
+<!--                                    <p class="item-icon"><i class="iconfont icon-shangpin5"></i></p>-->
+<!--                                    <p>拼团商品</p>-->
+<!--                                </nav>-->
                                 <nav class="special" @click="onAddItem('shop')">
                                     <p class="item-icon"><i class="iconfont icon-mendian"></i></p>
                                     <p>线下门店</p>

@@ -159,18 +159,22 @@ class User extends UserModel
                 'url' => 'pages/sharing/order/index',
                 'icon' => 'pintuan'
             ],
+            'points' => [
+                'name' => '积分兑换'
+            ],
+            'shop_settled' => [
+                'name' => '店家入驻',
+                'url' => 'pages/dealer/index/index',
+                'icon' => 'map'
+            ],
             'help' => [
                 'name' => '我的帮助',
                 'url' => 'pages/user/help',
                 'icon' => 'help'
             ],
+
         ];
-        // 判断分销功能是否开启
-        if (DealerSettingModel::isOpen()) {
-            $menus['dealer']['name'] = DealerSettingModel::getDealerTitle();
-        } else {
-            unset($menus['dealer']);
-        }
+
         return $menus;
     }
 
