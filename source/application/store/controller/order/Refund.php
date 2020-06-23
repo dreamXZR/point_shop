@@ -39,7 +39,7 @@ class Refund extends Controller
         // 订单详情
         $order = OrderModel::detail($detail['order_id']);
         // 退货地址
-        $address = (new ReturnAddressModel)->getAll();
+        $address = (new ReturnAddressModel)->getAll($order['shop_id']);
         return $this->fetch('detail', compact('detail', 'order', 'address'));
     }
 

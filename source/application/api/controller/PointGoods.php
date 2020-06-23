@@ -92,6 +92,7 @@ class PointGoods extends Controller
                 'exchange_number' => $goods_num,
                 'exchange_points' => $goods_num * $goods['exchange_points'],
                 'exchange_code' => $this->make_coupon_card(),
+                'goods_remarks' => $goods['goods_name'].' '.$goods['goods_sku']['goods_attr'],
             ]);
             //消减用户库存
             $user->decrPoints($goods_num * $goods['exchange_points']);

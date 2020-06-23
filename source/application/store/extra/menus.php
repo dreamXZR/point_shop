@@ -102,6 +102,13 @@ return [
                     'point_goods.category/edit',
                 ],
             ],
+            [
+                'name' => '积分兑换列表',
+                'index' => 'point_goods.exchange/index',
+                'uris' => [
+                    'point_goods.exchange/index',
+                ],
+            ],
         ],
     ],
     'order' => [

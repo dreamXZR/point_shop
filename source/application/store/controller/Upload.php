@@ -5,6 +5,7 @@ namespace app\store\controller;
 use app\store\model\UploadFile;
 use app\common\library\storage\Driver as StorageDriver;
 use app\store\model\Setting as SettingModel;
+use think\Session;
 
 /**
  * 文件库管理
@@ -14,6 +15,8 @@ use app\store\model\Setting as SettingModel;
 class Upload extends Controller
 {
     private $config;
+
+    private $admin_user;
 
     /**
      * 构造方法
@@ -27,6 +30,7 @@ class Upload extends Controller
         parent::_initialize();
         // 存储配置信息
         $this->config = SettingModel::getItem('storage');
+        $this->admin_user = Session::get('yoshop_store.user');
     }
 
     /**
@@ -76,6 +80,7 @@ class Upload extends Controller
             'file_size' => $fileInfo['size'],
             'file_type' => $fileType,
             'extension' => pathinfo($fileInfo['name'], PATHINFO_EXTENSION),
+            'store_shop_id' => $this->admin_user['store_shop_id'],
         ]);
         return $model;
     }

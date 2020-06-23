@@ -4,6 +4,7 @@ namespace app\store\model;
 
 use think\Request;
 use app\common\model\UploadFile as UploadFileModel;
+use think\Session;
 
 /**
  * 文件库模型
@@ -21,13 +22,16 @@ class UploadFile extends UploadFileModel
      */
     public function getList($group_id, $file_type = 'image')
     {
+        $admin_user = Session::get('yoshop_store.user');
+
         if ($group_id != -1) {
             $this->where(compact('group_id'));
         }
         return $this->where([
             'file_type' => $file_type,
             'is_user' => 0,
-            'is_delete' => 0
+            'is_delete' => 0,
+            'store_shop_id' => $admin_user['store_shop_id'],
         ])->order(['file_id' => 'desc'])
             ->paginate(32, false, [
                 'query' => Request::instance()->request()

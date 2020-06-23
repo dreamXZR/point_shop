@@ -132,7 +132,7 @@ class OrderRefund extends OrderRefundModel
                 'apply_desc' => $data['content'],
                 'is_agree' => 0,
                 'status' => 0,
-                'wxapp_id' => self::$wxapp_id,
+                'wxapp_id' => config('mini_weixin.wxapp_id'),
             ]);
             // 记录凭证图片关系
             if (isset($data['images']) && !empty($data['images'])) {

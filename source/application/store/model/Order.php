@@ -205,7 +205,7 @@ class Order extends OrderModel
         //判断后台是商家还是超管，超管全部导出
         $admin_user = Session::get('yoshop_store.user');
         if($admin_user['store_shop_id']){
-            $filter[] = ['shop_id' => $admin_user['store_shop_id']];
+            $filter['shop_id']= $admin_user['store_shop_id'];
         }
         return $filter;
     }
