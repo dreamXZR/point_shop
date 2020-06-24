@@ -112,7 +112,7 @@ class Goods extends BaseModel
      */
     public function getList(
         $status = null,
-        $category_id = 0,
+        $store_shop_id = 0,
         $search = '',
         $sortType = 'all',
         $sortPrice = false,
@@ -121,13 +121,16 @@ class Goods extends BaseModel
     {
         // 筛选条件
         $filter = [];
-        $category_id > 0 && $filter['category_id'] = ['IN', Category::getSubCategoryId($category_id)];
+        $store_shop_id > 0 && $filter['store_shop_id'] = $store_shop_id;
         $status > 0 && $filter['goods_status'] = $status;
         !empty($search) && $filter['goods_name'] = ['like', '%' . trim($search) . '%'];
+        //查找正在秒杀、未秒杀商品
+        $current_time = time();
+        $filter['end_at'] = ['>',$current_time];
         // 排序规则
         $sort = [];
         if ($sortType === 'all') {
-            $sort = ['goods_sort', 'goods_id' => 'desc'];
+            $sort = ['start_at', 'goods_sort'];
         } elseif ($sortType === 'sales') {
             $sort = ['goods_sales' => 'desc'];
         } elseif ($sortType === 'price') {
@@ -154,6 +157,16 @@ class Goods extends BaseModel
             ->paginate($listRows, false, [
                 'query' => \request()->request()
             ]);
+        $current_time = time();
+        foreach ($list as &$v){
+            if($v['start_at'] > $current_time){
+                $v['seckill_status'] = 10; //秒杀未开始
+            }elseif ($v['end_at'] < $current_time){
+                $v['seckill_status'] = 30; //秒杀已经结束
+            }else{
+                $v['seckill_status'] = 20; //秒杀进行中
+            }
+        }
         return $list;
     }
 
@@ -241,7 +254,7 @@ class Goods extends BaseModel
     public static function detail($goods_id)
     {
         $model = new static;
-        return $model->with([
+        $goods_data = $model->with([
             'image.file',
             'sku.image',
             'spec_rel.spec',
@@ -252,6 +265,19 @@ class Goods extends BaseModel
         ])->withCount(['commentData' => function ($query) {
             $query->where(['is_delete' => 0, 'status' => 1]);
         }])->where('goods_id', '=', $goods_id)->find();
+
+        //判断
+        $current_time = time();
+        if($goods_data['start_at'] > $current_time){
+            $goods_data['seckill_status'] = 10; //秒杀未开始
+        }elseif ($goods_data['end_at'] < $current_time){
+            $goods_data['seckill_status'] = 30; //秒杀已经结束
+        }else{
+            $goods_data['seckill_status'] = 20; //秒杀进行中
+        }
+
+        return $goods_data;
+
     }
 
     /**

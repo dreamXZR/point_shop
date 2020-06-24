@@ -80,14 +80,14 @@ class Order extends OrderModel
 //            $shop_id > 0 && $returnData['extract_shop'] = ShopModel::detail($shop_id);
 //        }
         // 可用优惠券列表
-        $couponList = UserCoupon::getUserCouponList($user['user_id'], $goodsTotalPrice);
+       // $couponList = UserCoupon::getUserCouponList($user['user_id'], $goodsTotalPrice);
         return array_merge([
             'goods_list' => array_values($goodsList),   // 商品详情
             'order_total_num' => $goods_num,            // 商品总数量
             'order_total_price' => $goodsTotalPrice,    // 商品总金额 (不含运费)
             'order_pay_price' => $goodsTotalPrice,      // 订单总金额 (含运费)
             'delivery' => $delivery,                    // 配送类型
-            'coupon_list' => array_values($couponList), // 优惠券列表
+           // 'coupon_list' => array_values($couponList), // 优惠券列表
             'address' => $user['address_default'],      // 默认地址
             'exist_address' => !$user['address']->isEmpty(),    // 是否存在收货地址
             'express_price' => '0.00',      // 配送费用
