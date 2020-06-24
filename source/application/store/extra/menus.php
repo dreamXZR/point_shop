@@ -422,6 +422,22 @@ return [
                         'index' => 'apps.sharing.setting/index'
                     ]
                 ]
+            ],
+            [
+                'name' => '秒杀活动',
+                'submenu' => [
+                    [
+                        'name' => '商品列表',
+                        'index' => 'apps.seckill.goods/index',
+                        'uris' => [
+                            'apps.seckill.goods/index',
+                            'apps.seckill.goods/add',
+                            'apps.seckill.goods/edit',
+                            'apps.seckill.goods/copy',
+                            'apps.seckill.goods/copy_master',
+                        ]
+                    ],
+                ]
             ]
         ]
     ],
