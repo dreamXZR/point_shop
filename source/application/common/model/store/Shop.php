@@ -56,4 +56,17 @@ class Shop extends BaseModel
         return static::get($shop_id, ['logo']);
     }
 
+    /**
+     * 根据user_id 获取门店详情
+     * @param $user_id
+     * @return array|bool|false|\PDOStatement|string|\think\Model|null
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
+    public static function getInfoByUserId($user_id)
+    {
+        return static::where(['user_id'=>$user_id])->find();
+    }
+
 }

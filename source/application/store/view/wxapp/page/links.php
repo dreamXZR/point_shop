@@ -17,37 +17,37 @@
                                     </div>
                                 </div>
                             </li>
+<!--                            <li class="link-item">-->
+<!--                                <div class="row page-name">自定义页面</div>-->
+<!--                                <div class="row am-cf">-->
+<!--                                    <div class="am-fl">地址：</div>-->
+<!--                                    <div class="am-fl">-->
+<!--                                        <span class="x-color-green">pages/custom/index</span>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                                <div class="row am-cf">-->
+<!--                                    <div class="am-fl">参数：</div>-->
+<!--                                    <div class="am-fl">-->
+<!--                                        <p class="param">-->
+<!--                                            <span class="x-color-green">page_id</span>-->
+<!--                                            <span>页面ID</span>-->
+<!--                                            <span class="x-color-red">　--必填</span>-->
+<!--                                        </p>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                                <div class="row am-cf">-->
+<!--                                    <div class="am-fl">例如：</div>-->
+<!--                                    <div class="am-fl">-->
+<!--                                        <span class="x-color-c-gray-5f">pages/custom/index?page_id=10001</span>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </li>-->
                             <li class="link-item">
-                                <div class="row page-name">自定义页面</div>
+                                <div class="row page-name">积分商城分类页面</div>
                                 <div class="row am-cf">
                                     <div class="am-fl">地址：</div>
                                     <div class="am-fl">
-                                        <span class="x-color-green">pages/custom/index</span>
-                                    </div>
-                                </div>
-                                <div class="row am-cf">
-                                    <div class="am-fl">参数：</div>
-                                    <div class="am-fl">
-                                        <p class="param">
-                                            <span class="x-color-green">page_id</span>
-                                            <span>页面ID</span>
-                                            <span class="x-color-red">　--必填</span>
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="row am-cf">
-                                    <div class="am-fl">例如：</div>
-                                    <div class="am-fl">
-                                        <span class="x-color-c-gray-5f">pages/custom/index?page_id=10001</span>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="link-item">
-                                <div class="row page-name">分类页面</div>
-                                <div class="row am-cf">
-                                    <div class="am-fl">地址：</div>
-                                    <div class="am-fl">
-                                        <span class="x-color-green">pages/category/index</span>
+                                        <span class="x-color-green">pages/pointCategory/index</span>
                                     </div>
                                 </div>
                             </li>

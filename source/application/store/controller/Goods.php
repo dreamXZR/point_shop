@@ -42,10 +42,10 @@ class Goods extends Controller
 
         if (!$this->request->isAjax()) {
             // 商品分类
-            $catgory = Category::getCacheTree();
+            //$catgory = Category::getCacheTree();
             // 配送模板
-            //$delivery = Delivery::getAll();
-            return $this->fetch('add', compact('catgory'));
+            $delivery = Delivery::getAll();
+            return $this->fetch('add', compact('catgory','delivery'));
         }
         $model = new GoodsModel;
         if ($model->add($this->postData('goods'))) {
@@ -95,7 +95,7 @@ class Goods extends Controller
         $model = GoodsModel::detail($goods_id);
         if (!$this->request->isAjax()) {
             // 商品分类
-            $catgory = Category::getCacheTree();
+            //$catgory = Category::getCacheTree();
             // 配送模板
             $delivery = Delivery::getAll();
             // 商品sku数据

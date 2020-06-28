@@ -72,6 +72,11 @@
                                                     <i class="am-icon-pencil"></i> 编辑
                                                 </a>
                                             <?php endif; ?>
+                                            <?php if (checkPrivilege('shop/recharge')): ?>
+                                                <a href="<?= url('shop/recharge', ['shop_id' => $item['shop_id']]) ?>">
+                                                    <i class="am-icon-pencil"></i> 积分充值
+                                                </a>
+                                            <?php endif; ?>
                                             <?php if (checkPrivilege('shop/delete')): ?>
                                                 <a href="javascript:void(0);"
                                                    class="item-delete tpl-table-black-operation-del"

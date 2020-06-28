@@ -126,6 +126,7 @@ class Goods extends BaseModel
         if($shop_id){
             $filter['shop_id'] = $shop_id;
         }
+        var_dump($shop_id);
         // 排序规则
         $sort = [];
         if ($sortType === 'all') {

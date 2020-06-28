@@ -8,6 +8,7 @@ use app\common\service\order\Printer;
 use app\common\enum\OrderStatus as OrderStatusEnum;
 use app\common\model\Order as OrderModel;
 use app\task\model\dealer\Apply as DealerApplyModel;
+use app\task\model\statements\PointStatements;
 use app\task\model\WxappPrepayId as WxappPrepayIdModel;
 
 /**
@@ -70,8 +71,18 @@ class OutlineOrder extends OrderModel
             //消减商家的积分
             $shop = Shop::get($this['shop_id']);
             $shop->decPoints($this['points']);
+            //商家金额变更
+            $shop->incMoney($this['total_price']);
+            //记录积分日志
+            $point_statements = new PointStatements();
+            $point_statements->record([
+                'user_id' => $this['user_id'],
+                'shop_id' => $this['shop_id'],
+                'type' => 20,
+                'points' => $this['points']
+            ]);
             // 更新prepay_id记录
-            $prepayId = WxappPrepayIdModel::detail($this['order_id']);
+            $prepayId = WxappPrepayIdModel::detail($this['order_id'],30);
             $prepayId->updatePayStatus();
             // 事务提交
             $this->commit();

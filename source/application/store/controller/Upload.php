@@ -29,7 +29,7 @@ class Upload extends Controller
     {
         parent::_initialize();
         // 存储配置信息
-        $this->config = SettingModel::getItem('storage');
+        $this->config = SettingModel::getItem('storage',config('mini_weixin.wxapp_id'));
         $this->admin_user = Session::get('yoshop_store.user');
     }
 

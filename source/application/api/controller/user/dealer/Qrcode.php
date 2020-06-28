@@ -5,6 +5,7 @@ namespace app\api\controller\user\dealer;
 use app\api\controller\Controller;
 use app\api\model\dealer\Setting;
 use app\api\model\dealer\User as DealerUserModel;
+use app\api\model\store\Shop as ShopModel;
 use app\common\service\qrcode\Poster;
 
 /**
@@ -30,9 +31,9 @@ class Qrcode extends Controller
         parent::_initialize();
         // 用户信息
         $this->user = $this->getUser();
-        // 分销商用户信息
-        $this->dealer = DealerUserModel::detail($this->user['user_id']);
-        // 分销商设置
+        // 店铺信息
+        $this->dealer = ShopModel::getInfoByUserId($this->user['user_id']);
+        // 设置
         $this->setting = Setting::getAll();
     }
 
@@ -49,8 +50,6 @@ class Qrcode extends Controller
         return $this->renderSuccess([
             // 二维码图片地址
             'qrcode' => $Qrcode->getImage(),
-            // 页面文字
-            'words' => $this->setting['words']['values'],
         ]);
     }
 

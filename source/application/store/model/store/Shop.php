@@ -3,7 +3,9 @@
 namespace app\store\model\store;
 
 use app\common\model\store\Shop as ShopModel;
+use app\store\model\statements\PointStatements;
 use Lvht\GeoHash;
+use think\Db;
 
 /**
  * 商家门店模型
@@ -145,6 +147,30 @@ class Shop extends ShopModel
             'money' => $model['money'] + $money,
             'freeze_money' => $model['freeze_money'] - $money,
         ]);
+    }
+
+    public function recharge($data)
+    {
+        Db::startTrans();
+        try {
+            $this->save([
+                'points' => $this['points'] + $data['points']
+            ]);
+            //积分记录
+            $point_statements = new PointStatements();
+            $point_statements->record([
+                'shop_id' => $this['shop_id'],
+                'points' => $data['points'],
+                'type' => 30,
+                'remark' => '商家充值操作'
+            ]);
+            Db::commit();
+            return true;
+        }catch (\Exception $e) {
+            $this->error = $e->getMessage();
+            Db::rollback();
+            return false;
+        }
     }
 
 }

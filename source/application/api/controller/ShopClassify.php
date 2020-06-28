@@ -2,8 +2,7 @@
 
 namespace app\api\controller;
 
-use app\api\model\Category as CategoryModel;
-use app\api\model\WxappCategory as WxappCategoryModel;
+use app\api\model\store\ShopClassify as CategoryModel;
 
 /**
  * 商品分类控制器

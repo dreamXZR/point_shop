@@ -22,10 +22,16 @@ class Goods extends Controller
      * @return array
      * @throws \think\exception\DbException
      */
-    public function lists($category_id, $search, $sortType, $sortPrice,$shop_id = 0)
+    public function lists()
     {
         $model = new GoodsModel;
-        $list = $model->getList(10, $category_id, $search, $sortType, $sortPrice,$shop_id);
+
+        $shop_id = request()->get('shop_id') ?: 0;
+        $category_id = request()->get('category_id') ?: 0;
+        $search = request()->get('search') ?: '';
+        $sortType = request()->get('sortType') ?: 'all';
+        $sortPrice = request()->get('sortPrice') ?: false;
+        $list = $model->getList(10, $category_id, $search, 0,$sortType, $sortPrice,$shop_id);
         return $this->renderSuccess(compact('list'));
     }
 

@@ -20,10 +20,10 @@ class Shop extends Controller
      * @return array
      * @throws \think\exception\DbException
      */
-    public function lists($longitude = '', $latitude = '',$shop_classify_id = 0)
+    public function lists($longitude = '', $latitude = '',$shop_classify_id = 0,$search = '')
     {
         $model = new ShopModel;
-        $list = $model->getList(true, $longitude, $latitude,$shop_classify_id);
+        $list = $model->getList(true, $longitude, $latitude,$shop_classify_id,$search);
         return $this->renderSuccess(compact('list'));
     }
 

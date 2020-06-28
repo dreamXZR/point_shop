@@ -7,7 +7,7 @@ use app\api\model\User as UserModel;
 use app\api\model\Wxapp as WxappModel;
 use app\api\model\WxappPrepayId as WxappPrepayIdModel;
 use app\common\library\wechat\WxPay;
-use app\store\model\UserExchange;
+use app\api\model\UserExchange;
 use think\Db;
 
 /**
@@ -41,26 +41,23 @@ class User extends Controller
      * @throws \think\db\exception\ModelNotFoundException
      * @throws \think\exception\DbException
      */
-    public function exchangeLists($is_used)
+    public function exchangeLists($is_used,$listRows = 15)
     {
         $user = $this->getUser();
-        $fields = [
-            'ue.id as id',
-            'g.goods_name',
-            'ue.exchange_number',
-            'ue.exchange_points',
-            'ue.is_used',
-        ];
-        $where = [
-            'is_used' => $is_used,
-            'user_id' => $user['user_id']
-        ];
-        $joins = [
-            ['goods g','ue.point_goods_id = g.goods_id','left']
-        ];
-        $exchangeRecord = Db::name('user_exchange')->alias('ue')->field($fields)->where($where)->join($joins)->select();
+
+        $model = new UserExchange();
+
+        $sort = ['create_time'=>'desc'];
+
+        $lists = $model->where([
+            'user_id' => $user['user_id'],
+            'is_used' => $is_used
+        ])->order($sort)->with(['goods','goods.image.file'])
+            ->paginate($listRows, false, [
+                'query' => \request()->request()
+            ]);
         return $this->renderSuccess([
-            'list'=>$exchangeRecord
+            'list'=>$lists
         ]);
     }
 
@@ -80,6 +77,9 @@ class User extends Controller
     {
         $user = $this->getUser();
         $data = $this->request->post();
+        if(!$data['shop_id'] && !$data['total_price']){
+            return $this->renderError('缺少必要参数');
+        }
         $outlineOrderModel = new OutlineOrder();
         //创建线下付款订单
         if($outlineOrderModel->createOrder($user['user_id'],$data)){

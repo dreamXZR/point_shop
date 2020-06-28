@@ -91,6 +91,25 @@ class Shop extends Controller
         return $this->renderSuccess('删除成功');
     }
 
+    public function recharge($shop_id)
+    {
+
+        // 门店详情
+        $model = ShopModel::detail($shop_id);
+        if (!$this->request->isAjax()) {
+            return $this->fetch('recharge', compact('model'));
+        }
+        //积分充值
+        $data = $this->postData('shop');
+        if($data['points'] == 0){
+            return $this->renderError('请输入充值积分');
+        }
+        if($model->recharge($data)){
+            return $this->renderSuccess('充值成功', url('shop/index'));
+        }
+        return $this->renderError($model->getError() ?: '充值失败');
+    }
+
 
 
 }

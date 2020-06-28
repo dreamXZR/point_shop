@@ -14,7 +14,7 @@ class WxappPrepayId extends BaseModel
     /**
      * prepay_id 详情
      * @param $order_id
-     * @param int $order_type 订单类型 (10商城订单 20拼团订单)
+     * @param int $order_type 订单类型 (10商城订单 20拼团订单 30 线下付款)
      * @return array|false|\PDOStatement|string|\think\Model|static
      */
     public static function detail($order_id, $order_type = 10)

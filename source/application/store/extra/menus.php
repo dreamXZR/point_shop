@@ -60,15 +60,15 @@ return [
                     'goods/copy'
                 ],
             ],
-            [
-                'name' => '商品分类',
-                'index' => 'goods.category/index',
-                'uris' => [
-                    'goods.category/index',
-                    'goods.category/add',
-                    'goods.category/edit',
-                ],
-            ],
+//            [
+//                'name' => '商品分类',
+//                'index' => 'goods.category/index',
+//                'uris' => [
+//                    'goods.category/index',
+//                    'goods.category/add',
+//                    'goods.category/edit',
+//                ],
+//            ],
 //            [
 //                'name' => '商品评价',
 //                'index' => 'goods.comment/index',
@@ -206,6 +206,10 @@ return [
 //                    ],
                 ]
             ],
+            [
+                'name' => '积分流水',
+                'index' => 'shop.pointStatements/index',
+            ],
 //            [
 //                'name' => '订单核销记录',
 //                'index' => 'shop.order/index',
@@ -216,6 +220,11 @@ return [
         'name' => '门店管理',
         'icon' => 'icon-shop',
         'index' => 'store_shop/edit',
+    ],
+    'management_points_statements' => [
+        'name' => '积分流水',
+        'icon' => 'icon-shop',
+        'index' => 'PointStatements/index',
     ],
     'content' => [
         'name' => '内容管理',

@@ -31,7 +31,7 @@ class Poster extends Base
         // 分销商用户信息
         $this->dealer = $dealer;
         // 分销商海报设置
-        $this->config = Setting::getItem('qrcode', $dealer['wxapp_id']);
+        $this->config = Setting::getItem('qrcode', config('mini_weixin.wxapp_id'));
     }
 
     /**
@@ -47,15 +47,16 @@ class Poster extends Base
             return $this->getPosterUrl();
         }
         // 小程序id
-        $wxappId = $this->dealer['wxapp_id'];
+        $wxappId = config('mini_weixin.wxapp_id');
         // 1. 下载背景图
-        $backdrop = $this->saveTempImage($wxappId, $this->config['backdrop']['src'], 'backdrop');
+        //$backdrop = $this->saveTempImage($wxappId, $this->config['backdrop']['src'], 'backdrop');
         // 2. 下载用户头像
-        $avatarUrl = $this->saveTempImage($wxappId, $this->dealer['user']['avatarUrl'], 'avatar');
+        //$avatarUrl = $this->saveTempImage($wxappId, $this->dealer['user']['avatarUrl'], 'avatar');
         // 3. 下载小程序码
-        $qrcode = $this->saveQrcode($wxappId, 'uid:' . $this->dealer['user_id']);
+        $qrcode = $this->saveQrcode($wxappId, 'shop_id:' . $this->dealer['shop_id'],'pages/index/index');
         // 4. 拼接海报图
-        return $this->savePoster($backdrop, $avatarUrl, $qrcode);
+        //return $this->savePoster($backdrop, $avatarUrl, $qrcode);
+        return $qrcode;
     }
 
     /**
@@ -65,7 +66,7 @@ class Poster extends Base
     private function getPosterPath()
     {
         // 保存路径
-        $tempPath = WEB_PATH . 'temp' . DS . $this->dealer['wxapp_id'] . DS;
+        $tempPath = WEB_PATH . 'temp' . DS . config('mini_weixin.wxapp_id') . DS;
         !is_dir($tempPath) && mkdir($tempPath, 0755, true);
         return $tempPath . $this->getPosterName();
     }

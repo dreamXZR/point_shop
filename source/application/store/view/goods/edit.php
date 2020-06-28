@@ -17,34 +17,34 @@
                                            value="<?= $model['goods_name'] ?>" required>
                                 </div>
                             </div>
-                            <div class="am-form-group">
-                                <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">商品分类 </label>
-                                <div class="am-u-sm-9 am-u-end">
-                                    <select name="goods[category_id]" required
-                                            data-am-selected="{searchBox: 1, btnSize: 'sm',
-                                             placeholder:'请选择商品分类', maxHeight: 400}">
-                                        <option value=""></option>
-                                        <?php if (isset($catgory)): foreach ($catgory as $first): ?>
-                                            <option value="<?= $first['category_id'] ?>"
-                                                <?= $model['category_id'] == $first['category_id'] ? 'selected' : '' ?>>
-                                                <?= $first['name'] ?></option>
-                                            <?php if (isset($first['child'])): foreach ($first['child'] as $two): ?>
-                                                <option value="<?= $two['category_id'] ?>"
-                                                    <?= $model['category_id'] == $two['category_id'] ? 'selected' : '' ?>>
-                                                    　　<?= $two['name'] ?></option>
-                                                <?php if (isset($two['child'])): foreach ($two['child'] as $three): ?>
-                                                    <option value="<?= $three['category_id'] ?>"
-                                                        <?= $model['category_id'] == $three['category_id'] ? 'selected' : '' ?>>
-                                                        　　　<?= $three['name'] ?></option>
-                                                <?php endforeach; endif; ?>
-                                            <?php endforeach; endif; ?>
-                                        <?php endforeach; endif; ?>
-                                    </select>
-                                    <small class="am-margin-left-xs">
-                                        <a href="<?= url('goods.category/add') ?>">去添加</a>
-                                    </small>
-                                </div>
-                            </div>
+<!--                            <div class="am-form-group">-->
+<!--                                <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">商品分类 </label>-->
+<!--                                <div class="am-u-sm-9 am-u-end">-->
+<!--                                    <select name="goods[category_id]" required-->
+<!--                                            data-am-selected="{searchBox: 1, btnSize: 'sm',-->
+<!--                                             placeholder:'请选择商品分类', maxHeight: 400}">-->
+<!--                                        <option value=""></option>-->
+<!--                                        --><?php //if (isset($catgory)): foreach ($catgory as $first): ?>
+<!--                                            <option value="--><?//= $first['category_id'] ?><!--"-->
+<!--                                                --><?//= $model['category_id'] == $first['category_id'] ? 'selected' : '' ?><!-->-->
+<!--                                                --><?//= $first['name'] ?><!--</option>-->
+<!--                                            --><?php //if (isset($first['child'])): foreach ($first['child'] as $two): ?>
+<!--                                                <option value="--><?//= $two['category_id'] ?><!--"-->
+<!--                                                    --><?//= $model['category_id'] == $two['category_id'] ? 'selected' : '' ?><!-->-->
+<!--                                                    　　--><?//= $two['name'] ?><!--</option>-->
+<!--                                                --><?php //if (isset($two['child'])): foreach ($two['child'] as $three): ?>
+<!--                                                    <option value="--><?//= $three['category_id'] ?><!--"-->
+<!--                                                        --><?//= $model['category_id'] == $three['category_id'] ? 'selected' : '' ?><!-->-->
+<!--                                                        　　　--><?//= $three['name'] ?><!--</option>-->
+<!--                                                --><?php //endforeach; endif; ?>
+<!--                                            --><?php //endforeach; endif; ?>
+<!--                                        --><?php //endforeach; endif; ?>
+<!--                                    </select>-->
+<!--                                    <small class="am-margin-left-xs">-->
+<!--                                        <a href="--><?//= url('goods.category/add') ?><!--">去添加</a>-->
+<!--                                    </small>-->
+<!--                                </div>-->
+<!--                            </div>-->
                             <div class="am-form-group">
                                 <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">商品图片 </label>
                                 <div class="am-u-sm-9 am-u-end">
@@ -314,6 +314,24 @@
                             </div>
                             <div class="widget-head am-cf">
                                 <div class="widget-title am-fl">其他设置</div>
+                            </div>
+                            <div class="am-form-group">
+                                <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">运费模板 </label>
+                                <div class="am-u-sm-9 am-u-end">
+                                    <select name="goods[delivery_id]" required
+                                            data-am-selected="{searchBox: 1, btnSize: 'sm',  placeholder:'请选择运费模板'}">
+                                        <option value="">请选择运费模板</option>
+                                        <?php foreach ($delivery as $item): ?>
+                                            <option value="<?= $item['delivery_id'] ?>"
+                                                <?= $model['delivery_id'] == $item['delivery_id'] ? 'selected' : '' ?>>
+                                                <?= $item['name'] ?> (<?= $item['method']['text'] ?>)
+                                            </option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                    <small class="am-margin-left-xs">
+                                        <a href="<?= url('setting.delivery/add') ?>">去添加</a>
+                                    </small>
+                                </div>
                             </div>
                             <div class="am-form-group">
                                 <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">商品状态 </label>

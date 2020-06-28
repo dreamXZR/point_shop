@@ -12,7 +12,7 @@ use \app\store\model\Banner as BannerModel;
 class Banner extends Controller
 {
 
-    public function get_banners($banner_type)
+    public function index($banner_type)
     {
         $model = new BannerModel();
         $filter = [];

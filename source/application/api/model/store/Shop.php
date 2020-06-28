@@ -33,7 +33,7 @@ class Shop extends ShopModel
      * @throws \think\db\exception\ModelNotFoundException
      * @throws \think\exception\DbException
      */
-    public function getList($is_check = null, $longitude = '', $latitude = '', $shop_classify_id = 0,$limit = false)
+    public function getList($is_check = null, $longitude = '', $latitude = '', $shop_classify_id = 0,$search = '',$limit = false)
     {
         // 是否支持自提核销
         $is_check && $this->where('is_check', '=', $is_check);
@@ -45,6 +45,9 @@ class Shop extends ShopModel
         ];
         if($shop_classify_id){
             $where['shop_classify_id'] = $shop_classify_id;
+        }
+        if($search){
+            $where['shop_name'] = ['like','%'.$search.'%'];
         }
         // 获取门店列表数据
         $data = $this->where($where)
@@ -136,7 +139,14 @@ class Shop extends ShopModel
 
     public function decPoints($points)
     {
-        $this->dec('points',$points);
+        $this->setDec('points',$points);
+    }
+
+    public function incMoney($money)
+    {
+        return $this->save([
+            'money' => $this['money'] + $money,
+        ]);
     }
 
     /**

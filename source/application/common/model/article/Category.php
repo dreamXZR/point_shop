@@ -21,12 +21,12 @@ class Category extends BaseModel
     public static function getALL()
     {
         $model = new static;
-        if (!Cache::get('article_category_' . $model::$wxapp_id)) {
+        if (!Cache::get('article_category_' .config('mini_weixin.wxapp_id'))) {
             $data = $model->order(['sort' => 'asc', 'create_time' => 'asc'])->select();
             $all = !empty($data) ? $data->toArray() : [];
-            Cache::tag('cache')->set('article_category_' . $model::$wxapp_id, $all);
+            Cache::tag('cache')->set('article_category_' .config('mini_weixin.wxapp_id'), $all);
         }
-        return Cache::get('article_category_' . $model::$wxapp_id);
+        return Cache::get('article_category_' .config('mini_weixin.wxapp_id'));
     }
 
 }

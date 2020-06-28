@@ -23,9 +23,11 @@ class OutlineOrder extends Model
                 'total_price' => $data['total_price'],
                 'pay_price' => $data['total_price'],
                 'shop_id' => $data['shop_id'],
-                'points' => $this->getPoints($data['total_price'])
+                'points' => $this->getPoints($data['total_price']),
+                'wxapp_id' => config('mini_weixin.wxapp_id'),
             ]);
             $this->commit();
+            return true;
         }catch (\Exception $e) {
             $this->rollback();
             $this->error = $e->getMessage();
