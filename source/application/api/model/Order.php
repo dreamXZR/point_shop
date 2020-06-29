@@ -73,12 +73,11 @@ class Order extends OrderModel
         // 商品详情
         $goodsList = [$goods['goods_id'] => $goods->toArray()];
         // 处理配送方式
-//        if ($delivery == DeliveryTypeEnum::EXPRESS) {
-//            $this->orderExpress($returnData, $user, $goodsList, $goodsTotalPrice);
-//        }
-//        } elseif ($delivery == DeliveryTypeEnum::EXTRACT) {
-//            $shop_id > 0 && $returnData['extract_shop'] = ShopModel::detail($shop_id);
-//        }
+        if ($delivery == DeliveryTypeEnum::EXPRESS) {
+            $this->orderExpress($returnData, $user, $goodsList, $goodsTotalPrice);
+        } elseif ($delivery == DeliveryTypeEnum::EXTRACT) {
+            $shop_id > 0 && $returnData['extract_shop'] = ShopModel::detail($shop_id);
+        }
         // 可用优惠券列表
        // $couponList = UserCoupon::getUserCouponList($user['user_id'], $goodsTotalPrice);
         return array_merge([
@@ -168,7 +167,7 @@ class Order extends OrderModel
             // 更新商品库存 (针对下单减库存的商品)
             $this->updateGoodsStockNum($order['goods_list']);
             // 获取订单详情
-            $detail = self::getUserOrderDetail($this['order_id'], $user_id);
+            //$detail = self::getUserOrderDetail($this['order_id'], $user_id);
             // 记录分销商订单
             //DealerOrderModel::createOrder($detail);
             // 事务提交
@@ -245,6 +244,15 @@ class Order extends OrderModel
      */
     private function add($user_id, &$order, $remark = '',$shop_id = 0)
     {
+
+        //计算订单产生的积分
+        $points = 0;
+        foreach ($order['goods_list'] as $v){
+            $points += $v['exchange_points'] * $v['total_num'];
+        }
+        if($shop_id == 0){
+            $shop_id = $order['goods_list'][0]['shop_id'];
+        }
         $data = [
             'user_id' => $user_id,
             'order_no' => $this->orderNo(),
@@ -255,7 +263,8 @@ class Order extends OrderModel
             'delivery_type' => $order['delivery'],
             'buyer_remark' => trim($remark),
             'wxapp_id' => config('mini_weixin.wxapp_id'),
-            'shop_id' => $shop_id
+            'shop_id' => $shop_id,
+            'points' => $points,
         ];
         if ($order['delivery'] == DeliveryTypeEnum::EXPRESS) {
             $data['express_price'] = $order['express_price'];

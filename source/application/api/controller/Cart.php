@@ -49,9 +49,9 @@ class Cart extends Controller
      * @param $goods_sku_id
      * @return array
      */
-    public function add($goods_id, $goods_num, $goods_sku_id)
+    public function add($goods_id, $goods_num, $goods_sku_id,$shop_id=0)
     {
-        if (!$this->model->add($goods_id, $goods_num, $goods_sku_id)) {
+        if (!$this->model->add($goods_id, $goods_num,$goods_sku_id,$shop_id)) {
             return $this->renderError($this->model->getError() ?: '加入购物车失败');
         }
         $total_num = $this->model->getTotalNum();

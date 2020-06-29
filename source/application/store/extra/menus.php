@@ -210,10 +210,10 @@ return [
                 'name' => '积分流水',
                 'index' => 'shop.pointStatements/index',
             ],
-//            [
-//                'name' => '订单核销记录',
-//                'index' => 'shop.order/index',
-//            ]
+            [
+                'name' => '订单核销记录',
+                'index' => 'shop.order/index',
+            ]
         ]
     ],
     'store_shop' => [

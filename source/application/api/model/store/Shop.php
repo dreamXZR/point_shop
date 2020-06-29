@@ -49,6 +49,9 @@ class Shop extends ShopModel
         if($search){
             $where['shop_name'] = ['like','%'.$search.'%'];
         }
+        if($shop_id = request()->get('shop_id')){
+            $where['shop_id'] = $shop_id;
+        }
         // 获取门店列表数据
         $data = $this->where($where)
             ->order(['sort' => 'asc', 'create_time' => 'desc'])
@@ -140,6 +143,11 @@ class Shop extends ShopModel
     public function decPoints($points)
     {
         $this->setDec('points',$points);
+    }
+
+    public function incPoints($points)
+    {
+        $this->setInc('points',$points);
     }
 
     public function incMoney($money)

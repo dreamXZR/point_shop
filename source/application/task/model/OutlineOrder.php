@@ -78,8 +78,9 @@ class OutlineOrder extends OrderModel
             $point_statements->record([
                 'user_id' => $this['user_id'],
                 'shop_id' => $this['shop_id'],
-                'type' => 20,
-                'points' => $this['points']
+                'type' => 10,
+                'points' => $this['points'],
+                'remark' => '用户线下付款',
             ]);
             // 更新prepay_id记录
             $prepayId = WxappPrepayIdModel::detail($this['order_id'],30);

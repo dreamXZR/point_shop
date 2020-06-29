@@ -2,6 +2,9 @@
 
 namespace app\store\model;
 
+use app\api\model\store\Shop;
+use app\task\model\User;
+use think\Db;
 use think\Request;
 use app\common\model\Order as OrderModel;
 use app\common\service\Message;
@@ -371,12 +374,29 @@ class Order extends OrderModel
             $this->error = '该订单不合法';
             return false;
         }
-        // 微信支付原路退款
-        if ($data['is_cancel'] == true) {
-            $wxConfig = Wxapp::getWxappCache();
-            $WxPay = new WxPay($wxConfig);
-            $WxPay->refund($this['transaction_id'], $this['pay_price'], $this['pay_price']);
+        Db::startTrans();
+        try{
+            // 微信支付原路退款
+            if ($data['is_cancel'] == true) {
+                $wxConfig = Wxapp::getWxappCache();
+                $WxPay = new WxPay($wxConfig);
+                $WxPay->refund($this['transaction_id'], $this['pay_price'], $this['pay_price']);
+            }
+            $user = User::detail($this['user_id']);
+            //消减用户积分
+            $user->decPoints($this['points']);
+            //消减商家的积分
+            $shop = Shop::get($this['shop_id']);
+            $shop->incPoints($this['points']);
+            Db::commit();
+            return true;
+        }catch (\Exception $e) {
+            // 回滚事务
+            Db::rollback();
+            return false;
         }
+
+
         return $this->save(['order_status' => $data['is_cancel'] ? 20 : 10]) !== false;
     }
 

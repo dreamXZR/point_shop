@@ -27,7 +27,7 @@ class WxappPrepayId extends WxappPrepayIdModel
             'user_id' => $user_id,
             'can_use_times' => 0,
             'used_times' => 0,
-            'wxapp_id' => self::$wxapp_id,
+            'wxapp_id' => config('mini_weixin.wxapp_id'),
             'expiry_time' => time() + (7 * 86400)
         ]);
     }

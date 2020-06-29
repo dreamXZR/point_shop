@@ -105,7 +105,7 @@ class Order extends Controller
         }
         // 创建订单
         $model = new OrderModel;
-        if ($model->createOrder($this->user['user_id'], $order, $coupon_id, $remark)) {
+        if ($model->createOrder($this->user['user_id'], $order, $coupon_id, $remark,$shop_id)) {
             // 移出购物车中已下单的商品
             $Card->clearAll($cart_ids);
             // 发起微信支付

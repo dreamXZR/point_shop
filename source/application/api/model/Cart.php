@@ -2,6 +2,7 @@
 
 namespace app\api\model;
 
+use app\api\model\store\Shop;
 use think\Cache;
 use app\api\model\store\Shop as ShopModel;
 use app\common\enum\OrderType as OrderTypeEnum;
@@ -42,7 +43,7 @@ class Cart
     {
         $this->user = $user;
         $this->user_id = $this->user['user_id'];
-        //$this->wxapp_id = $this->user['wxapp_id'];
+        $this->wxapp_id = config('mini_weixin.wxapp_id');
         $this->cart = Cache::get('cart_' . $this->user_id) ?: [];
     }
 
@@ -72,20 +73,20 @@ class Cart
         // 订单商品总金额
         $orderTotalPrice = array_sum(array_column($goodsList, 'total_price'));
         // 处理配送方式
-//        if ($delivery == DeliveryTypeEnum::EXPRESS) {
-//            $this->orderExpress($returnData, $goodsList, $orderTotalPrice);
-//        } elseif ($delivery == DeliveryTypeEnum::EXTRACT) {
-//            $shop_id > 0 && $returnData['extract_shop'] = ShopModel::detail($shop_id);
-//        }
+        if ($delivery == DeliveryTypeEnum::EXPRESS) {
+            $this->orderExpress($returnData, $goodsList, $orderTotalPrice);
+        } elseif ($delivery == DeliveryTypeEnum::EXTRACT) {
+            $shop_id > 0 && $returnData['extract_shop'] = ShopModel::detail($shop_id);
+        }
         // 可用优惠券列表
-        $couponList = UserCoupon::getUserCouponList($this->user['user_id'], $orderTotalPrice);
+        //$couponList = UserCoupon::getUserCouponList($this->user['user_id'], $orderTotalPrice);
         return array_merge([
             'goods_list' => array_values($goodsList),         // 商品列表
             'order_total_num' => $orderTotalNum,              // 商品总数量
             'order_total_price' => sprintf('%.2f', $orderTotalPrice),   // 商品总金额 (不含运费)
             'order_pay_price' => $orderTotalPrice,            // 实际支付金额
             'delivery' => $delivery,                        // 配送类型
-            'coupon_list' => array_values($couponList),     // 优惠券列表
+            //'coupon_list' => array_values($couponList),     // 优惠券列表
             'address' => $this->user['address_default'],    // 默认地址
             'exist_address' => !$this->user['address']->isEmpty(),  // 是否存在收货地址
             'express_price' => '0.00',      // 配送费用
@@ -216,8 +217,16 @@ class Cart
      * @param $goods_sku_id
      * @return bool
      */
-    public function add($goods_id, $goods_num, $goods_sku_id)
+    public function add($goods_id, $goods_num, $goods_sku_id,$shop_id = 0)
     {
+        //判断是否是不同店铺商品
+        foreach ($this->cart as $v){
+            if($shop_id != 0 && $v['shop_id'] != $shop_id){
+                $this->setError('很抱歉，购物车存在其他店铺商品');
+                return false;
+            }
+
+        }
         // 购物车商品索引
         $index = $goods_id . '_' . $goods_sku_id;
         // 商品信息
@@ -236,7 +245,7 @@ class Cart
             return false;
         }
         $create_time = time();
-        $data = compact('goods_id', 'goods_num', 'goods_sku_id', 'create_time');
+        $data = compact('goods_id', 'goods_num', 'goods_sku_id', 'create_time','shop_id');
         if (empty($this->cart)) {
             $this->cart[$index] = $data;
             return true;
