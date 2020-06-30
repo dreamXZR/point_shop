@@ -103,6 +103,7 @@ class Setting extends BaseModel
                         'refund_days' => '7'
                     ],
                     'freight_rule' => '10',
+                    'points_proportion' => '2',
                 ]
             ],
             'storage' => [

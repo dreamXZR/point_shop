@@ -4,6 +4,7 @@
 namespace app\api\model;
 
 
+use app\store\model\Setting as SettingModel;
 use think\Model;
 use app\common\service\Order as OrderService;
 
@@ -44,9 +45,15 @@ class OutlineOrder extends Model
         return OrderService::createOrderNo();
     }
 
+    /**
+     *  金额兑换积分
+     * @param $price
+     * @return false|float
+     */
     protected function getPoints($price)
     {
-        //金额兑换积分
-        return 100;
+
+        $vars = SettingModel::getItem('trade',config('mini_weixin.wxapp_id'));
+        return floor($price*$vars['points_proportion']);
     }
 }

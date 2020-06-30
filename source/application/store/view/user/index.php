@@ -56,6 +56,8 @@
                                 <th>微信头像</th>
                                 <th>微信昵称</th>
                                 <th>累积消费金额</th>
+                                <th>可使用积分</th>
+                                <th>预备积分</th>
                                 <th>性别</th>
                                 <th>国家</th>
                                 <th>省份</th>
@@ -75,6 +77,8 @@
                                     </td>
                                     <td class="am-text-middle"><?= $item['nickName'] ?></td>
                                     <td class="am-text-middle"><?= $item['money'] ?></td>
+                                    <td class="am-text-middle"><?= $item['points'] ?></td>
+                                    <td class="am-text-middle"><?= $item['prepare_points'] ?></td>
                                     <td class="am-text-middle"><?= $item['gender'] ?></td>
                                     <td class="am-text-middle"><?= $item['country'] ?: '--' ?></td>
                                     <td class="am-text-middle"><?= $item['province'] ?: '--' ?></td>

@@ -86,7 +86,7 @@ class User extends Controller
             // 发起微信支付
             return $this->renderSuccess([
                 'payment' => $this->unifiedorder($outlineOrderModel),
-                'order_id' => $outlineOrderModel['order_id']
+                'order_id' => $outlineOrderModel['id']
             ]);
         }
     }
@@ -105,9 +105,9 @@ class User extends Controller
         $wxConfig = WxappModel::getWxappCache();
         $WxPay = new WxPay($wxConfig);
         $payment = $WxPay->unifiedorder($order['order_no'], $user['open_id'], $order['pay_price'],'outline');
-        // 记录prepay_id
+        // 记录prepay_id 线下付款
         $model = new WxappPrepayIdModel;
-        $model->add($payment['prepay_id'], $order['order_id'], $user['user_id'], 10);
+        $model->add($payment['prepay_id'], $order['id'], $user['user_id'], 30);
         return $payment;
     }
 

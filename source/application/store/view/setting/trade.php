@@ -86,6 +86,23 @@
                                 </div>
 
                             </div>
+                            <div class="widget-head am-cf">
+                                <div class="widget-title am-fl">积分设置</div>
+                            </div>
+                            <div class="am-form-group">
+                                <label class="am-u-sm-3 am-form-label form-require">积分兑换比例</label>
+                                <div class="am-u-sm-9">
+
+                                    <div class="am-u-sm-6">
+                                        <input type="number" class="am-form-field" name="trade[points_proportion]"
+                                               value="<?= $values['points_proportion'] ?>" required>
+                                    </div>
+                                    <label class="am-u-sm-6 am-form-label am-text-left">用户花费1元可兑换积分</label>
+                                    <div class="help-block am-u-sm-12">
+                                        <small>设置积分兑换比例</small>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="am-form-group">
                                 <div class="am-u-sm-9 am-u-sm-push-3 am-margin-top-lg">
                                     <button type="submit" class="j-submit am-btn am-btn-secondary">提交

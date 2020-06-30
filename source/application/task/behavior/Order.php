@@ -30,22 +30,24 @@ class Order
             return new OrderModel and false;
         }
         $this->model = $model;
-        if (!$model::$wxapp_id) {
-            return false;
-        }
-        if (!Cache::has('__task_space__order__' . $model::$wxapp_id)) {
+//        if (!$model::$wxapp_id) {
+//            return false;
+//        }
+        if (!Cache::has('__task_space__order__' .config('mini_weixin.wxapp_id'))) {
             $this->model->startTrans();
             try {
-                $config = Setting::getItem('trade');
+                $config = Setting::getItem('trade',config('mini_weixin.wxapp_id'));
                 // 未支付订单自动关闭
                 $this->close($config['order']['close_days']);
                 // 已发货订单自动确认收货
                 $this->receive($config['order']['receive_days']);
+                // 订单的积分计算
+                $this->calculatePoints($config['order']['refund_days']);
                 $this->model->commit();
             } catch (\Exception $e) {
                 $this->model->rollback();
             }
-            Cache::set('__task_space__order__' . $model::$wxapp_id, time(), 3600);
+            Cache::set('__task_space__order__' . config('mini_weixin.wxapp_id'), time(), 3600);
         }
         return true;
     }
@@ -123,6 +125,37 @@ class Order
         return $this->grantMoney($orderIds);
     }
 
+    private function calculatePoints($refund_days)
+    {
+        if ($refund_days < 1) {
+            return false;
+        }
+        //截止时间
+        $deadlineTime = time() - ((int)$refund_days * 86400);
+        $filter = [
+            'pay_status' => 20,
+            'delivery_status' => 20,
+            'receipt_status' => 20,
+            'receipt_time' => ['<',$deadlineTime],
+            'is_points' => 10
+        ];
+
+        // 订单id集
+        $orderIds = $this->model->where($filter)->column('order_id');
+        // 记录日志
+        $this->dologs('calculatePoints', [
+            'refund_days' => (int)$refund_days,
+            'deadline_time' => $deadlineTime,
+            'orderIds' => json_encode($orderIds),
+        ]);
+        // 更新订单积分状态
+        $this->model->isUpdate(true)->save([
+            'is_points' => 20,
+        ], ['order_id' => ['in', $orderIds]]);
+        //积分分发
+        return $this->distributePoints($orderIds);
+    }
+
     /**
      * 发放分销订单佣金
      * @param $orderIds
@@ -140,6 +173,18 @@ class Order
         }
         foreach ($list as &$order) {
             DealerOrderModel::grantMoney($order, OrderTypeEnum::MASTER);
+        }
+        return true;
+    }
+
+    private function distributePoints($orderIds)
+    {
+        $list = $this->model->getList(['order_id' => ['in', $orderIds]]);
+        if ($list->isEmpty()) {
+            return false;
+        }
+        foreach ($list as &$order){
+            $order->distributePoints();
         }
         return true;
     }

@@ -10,6 +10,7 @@ use app\common\model\Order as OrderModel;
 use app\task\model\dealer\Apply as DealerApplyModel;
 use app\task\model\statements\PointStatements;
 use app\task\model\WxappPrepayId as WxappPrepayIdModel;
+use think\Db;
 
 /**
  * 订单模型
@@ -68,20 +69,17 @@ class Order extends OrderModel
             // 累积用户总消费金额
             $user = User::detail($this['user_id']);
             $user->cumulateMoney($this['pay_price']);
-            //累计用户积分
-            $user->incPoints($this['points']);
-            //消减商家的积分
-            $shop = Shop::get($this['shop_id']);
-            $shop->decPoints($this['points']);
+            //累计用户预备积分
+            $user->incPreparePoints($this['points']);
             //记录积分日志
-            $point_statements = new PointStatements();
-            $point_statements->record([
-                'user_id' => $this['user_id'],
-                'shop_id' => $this['shop_id'],
-                'type' => 20,
-                'points' => $this['points'],
-                'remark' => '用户线上付款'
-            ]);
+//            $point_statements = new PointStatements();
+//            $point_statements->record([
+//                'user_id' => $this['user_id'],
+//                'shop_id' => $this['shop_id'],
+//                'type' => 20,
+//                'points' => $this['points'],
+//                'remark' => '用户线上付款'
+//            ]);
             // 更新prepay_id记录
             $prepayId = WxappPrepayIdModel::detail($this['order_id']);
             $prepayId->updatePayStatus();
@@ -127,6 +125,23 @@ class Order extends OrderModel
     public function getList($filter = [])
     {
         return $this->with(['goods' => ['refund']])->where($filter)->select();
+    }
+
+    public function distributePoints()
+    {
+        Db::startTrans();
+        try {
+            //用户增加积分
+            $user = \app\api\model\User::get(['user_id'=>$this['user_id']]);
+            $user->incrPoints($this['points']);
+            //商家减少积分
+            $shop = Shop::get(['shop_id'=>$this['shop_id']]);
+            $shop->decPoints($this['points']);
+            Db::commit();
+        }catch (\Exception $e){
+            // 回滚事务
+            Db::rollback();
+        }
     }
 
 }

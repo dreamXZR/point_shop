@@ -43,4 +43,9 @@ class User extends UserModel
         return $this->setDec('points',$points);
     }
 
+    public function incPreparePoints($points)
+    {
+        return $this->setInc('prepare_points',$points);
+    }
+
 }
