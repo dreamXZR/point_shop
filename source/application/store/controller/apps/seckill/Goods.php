@@ -4,8 +4,8 @@ namespace app\store\controller\apps\seckill;
 
 use app\store\controller\Controller;
 use app\store\model\Delivery as DeliveryModel;
-use app\store\model\seckill\Goods as GoodsModel;
-use app\store\model\sharing\Category as CategoryModel;
+use app\store\model\Goods as GoodsModel;
+use app\store\model\Category as CategoryModel;
 
 /**
  * 秒杀商品管理控制器
@@ -29,7 +29,7 @@ class Goods extends Controller
         //$catgory = CategoryModel::getCacheTree();
         // 商品列表
         $model = new GoodsModel;
-        $list = $model->getList($goods_status, $category_id, $goods_name);
+        $list = $model->getList($goods_status, $category_id, $goods_name,'seckill');
         return $this->fetch('index', compact('list'));
     }
 
@@ -53,6 +53,7 @@ class Goods extends Controller
         if($post_data['end_at']<$post_data['start_at']){
             return $this->renderError('秒杀时间填写错误');
         }
+        $post_data['is_seckill_goods'] = 1;
         $model = new GoodsModel;
         if ($model->add($post_data)) {
             return $this->renderSuccess('添加成功', url('apps.seckill.goods/index'));

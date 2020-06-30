@@ -105,7 +105,7 @@ class Goods extends BaseModel
         $status = null,
         $category_id = 0,
         $search = '',
-        $is_point_goods = 0,
+        $goods_status = '',
         $sortType = 'all',
         $sortPrice = false,
         $shop_id = 0,
@@ -117,7 +117,14 @@ class Goods extends BaseModel
         $category_id > 0 && $filter['category_id'] = ['IN', Category::getSubCategoryId($category_id)];
         $status > 0 && $filter['goods_status'] = $status;
         !empty($search) && $filter['goods_name'] = ['like', '%' . trim($search) . '%'];
-        $filter['is_point_goods'] = $is_point_goods;
+        //商品类型判断
+        $filter['is_point_goods'] = 0;
+        $filter['is_seckill_goods'] = 0;
+        if($goods_status == 'seckill'){
+            $filter['is_seckill_goods'] = 1;
+        }elseif ($goods_status == 'point'){
+            $filter['is_point_goods'] = 1;
+        }
         //判断是商家还是超管
         $admin_user = Session::get('yoshop_store.user');
         if($admin_user['store_shop_id']){
