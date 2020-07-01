@@ -5,6 +5,7 @@ namespace app\common\library\wechat;
 use app\api\model\OutlineOrder;
 use app\common\model\Wxapp as WxappModel;
 use app\common\exception\BaseException;
+use Yansongda\Pay\Pay;
 
 /**
  * 微信支付
@@ -178,7 +179,7 @@ class WxPay extends WxBase
             throw new BaseException(['msg' => '请先到后台小程序设置填写微信支付证书文件']);
         }
         // cert目录
-        $filePath = __DIR__ . '/cert/' . $this->config['wxapp_id'] . '/';
+        $filePath = __DIR__ . '/cert/';
         return [
             'certPem' => $filePath . 'cert.pem',
             'keyPem' => $filePath . 'key.pem'
