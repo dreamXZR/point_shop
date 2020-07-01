@@ -25,28 +25,6 @@
                             <div class="am-u-sm-12 am-u-md-9">
                                 <div class="am fr">
                                     <div class="am-form-group am-fl">
-                                        <?php $category_id = $request->get('category_id') ?: null; ?>
-                                        <select name="category_id"
-                                                data-am-selected="{searchBox: 1, btnSize: 'sm',  placeholder: '商品分类', maxHeight: 400}">
-                                            <option value=""></option>
-                                            <?php if (isset($catgory)): foreach ($catgory as $first): ?>
-                                                <option value="<?= $first['category_id'] ?>"
-                                                    <?= $category_id == $first['category_id'] ? 'selected' : '' ?>>
-                                                    <?= $first['name'] ?></option>
-                                                <?php if (isset($first['child'])): foreach ($first['child'] as $two): ?>
-                                                    <option value="<?= $two['category_id'] ?>"
-                                                        <?= $category_id == $two['category_id'] ? 'selected' : '' ?>>
-                                                        　　<?= $two['name'] ?></option>
-                                                    <?php if (isset($two['child'])): foreach ($two['child'] as $three): ?>
-                                                        <option value="<?= $three['category_id'] ?>"
-                                                            <?= $category_id == $three['category_id'] ? 'selected' : '' ?>>
-                                                            　　　<?= $three['name'] ?></option>
-                                                    <?php endforeach; endif; ?>
-                                                <?php endforeach; endif; ?>
-                                            <?php endforeach; endif; ?>
-                                        </select>
-                                    </div>
-                                    <div class="am-form-group am-fl">
                                         <?php $goods_status = $request->get('goods_status') ?: null; ?>
                                         <select name="goods_status"
                                                 data-am-selected="{btnSize: 'sm', placeholder: '商品状态'}">
@@ -83,7 +61,6 @@
                                 <th>商品ID</th>
                                 <th>商品图片</th>
                                 <th>商品名称</th>
-                                <th>商品分类</th>
                                 <th>商品排序</th>
                                 <th>可获取积分</th>
                                 <th>商品状态</th>
@@ -105,7 +82,6 @@
                                     <td class="am-text-middle">
                                         <p class="item-title"><?= $item['goods_name'] ?></p>
                                     </td>
-                                    <td class="am-text-middle"><?= $item['category']['name'] ?></td>
                                     <td class="am-text-middle"><?= $item['goods_sort'] ?></td>
                                     <td class="am-text-middle"><?= $item['exchange_points'] ?></td>
                                     <td class="am-text-middle">

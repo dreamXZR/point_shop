@@ -89,6 +89,12 @@ class Settled extends Controller
     {
         $model = new ShopSettled();
         $data = $this->postData();
+        //查看手机号是否有重复
+        $shop = $model->where(['phone'=>$data['mobile']])->find();
+        if($shop){
+            return $this->renderError('该手机号已经提交过申请');
+        }
+
         $model->save([
             'user_id' => $this->user['user_id'],
             'shop_name' => $data['shop_name'],

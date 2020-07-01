@@ -27,7 +27,7 @@ class PointGoods extends Controller
         $catgory = PointCategory::getCacheTree();
         // 商品列表
         $model = new GoodsModel;
-        $list = $model->getList($goods_status, $category_id, $goods_name,1);
+        $list = $model->getList($goods_status, $category_id, $goods_name,'point');
         return $this->fetch('index', compact('list', 'catgory'));
     }
 

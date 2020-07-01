@@ -2,10 +2,10 @@
 
 // 数据库配置
 $config = [
-    'host' => '127.0.0.1',
-    'database' => 'shop',
-    'username' => 'root',
-    'password' => 'root',
+    'host' => '47.92.150.84',
+    'database' => 'point_shop',
+    'username' => 'point_shop',
+    'password' => 'CPGAfzEpDFmMYrp5',
     'port' => '3306',
     'charset' => 'utf8',
 ];

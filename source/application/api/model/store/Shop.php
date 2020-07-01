@@ -55,6 +55,7 @@ class Shop extends ShopModel
         // 获取门店列表数据
         $data = $this->where($where)
             ->order(['sort' => 'asc', 'create_time' => 'desc'])
+            ->with('logo')
             ->select();
         // 根据距离排序
         if (!empty($longitude) && !empty($latitude)) {

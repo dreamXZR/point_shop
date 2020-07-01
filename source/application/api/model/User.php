@@ -154,18 +154,19 @@ class User extends UserModel
                 'url' => 'pages/address/index',
                 'icon' => 'map'
             ],
-            'sharing_order' => [
-                'name' => '拼团订单',
-                'url' => 'pages/sharing/order/index',
-                'icon' => 'pintuan'
-            ],
+//            'sharing_order' => [
+//                'name' => '拼团订单',
+//                'url' => 'pages/sharing/order/index',
+//                'icon' => 'pintuan'
+//            ],
             'points' => [
-                'name' => '积分兑换'
+                'name' => '积分兑换',
+                'icon' => 'erweima',
             ],
             'shop_settled' => [
                 'name' => '店家入驻',
                 'url' => 'pages/dealer/index/index',
-                'icon' => 'map'
+                'icon' => 'home'
             ],
             'help' => [
                 'name' => '我的帮助',

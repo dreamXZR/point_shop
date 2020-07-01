@@ -31,7 +31,7 @@ class Goods extends Controller
         $search = request()->get('search') ?: '';
         $sortType = request()->get('sortType') ?: 'all';
         $sortPrice = request()->get('sortPrice') ?: false;
-        $list = $model->getList(10, $category_id, $search, 0,$sortType, $sortPrice,$shop_id);
+        $list = $model->getList(10, $category_id, $search, 'shop',$sortType, $sortPrice,$shop_id);
         return $this->renderSuccess(compact('list'));
     }
 

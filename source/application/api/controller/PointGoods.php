@@ -28,7 +28,7 @@ class PointGoods extends Controller
     public function lists($category_id, $search, $sortType, $sortPrice)
     {
         $model = new GoodsModel;
-        $list = $model->getList(10, $category_id, $search, 1,$sortType, $sortPrice);
+        $list = $model->getList(10, $category_id, $search, 'point',$sortType, $sortPrice);
         return $this->renderSuccess(compact('list'));
     }
 
