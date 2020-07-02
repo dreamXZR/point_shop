@@ -374,15 +374,15 @@ class Order extends OrderModel
             $this->error = '该订单不合法';
             return false;
         }
-        // 微信支付原路退款
-        if ($data['is_cancel'] == true) {
-            $wxConfig = Wxapp::getWxappCache();
-            $WxPay = new WxPay($wxConfig);
-            $WxPay->refund($this['transaction_id'], $this['pay_price'], $this['pay_price']);
-        }
+
         Db::startTrans();
         try{
-
+            // 微信支付原路退款
+            if ($data['is_cancel'] == true) {
+                $wxConfig = Wxapp::getWxappCache();
+                $WxPay = new WxPay($wxConfig);
+                $WxPay->refund($this['transaction_id'], $this['pay_price'], $this['pay_price']);
+            }
             $user = User::detail($this['user_id']);
             //消减用户预备积分
             $user->decPreparePoints($this['points']);

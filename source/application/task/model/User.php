@@ -50,7 +50,12 @@ class User extends UserModel
 
     public function decPreparePoints($points)
     {
-        return $this->setDec('prepare_points',$points);
+        if($this['prepare_points'] - $points < 0 ){
+            return $this->save(['prepare_points'=>0]);
+        }else{
+            return $this->setDec('prepare_points',$points);
+        }
+
     }
 
 }

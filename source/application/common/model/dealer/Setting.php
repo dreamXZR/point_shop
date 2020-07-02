@@ -323,8 +323,8 @@ class Setting extends BaseModel
                     ],
                     'qrcode' => [
                         'title' => [
-                            'default' => '推广二维码',
-                            'value' => '推广二维码'
+                            'default' => '收款二维码',
+                            'value' => '收款二维码'
                         ]
                     ],
                     'settled' => [

@@ -162,6 +162,7 @@ class User extends UserModel
             'points' => [
                 'name' => '积分兑换',
                 'icon' => 'erweima',
+                'url' => 'pages/pointExchange/index',
             ],
             'shop_settled' => [
                 'name' => '店家入驻',

@@ -3,6 +3,7 @@
 namespace app\common\library\wechat;
 
 use app\api\model\OutlineOrder;
+use app\common\model\Order;
 use app\common\model\Wxapp as WxappModel;
 use app\common\exception\BaseException;
 use Yansongda\Pay\Pay;
@@ -121,6 +122,10 @@ class WxPay extends WxBase
         if ($prepay['result_code'] === 'FAIL') {
             throw new BaseException(['msg' => 'err_code_des: ' . $prepay['err_code_des']]);
         }
+        if($prepay['return_code'] === 'SUCCESS'){
+            //修改订单状态
+            (new Order())->where(['transaction_id'=>$transaction_id])->save(['order_status' => 20, 'is_refund' => 1]);
+        }
         return true;
     }
 
@@ -179,7 +184,7 @@ class WxPay extends WxBase
             throw new BaseException(['msg' => '请先到后台小程序设置填写微信支付证书文件']);
         }
         // cert目录
-        $filePath = __DIR__ . '/cert/';
+        $filePath = __DIR__ . '/cert/'.config('mini_weixin.wxapp_id').'/';
         return [
             'certPem' => $filePath . 'cert.pem',
             'keyPem' => $filePath . 'key.pem'

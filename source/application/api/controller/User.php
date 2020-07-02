@@ -33,6 +33,11 @@ class User extends Controller
         ]);
     }
 
+    private $exchange_status = [
+        'no-exchange' => 0,
+        'exchange' => 1
+    ];
+
     /**
      * 用户兑换记录
      * @return array
@@ -41,7 +46,7 @@ class User extends Controller
      * @throws \think\db\exception\ModelNotFoundException
      * @throws \think\exception\DbException
      */
-    public function exchangeLists($is_used,$listRows = 15)
+    public function exchangeLists($dataType,$listRows = 15)
     {
         $user = $this->getUser();
 
@@ -51,22 +56,13 @@ class User extends Controller
 
         $lists = $model->where([
             'user_id' => $user['user_id'],
-            'is_used' => $is_used
+            'is_used' => $this->exchange_status[$dataType],
         ])->order($sort)->with(['goods','goods.image.file'])
             ->paginate($listRows, false, [
                 'query' => \request()->request()
             ]);
         return $this->renderSuccess([
             'list'=>$lists
-        ]);
-    }
-
-    public function exchangeDetail($id)
-    {
-        $user = $this->getUser();
-        $data = UserExchange::get($id);
-        return $this->renderSuccess([
-            'info'=>$data
         ]);
     }
 

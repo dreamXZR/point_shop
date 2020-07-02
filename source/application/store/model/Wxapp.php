@@ -49,7 +49,7 @@ class Wxapp extends WxappModel
             return false;
         }
         // 证书目录
-        $filePath = APP_PATH . 'common/library/wechat/cert/' . self::$wxapp_id . '/';
+        $filePath = APP_PATH . 'common/library/wechat/cert/' . config('mini_weixin.wxapp_id') . '/';
         // 目录不存在则自动创建
         if (!is_dir($filePath)) {
             mkdir($filePath, 0755, true);
@@ -105,7 +105,7 @@ class Wxapp extends WxappModel
      */
     public static function deleteCache()
     {
-        return Cache::rm('wxapp_' . self::$wxapp_id);
+        return Cache::rm('wxapp_' . config('mini_weixin.wxapp_id'));
     }
 
 }
