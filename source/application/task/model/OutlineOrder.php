@@ -80,9 +80,6 @@ class OutlineOrder extends OrderModel
                 'points' => $this['points'],
                 'remark' => '用户线下付款',
             ]);
-            // 更新prepay_id记录
-            $prepayId = WxappPrepayIdModel::detail($this['order_id'],30);
-            $prepayId->updatePayStatus();
             // 事务提交
             $this->commit();
             return true;
