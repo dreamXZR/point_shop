@@ -260,7 +260,7 @@ class WxPay extends WxBase
     /**
      * 实例化订单模型 (根据attach判断)
      * @param null $attach
-     * @return \app\task\model\Order|\app\task\model\sharing\Order|null
+     * @return \app\task\model\Order|\app\task\model\sharing\Order|\app\task\model\OutlineOrder|null
      */
     private function instanceOrderModel($attach = null)
     {
@@ -278,8 +278,10 @@ class WxPay extends WxBase
         } elseif ($orderType === 'outline') {
             // 线下购买订单模型
             return (new \app\task\model\OutlineOrder);
+        }else{
+            return null;
         }
-        return null;
+
     }
 
     /**

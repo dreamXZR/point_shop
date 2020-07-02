@@ -4,9 +4,7 @@ namespace app\task\model;
 
 use app\api\model\store\Shop;
 use app\common\service\Message;
-use app\common\service\order\Printer;
-use app\common\enum\OrderStatus as OrderStatusEnum;
-use app\common\model\Order as OrderModel;
+use app\common\model\OutlineOrder as OrderModel;
 use app\task\model\dealer\Apply as DealerApplyModel;
 use app\task\model\statements\PointStatements;
 use app\task\model\WxappPrepayId as WxappPrepayIdModel;
