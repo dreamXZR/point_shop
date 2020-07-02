@@ -87,7 +87,7 @@ class OutlineOrder extends OrderModel
             $this->commit();
             return true;
         } catch (\Exception $e) {
-            $this->error = $e->getMessage();
+            log_write($e->getMessage());
             $this->rollback();
             return false;
         }
