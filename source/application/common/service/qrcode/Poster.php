@@ -53,10 +53,9 @@ class Poster extends Base
         // 2. 下载用户头像
         //$avatarUrl = $this->saveTempImage($wxappId, $this->dealer['user']['avatarUrl'], 'avatar');
         // 3. 下载小程序码
-        $qrcode = $this->saveQrcode($wxappId, 'shop_id:' . $this->dealer['shop_id'],'pages/outlinePay/index');
+        $qrcode = $this->saveQrcode($wxappId, 'shop_id:' . $this->dealer['shop_id'],'pages/outlinePay/index',$this->getPosterPath());
         // 4. 拼接海报图
-        //return $this->savePoster($backdrop, $avatarUrl, $qrcode);
-        return $qrcode;
+        return $this->getPosterUrl();
     }
 
     /**
@@ -86,7 +85,7 @@ class Poster extends Base
      */
     private function getPosterUrl()
     {
-        return \base_url() . 'temp/' . $this->dealer['wxapp_id'] . '/' . $this->getPosterName() . '?t=' . time();
+        return \base_url() . 'temp/' . config('mini_weixin.wxapp_id') . '/' . $this->getPosterName() . '?t=' . time();
     }
 
     /**

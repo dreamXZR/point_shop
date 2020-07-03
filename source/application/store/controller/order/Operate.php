@@ -92,7 +92,7 @@ class Operate extends Controller
     {
         $model = OrderModel::detail($order_id);
         $data = $this->postData('order');
-        if ($model->extract($data['extract_clerk_id'])) {
+        if ($model->extract($data['exchange_code'])) {
             return $this->renderSuccess('核销成功');
         }
         return $this->renderError($model->getError() ?: '核销失败');

@@ -448,19 +448,25 @@ $detail = isset($detail) ? $detail : null;
                             <?php if (checkPrivilege('order.operate/extract')): ?>
                                 <form id="delivery" class="my-form am-form tpl-form-line-form" method="post"
                                       action="<?= url('order.operate/extract', ['order_id' => $detail['order_id']]) ?>">
+<!--                                    <div class="am-form-group">-->
+<!--                                        <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">门店核销员 </label>-->
+<!--                                        <div class="am-u-sm-9 am-u-end am-padding-top-xs">-->
+<!--                                            <select name="order[extract_clerk_id]"-->
+<!--                                                    data-am-selected="{searchBox: 1, btnSize: 'sm', maxHeight: 240}"-->
+<!--                                                    required>-->
+<!--                                                <option value=""></option>-->
+<!--                                                --><?php //if (isset($shopClerkList)): foreach ($shopClerkList as $clerk): ?>
+<!--                                                    <option value="--><?//= $clerk['clerk_id'] ?><!--">-->
+<!--                                                        --><?//= $clerk['real_name'] ?><!-- (--><?//= $clerk['shop']['shop_name'] ?><!--)-->
+<!--                                                    </option>-->
+<!--                                                --><?php //endforeach; endif; ?>
+<!--                                            </select>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
                                     <div class="am-form-group">
-                                        <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">门店核销员 </label>
+                                        <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">商品核销码 </label>
                                         <div class="am-u-sm-9 am-u-end am-padding-top-xs">
-                                            <select name="order[extract_clerk_id]"
-                                                    data-am-selected="{searchBox: 1, btnSize: 'sm', maxHeight: 240}"
-                                                    required>
-                                                <option value=""></option>
-                                                <?php if (isset($shopClerkList)): foreach ($shopClerkList as $clerk): ?>
-                                                    <option value="<?= $clerk['clerk_id'] ?>">
-                                                        <?= $clerk['real_name'] ?> (<?= $clerk['shop']['shop_name'] ?>)
-                                                    </option>
-                                                <?php endforeach; endif; ?>
-                                            </select>
+                                            <input name="order[exchange_code]" type="text" required>
                                         </div>
                                     </div>
                                     <div class="am-form-group">

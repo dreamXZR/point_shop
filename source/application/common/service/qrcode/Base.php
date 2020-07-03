@@ -29,15 +29,20 @@ class Base
      * @throws \app\common\exception\BaseException
      * @throws \think\exception\DbException
      */
-    protected function saveQrcode($wxapp_id, $scene, $page = null)
+    protected function saveQrcode($wxapp_id, $scene, $page = null,$path = '')
     {
-        // 文件目录
-        $dirPath = RUNTIME_PATH . 'image' . '/' . $wxapp_id;
-        !is_dir($dirPath) && mkdir($dirPath, 0755, true);
-        // 文件名称
-        $fileName = 'qrcode_' . md5($wxapp_id . $scene . $page) . '.png';
-        // 文件路径
-        $savePath = "{$dirPath}/{$fileName}";
+        if(!$path){
+            // 文件目录
+            $dirPath = RUNTIME_PATH . 'image' . '/' . $wxapp_id;
+            !is_dir($dirPath) && mkdir($dirPath, 0755, true);
+            // 文件名称
+            $fileName = 'qrcode_' . md5($wxapp_id . $scene . $page) . '.png';
+            // 文件路径
+            $savePath = "{$dirPath}/{$fileName}";
+        }else{
+            $savePath = $path;
+        }
+
         if (file_exists($savePath)) return $savePath;
         // 小程序配置信息
         $wxConfig = WxappModel::getWxappCache($wxapp_id);

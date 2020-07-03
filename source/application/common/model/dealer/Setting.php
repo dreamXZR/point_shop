@@ -223,8 +223,8 @@ class Setting extends BaseModel
                     ],
                     'order' => [
                         'title' => [
-                            'default' => '分销订单',
-                            'value' => '分销订单'
+                            'default' => '积分详情',
+                            'value' => '积分详情'
                         ],
                         'words' => [
                             'all' => [
