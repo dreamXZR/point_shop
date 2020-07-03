@@ -210,10 +210,10 @@ return [
                 'name' => '积分流水',
                 'index' => 'shop.pointStatements/index',
             ],
-            [
-                'name' => '订单核销记录',
-                'index' => 'shop.order/index',
-            ]
+//            [
+//                'name' => '订单核销记录',
+//                'index' => 'shop.order/index',
+//            ]
         ]
     ],
     'store_shop' => [
@@ -335,103 +335,8 @@ return [
         'name' => '应用中心',
         'icon' => 'icon-application',
         'is_svg' => true,   // 多色图标
-        'index' => 'apps.dealer.apply/index',
+        'index' => 'apps.seckill.goods/index',
         'submenu' => [
-            [
-                'name' => '分销中心',
-                'submenu' => [
-                    [
-                        'name' => '入驻申请',
-                        'index' => 'apps.dealer.apply/index',
-                    ],
-                    [
-                        'name' => '分销商用户',
-                        'index' => 'apps.dealer.user/index',
-                        'uris' => [
-                            'apps.dealer.user/index',
-                            'apps.dealer.user/fans',
-                        ]
-                    ],
-                    [
-                        'name' => '分销订单',
-                        'index' => 'apps.dealer.order/index',
-                    ],
-                    [
-                        'name' => '提现申请',
-                        'index' => 'apps.dealer.withdraw/index',
-                    ],
-                    [
-                        'name' => '分销设置',
-                        'index' => 'apps.dealer.setting/index',
-                    ],
-                    [
-                        'name' => '分销海报',
-                        'index' => 'apps.dealer.setting/qrcode',
-                    ],
-                ]
-            ],
-            [
-                'name' => '拼团管理',
-                'submenu' => [
-                    [
-                        'name' => '商品分类',
-                        'index' => 'apps.sharing.category/index',
-                        'uris' => [
-                            'apps.sharing.category/index',
-                            'apps.sharing.category/add',
-                            'apps.sharing.category/edit',
-                        ]
-                    ],
-                    [
-                        'name' => '商品列表',
-                        'index' => 'apps.sharing.goods/index',
-                        'uris' => [
-                            'apps.sharing.goods/index',
-                            'apps.sharing.goods/add',
-                            'apps.sharing.goods/edit',
-                            'apps.sharing.goods/copy',
-                            'apps.sharing.goods/copy_master',
-                        ]
-                    ],
-                    [
-                        'name' => '拼单管理',
-                        'index' => 'apps.sharing.active/index',
-                        'uris' => [
-                            'apps.sharing.active/index',
-                            'apps.sharing.active/users',
-                        ]
-                    ],
-                    [
-                        'name' => '订单管理',
-                        'index' => 'apps.sharing.order/index',
-                        'uris' => [
-                            'apps.sharing.order/index',
-                            'apps.sharing.order/detail',
-                            'apps.sharing.order.operate/batchdelivery'
-                        ]
-                    ],
-                    [
-                        'name' => '售后管理',
-                        'index' => 'apps.sharing.order.refund/index',
-                        'uris' => [
-                            'apps.sharing.order.refund/index',
-                            'apps.sharing.order.refund/detail',
-                        ]
-                    ],
-                    [
-                        'name' => '商品评价',
-                        'index' => 'apps.sharing.comment/index',
-                        'uris' => [
-                            'apps.sharing.comment/index',
-                            'apps.sharing.comment/detail',
-                        ],
-                    ],
-                    [
-                        'name' => '拼团设置',
-                        'index' => 'apps.sharing.setting/index'
-                    ]
-                ]
-            ],
             [
                 'name' => '秒杀活动',
                 'submenu' => [
@@ -448,6 +353,102 @@ return [
                     ],
                 ]
             ]
+//            [
+//                'name' => '分销中心',
+//                'submenu' => [
+//                    [
+//                        'name' => '入驻申请',
+//                        'index' => 'apps.dealer.apply/index',
+//                    ],
+//                    [
+//                        'name' => '分销商用户',
+//                        'index' => 'apps.dealer.user/index',
+//                        'uris' => [
+//                            'apps.dealer.user/index',
+//                            'apps.dealer.user/fans',
+//                        ]
+//                    ],
+//                    [
+//                        'name' => '分销订单',
+//                        'index' => 'apps.dealer.order/index',
+//                    ],
+//                    [
+//                        'name' => '提现申请',
+//                        'index' => 'apps.dealer.withdraw/index',
+//                    ],
+//                    [
+//                        'name' => '分销设置',
+//                        'index' => 'apps.dealer.setting/index',
+//                    ],
+//                    [
+//                        'name' => '分销海报',
+//                        'index' => 'apps.dealer.setting/qrcode',
+//                    ],
+//                ]
+//            ],
+//            [
+//                'name' => '拼团管理',
+//                'submenu' => [
+//                    [
+//                        'name' => '商品分类',
+//                        'index' => 'apps.sharing.category/index',
+//                        'uris' => [
+//                            'apps.sharing.category/index',
+//                            'apps.sharing.category/add',
+//                            'apps.sharing.category/edit',
+//                        ]
+//                    ],
+//                    [
+//                        'name' => '商品列表',
+//                        'index' => 'apps.sharing.goods/index',
+//                        'uris' => [
+//                            'apps.sharing.goods/index',
+//                            'apps.sharing.goods/add',
+//                            'apps.sharing.goods/edit',
+//                            'apps.sharing.goods/copy',
+//                            'apps.sharing.goods/copy_master',
+//                        ]
+//                    ],
+//                    [
+//                        'name' => '拼单管理',
+//                        'index' => 'apps.sharing.active/index',
+//                        'uris' => [
+//                            'apps.sharing.active/index',
+//                            'apps.sharing.active/users',
+//                        ]
+//                    ],
+//                    [
+//                        'name' => '订单管理',
+//                        'index' => 'apps.sharing.order/index',
+//                        'uris' => [
+//                            'apps.sharing.order/index',
+//                            'apps.sharing.order/detail',
+//                            'apps.sharing.order.operate/batchdelivery'
+//                        ]
+//                    ],
+//                    [
+//                        'name' => '售后管理',
+//                        'index' => 'apps.sharing.order.refund/index',
+//                        'uris' => [
+//                            'apps.sharing.order.refund/index',
+//                            'apps.sharing.order.refund/detail',
+//                        ]
+//                    ],
+//                    [
+//                        'name' => '商品评价',
+//                        'index' => 'apps.sharing.comment/index',
+//                        'uris' => [
+//                            'apps.sharing.comment/index',
+//                            'apps.sharing.comment/detail',
+//                        ],
+//                    ],
+//                    [
+//                        'name' => '拼团设置',
+//                        'index' => 'apps.sharing.setting/index'
+//                    ]
+//                ]
+//            ],
+
         ]
     ],
     'setting' => [
