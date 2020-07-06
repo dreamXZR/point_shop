@@ -162,12 +162,12 @@
                                                 <input type="text" v-model="batchData.goods_no" placeholder="商家编码">
                                             </div>
                                             <div class="am-form-group">
-                                                <input type="number" v-model="batchData.sharing_price"
-                                                       placeholder="拼团价">
+                                                <input type="number" v-model="batchData.seckill_price"
+                                                       placeholder="秒杀价">
                                             </div>
                                             <div class="am-form-group">
                                                 <input type="number" v-model="batchData.goods_price"
-                                                       placeholder="单买价">
+                                                       placeholder="商品价">
                                             </div>
                                             <div class="am-form-group">
                                                 <input type="number" v-model="batchData.line_price"
@@ -196,10 +196,10 @@
                                                 <th>规格图片</th>
                                                 <th>商家编码</th>
                                                 <th class="form-require">
-                                                    拼团价
+                                                    秒杀价
                                                 </th>
                                                 <th class="">
-                                                    单买价
+                                                    商品价格
                                                 </th>
                                                 <th>划线价</th>
                                                 <th class="form-require">
@@ -232,7 +232,7 @@
                                                 </td>
                                                 <td>
                                                     <input type="number" min="0.01" class="ipt-w80" name="sharing_price"
-                                                           v-model="item.form.sharing_price" required>
+                                                           v-model="item.form.seckill_price" required>
                                                 </td>
                                                 <td>
                                                     <input type="number" min="0" class="ipt-w80" name="goods_price"
@@ -271,18 +271,18 @@
                                     </div>
                                 </div>
                                 <div class="am-form-group">
-                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">拼团价格 </label>
+                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">秒杀价格 </label>
                                     <div class="am-u-sm-9 am-u-end">
                                         <input type="number" min="0.01" class="tpl-form-input"
-                                               name="goods[sku][sharing_price]" value="" required>
+                                               name="goods[sku][seckill_price]" value="" required>
                                     </div>
                                 </div>
                                 <div class="am-form-group">
-                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label">单买价格 </label>
+                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label">商品价格 </label>
                                     <div class="am-u-sm-9 am-u-end">
                                         <input type="number" min="0" class="tpl-form-input"
                                                name="goods[sku][goods_price]"
-                                               value="<?= $model['sku'][0]['goods_price'] ?>">
+                                               value="<?= $model['sku'][0]['goods_price'] ?>" required>
                                     </div>
                                 </div>
                                 <div class="am-form-group">

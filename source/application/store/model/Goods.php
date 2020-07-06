@@ -169,8 +169,8 @@ class Goods extends GoodsModel
         $where = [
             'goods_id'=>$goods_id,
         ];
-        if($admin_user['shop_id']){
-            $where['shop_id'] = $admin_user['shop_id'];
+        if($admin_user['store_shop_id']){
+            $where['shop_id'] = $admin_user['store_shop_id'];
         }
         return $model->with([
             'category',

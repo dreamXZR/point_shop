@@ -18,7 +18,7 @@ class WxappHelp extends WxappHelpModel
      */
     public function add($data)
     {
-        $data['wxapp_id'] = self::$wxapp_id;
+        $data['wxapp_id'] = config('mini_weixin.wxapp_id');
         return $this->allowField(true)->save($data);
     }
 

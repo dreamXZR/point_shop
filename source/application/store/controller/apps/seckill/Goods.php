@@ -87,8 +87,15 @@ class Goods extends Controller
             return $this->fetch('copy_master', compact('model', 'delivery', 'specData'));
         }
         // 新增秒杀商品
+        $post_data = $this->postData('goods');
+        $post_data['start_at'] = strtotime( $post_data['start_at']);
+        $post_data['end_at'] = strtotime( $post_data['end_at']);
+        if($post_data['end_at']<$post_data['start_at']){
+            return $this->renderError('秒杀时间填写错误');
+        }
+        $post_data['is_seckill_goods'] = 1;
         $model = new GoodsModel;
-        if ($model->add($this->postData('goods'))) {
+        if ($model->add($post_data)) {
             return $this->renderSuccess('添加成功', url('apps.seckill.goods/index'));
         }
         return $this->renderError($model->getError() ?: '添加失败');
