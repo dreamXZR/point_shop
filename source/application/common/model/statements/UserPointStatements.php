@@ -7,9 +7,9 @@ namespace app\common\model\statements;
 use app\common\model\BaseModel;
 use think\Session;
 
-class PointStatements extends BaseModel
+class UserPointStatements extends BaseModel
 {
-    protected $name = 'point_statements';
+    protected $name = 'user_point_statements';
 
     private $admin_user;
 
@@ -44,7 +44,7 @@ class PointStatements extends BaseModel
         }
         return $this->where($where)
             ->with('shop')
-            ->order(['id' => 'desc'])
+            ->order(['create_time' => 'desc'])
             ->paginate(15, false, [
                 'query' => \request()->request()
             ]);

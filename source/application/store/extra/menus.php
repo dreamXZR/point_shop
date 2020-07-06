@@ -207,7 +207,7 @@ return [
                 ]
             ],
             [
-                'name' => '积分流水',
+                'name' => '商家充值流水',
                 'index' => 'shop.pointStatements/index',
             ],
 //            [

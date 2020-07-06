@@ -13,6 +13,7 @@
                             <thead>
                             <tr>
                                 <th>ID</th>
+                                <th>店铺名称</th>
                                 <th>时间</th>
                                 <th>积分</th>
                                 <th>备注</th>
@@ -22,8 +23,9 @@
                             <?php if (!$list->isEmpty()): foreach ($list as $item): ?>
                                 <tr>
                                     <td class="am-text-middle"><?= $item['id'] ?></td>
+                                    <td class="am-text-middle"><?= $item['shop']['shop_name'] ?></td>
                                     <td class="am-text-middle"><?= $item['create_time'] ?></td>
-                                    <td class="am-text-middle"><?= $item['points'] ?></td>
+                                    <td class="am-text-middle"><?= $item['type'] == 30 ? '+'.$item['points'] : '-'.$item['points'] ?></td>
                                     <td class="am-text-middle"><?= $item['remark'] ?></td>
                                 </tr>
                             <?php endforeach; else: ?>

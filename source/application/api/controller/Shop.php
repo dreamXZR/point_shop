@@ -2,6 +2,7 @@
 
 namespace app\api\controller;
 
+use app\api\model\statements\PointStatements;
 use app\api\model\store\Shop as ShopModel;
 use app\store\model\store\ShopSettled;
 
@@ -72,7 +73,12 @@ class Shop extends Controller
      */
     public function pointsInfo()
     {
-
+        $user = $this->getUser();
+        $shop_info = \app\api\model\store\Shop::get(['user_id'=>$user['user_id']]);
+        $model = new PointStatements();
+        return $this->renderSuccess([
+            'list' => $model->getList($shop_info['shop_id']),
+        ]);
     }
 
 }

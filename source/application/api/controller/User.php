@@ -3,6 +3,7 @@
 namespace app\api\controller;
 
 use app\api\model\OutlineOrder;
+use app\api\model\statements\UserPointStatements;
 use app\api\model\User as UserModel;
 use app\api\model\Wxapp as WxappModel;
 use app\api\model\WxappPrepayId as WxappPrepayIdModel;
@@ -105,6 +106,18 @@ class User extends Controller
         $model = new WxappPrepayIdModel;
         $model->add($payment['prepay_id'], $order['id'], $user['user_id'], 30);
         return $payment;
+    }
+
+    /**
+     * 用户积分明细
+     */
+    public function pointsInfo()
+    {
+        $user = $this->getUser();
+        $model = new UserPointStatements();
+        return $this->renderSuccess([
+            'list' => $model->getList($user['user_id']),
+        ]);
     }
 
 }

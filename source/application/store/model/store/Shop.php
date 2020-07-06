@@ -160,6 +160,7 @@ class Shop extends ShopModel
             $point_statements = new PointStatements();
             $point_statements->record([
                 'shop_id' => $this['shop_id'],
+                'charge_money'=>$data['charge_money'],
                 'points' => $data['points'],
                 'type' => 30,
                 'remark' => '商家充值操作'

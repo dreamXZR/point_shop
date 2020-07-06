@@ -127,21 +127,6 @@ class Order extends OrderModel
         return $this->with(['goods' => ['refund']])->where($filter)->select();
     }
 
-    public function distributePoints()
-    {
-        Db::startTrans();
-        try {
-            //用户增加积分
-            $user = \app\api\model\User::get(['user_id'=>$this['user_id']]);
-            $user->incrPoints($this['points']);
-            //商家减少积分
-            $shop = Shop::get(['shop_id'=>$this['shop_id']]);
-            $shop->decPoints($this['points']);
-            Db::commit();
-        }catch (\Exception $e){
-            // 回滚事务
-            Db::rollback();
-        }
-    }
+
 
 }

@@ -2,6 +2,10 @@
 
 namespace app\common\model;
 
+use app\api\model\store\Shop;
+use app\common\model\statements\PointStatements;
+use app\common\model\statements\UserPointStatements;
+use think\Db;
 use think\Hook;
 use app\common\model\store\shop\Order as ShopOrder;
 use app\common\service\Order as OrderService;
@@ -303,6 +307,44 @@ class Order extends BaseModel
             ]);
         });
         return true;
+    }
+
+    /**
+     * 积分分发
+     */
+    public function distributePoints()
+    {
+        Db::startTrans();
+        try {
+            //用户增加积分、减少待领取积分
+            $user  = new User();
+            $user->where(['user_id'=>$this['user_id']])->inc('points',$this['points'])->dec('prepare_points',$this['points'])->update();
+            //商家减少积分
+            $shop  = new \app\common\model\store\Shop();
+            $shop->where(['shop_id'=>$this['shop_id']])->dec('points',$this['points'])->update();
+            //记录日志
+            $shop_log = new PointStatements();
+            $shop_log->save([
+                'user_id' => $this['user_id'],
+                'shop_id' => $this['shop_id'],
+                'type' => 20,
+                'order_no' => $this['order_no'],
+                'points' => $this['points'],
+                'remark' => '用户线上消费',
+            ]);
+            $user_log = new UserPointStatements();
+            $user_log->save([
+                'user_id' => $this['user_id'],
+                'shop_id' => $this['shop_id'],
+                'type' => 20,
+                'points' => $this['points'],
+                'remark' => '用户线上消费',
+            ]);
+            Db::commit();
+        }catch (\Exception $e){
+            // 回滚事务
+            Db::rollback();
+        }
     }
 
 }

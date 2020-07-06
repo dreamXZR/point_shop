@@ -3,6 +3,7 @@
 namespace app\api\controller;
 
 use app\api\model\GoodsSku;
+use app\api\model\statements\UserPointStatements;
 use app\store\model\PointGoods as GoodsModel;
 use app\api\model\Cart as CartModel;
 use app\common\service\qrcode\Goods as GoodsPoster;
@@ -93,6 +94,14 @@ class PointGoods extends Controller
                 'exchange_points' => $goods_num * $goods['exchange_points'],
                 'exchange_code' => $this->make_coupon_card(),
                 'goods_remarks' => $goods['goods_name'].' '.$goods['goods_sku']['goods_attr'],
+            ]);
+            //用户积分记录
+            $user_log = new UserPointStatements();
+            $user_log->save([
+                'user_id' => $user['user_id'],
+                'type' => 40,
+                'points' => $goods_num * $goods['exchange_points'],
+                'remark' => '用户积分兑换'
             ]);
             //消减用户库存
             $user->decrPoints($goods_num * $goods['exchange_points']);

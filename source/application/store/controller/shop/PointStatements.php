@@ -11,7 +11,7 @@ class PointStatements extends Controller
     public function index()
     {
         $model = new PointStatementsModel();
-        $list = $model->getShopList();
+        $list = $model->getShopRechargeList();
         return $this->fetch('index',compact('list'));
     }
 }

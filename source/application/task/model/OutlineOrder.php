@@ -7,6 +7,7 @@ use app\common\service\Message;
 use app\common\model\OutlineOrder as OrderModel;
 use app\task\model\dealer\Apply as DealerApplyModel;
 use app\task\model\statements\PointStatements;
+use app\task\model\statements\UserPointStatements;
 use app\task\model\WxappPrepayId as WxappPrepayIdModel;
 
 /**
@@ -72,8 +73,17 @@ class OutlineOrder extends OrderModel
             //商家金额变更
             $shop->incMoney($this['total_price']);
             //记录积分日志
-            $point_statements = new PointStatements();
-            $point_statements->record([
+            $shop_log = new PointStatements();
+            $shop_log->record([
+                'user_id' => $this['user_id'],
+                'shop_id' => $this['shop_id'],
+                'type' => 10,
+                'order_no' => $this['order_no'],
+                'points' => $this['points'],
+                'remark' => '用户线下付款',
+            ]);
+            $user_log = new UserPointStatements();
+            $user_log->save([
                 'user_id' => $this['user_id'],
                 'shop_id' => $this['shop_id'],
                 'type' => 10,

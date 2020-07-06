@@ -3,7 +3,7 @@
         <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
             <div class="widget am-cf">
                 <div class="widget-head am-cf">
-                    <div class="widget-title a m-cf">商铺积分流水</div>
+                    <div class="widget-title a m-cf">商铺充值流水</div>
                 </div>
                 <div class="widget-body am-fr">
                     <!-- 工具栏 -->
@@ -13,18 +13,22 @@
                             <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>时间</th>
-                                <th>积分</th>
-                                <th>备注</th>
+                                <th>店铺名称</th>
+                                <th>充值时间</th>
+                                <th>充值金额</th>
+                                <th>充值积分</th>
+<!--                                <th>备注</th>-->
                             </tr>
                             </thead>
                             <tbody>
                             <?php if (!$list->isEmpty()): foreach ($list as $item): ?>
                                 <tr>
                                     <td class="am-text-middle"><?= $item['id'] ?></td>
+                                    <td class="am-text-middle"><?= $item['shop']['shop_name'] ?></td>
                                     <td class="am-text-middle"><?= $item['create_time'] ?></td>
+                                    <td class="am-text-middle"><?= $item['charge_money'] ?></td>
                                     <td class="am-text-middle"><?= $item['points'] ?></td>
-                                    <td class="am-text-middle"><?= $item['remark'] ?></td>
+<!--                                    <td class="am-text-middle">--><?//= $item['remark'] ?><!--</td>-->
                                 </tr>
                             <?php endforeach; else: ?>
                                 <tr>

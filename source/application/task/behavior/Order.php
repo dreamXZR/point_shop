@@ -33,6 +33,7 @@ class Order
 //        if (!$model::$wxapp_id) {
 //            return false;
 //        }
+
         if (!Cache::has('__task_space__order__' .config('mini_weixin.wxapp_id'))) {
             $this->model->startTrans();
             try {
@@ -122,7 +123,8 @@ class Order
             'order_status' => 30
         ], ['order_id' => ['in', $orderIds]]);
         // 发放分销订单佣金
-        return $this->grantMoney($orderIds);
+        //return $this->grantMoney($orderIds);
+        return true;
     }
 
     private function calculatePoints($refund_days)
