@@ -3,9 +3,8 @@
 namespace app\api\controller\seckill;
 
 use app\api\controller\Controller;
-use app\api\model\seckill\Goods as GoodsModel;
+use app\api\model\Goods as GoodsModel;
 use app\common\service\qrcode\Goods as GoodsPoster;
-use app\api\model\sharing\Active as ActiveModel;
 
 /**
  * 商品控制器
@@ -15,16 +14,21 @@ use app\api\model\sharing\Active as ActiveModel;
 class Goods extends Controller
 {
     /**
-     * 商品列表
-     * @param int $category_id
-     * @return array
+     * 秒杀商品列表
+     * @param null $goods_status
+     * @param null $category_id
+     * @param string $goods_name
+     * @return mixed
      * @throws \think\exception\DbException
      */
-    public function lists($store_shop_id = 0)
+    public function lists($status = null, $category_id = null, $search = '',$shop_id = 0)
     {
+        // 商品列表
         $model = new GoodsModel;
-        $list = $model->getList(10, $store_shop_id);
-        return $this->renderSuccess(compact('list'));
+        $list = $model->getSeckillList($status, $category_id, $search,'seckill',$shop_id);
+        return $this->renderSuccess([
+            'list' => $list
+        ]);
     }
 
     /**

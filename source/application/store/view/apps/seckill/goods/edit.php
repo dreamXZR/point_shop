@@ -73,21 +73,21 @@
                             </div>
 
                             <div class="widget-head am-cf">
-                                <div class="widget-title am-fl">秒杀设置</div>
+                                <div class="widget-title am-fl">活动时间设置</div>
                             </div>
                             <div class="am-form-group">
-                                <label class="am-u-sm-2 am-form-label form-require"> 秒杀开始时间 </label>
+                                <label class="am-u-sm-2 am-form-label form-require"> 活动开始时间 </label>
                                 <div class="am-u-sm-10">
                                     <input type="text" name="goods[start_at]" class="layui-input" id="start_at" value="<?= date('Y-m-d H:i:s',$model['start_at']) ?>" required>
-                                    <small>秒杀开始时间</small>
+                                    <small>活动开始时间</small>
                                 </div>
                             </div>
                             <div class="am-form-group">
-                                <label class="am-u-sm-2 am-form-label form-require"> 秒杀结束时间 </label>
+                                <label class="am-u-sm-2 am-form-label form-require"> 活动结束时间 </label>
                                 <div class="am-u-sm-10">
                                     <div class="am-u-sm-10">
                                         <input type="text" name="goods[end_at]" class="layui-input" id="end_at" value="<?= date('Y-m-d H:i:s',$model['end_at']) ?>" required>
-                                        <small>注：秒杀结束时间要大于开始时间</small>
+                                        <small>注：活动结束时间要大于开始时间</small>
                                     </div>
                                 </div>
                             </div>
@@ -184,12 +184,8 @@
                                                 <input type="text" v-model="batchData.goods_no" placeholder="商家编码">
                                             </div>
                                             <div class="am-form-group">
-                                                <input type="number" v-model="batchData.seckill_price"
-                                                       placeholder="秒杀价">
-                                            </div>
-                                            <div class="am-form-group">
                                                 <input type="number" v-model="batchData.goods_price"
-                                                       placeholder="商品价">
+                                                       placeholder="商品特惠价">
                                             </div>
                                             <div class="am-form-group">
                                                 <input type="number" v-model="batchData.line_price"
@@ -218,12 +214,9 @@
                                                 <th>规格图片</th>
                                                 <th>商家编码</th>
                                                 <th class="form-require">
-                                                    秒杀价
+                                                    商品特惠价
                                                 </th>
-                                                <th class="">
-                                                    商品价
-                                                </th>
-                                                <th>划线价</th>
+                                                <th class="form-require">划线价</th>
                                                 <th class="form-require">
                                                     库存
                                                 </th>
@@ -251,10 +244,6 @@
                                                 <td>
                                                     <input type="text" class="ipt-goods-no" name="goods_no"
                                                            v-model="item.form.goods_no">
-                                                </td>
-                                                <td>
-                                                    <input type="number" min="0.01" class="ipt-w80" name="seckill_price"
-                                                           v-model="item.form.seckill_price" required>
                                                 </td>
                                                 <td>
                                                     <input type="number" min="0" class="ipt-w80" name="goods_price"
@@ -293,15 +282,7 @@
                                     </div>
                                 </div>
                                 <div class="am-form-group">
-                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">秒杀价格 </label>
-                                    <div class="am-u-sm-9 am-u-end">
-                                        <input type="number" min="0.01" class="tpl-form-input"
-                                               name="goods[sku][sharing_price]"
-                                               value="<?= $model['sku'][0]['seckill_price'] ?>" required>
-                                    </div>
-                                </div>
-                                <div class="am-form-group">
-                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label">商品价格 </label>
+                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label">商品特惠价格 </label>
                                     <div class="am-u-sm-9 am-u-end">
                                         <input type="number" min="0" class="tpl-form-input"
                                                name="goods[sku][goods_price]"

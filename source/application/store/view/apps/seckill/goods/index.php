@@ -3,7 +3,7 @@
         <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
             <div class="widget am-cf">
                 <div class="widget-head am-cf">
-                    <div class="widget-title am-cf">秒杀商品列表</div>
+                    <div class="widget-title am-cf">限时特惠商品列表</div>
                 </div>
                 <div class="widget-body am-fr">
                     <!-- 工具栏 -->
@@ -67,8 +67,8 @@
                                 <th>商品ID</th>
                                 <th>商品图片</th>
                                 <th>商品名称</th>
-                                <th>秒杀开始时间</th>
-                                <th>秒杀结束时间</th>
+                                <th>活动开始时间</th>
+                                <th>活动结束时间</th>
                                 <th>积分</th>
                                 <th>商品排序</th>
                                 <th>商品状态</th>

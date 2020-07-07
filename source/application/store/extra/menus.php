@@ -310,10 +310,10 @@ return [
                             'wxapp.page/edit',
                         ]
                     ],
-                    [
-                        'name' => '分类模板',
-                        'index' => 'wxapp.page/category'
-                    ],
+//                    [
+//                        'name' => '分类模板',
+//                        'index' => 'wxapp.page/category'
+//                    ],
                     [
                         'name' => '页面链接',
                         'index' => 'wxapp.page/links'
@@ -338,7 +338,7 @@ return [
         'index' => 'apps.seckill.goods/index',
         'submenu' => [
             [
-                'name' => '秒杀活动',
+                'name' => '限时特惠',
                 'submenu' => [
                     [
                         'name' => '商品列表',
