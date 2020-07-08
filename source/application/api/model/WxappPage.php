@@ -47,6 +47,8 @@ class WxappPage extends WxappPageModel
                 $items[$key]['data'] = array_values($item['data']);
             } else if ($item['type'] === 'goods') {
                 $items[$key]['data'] = $model->getGoodsList($item);
+            }else if ($item['type'] === 'pointGoods') {
+                $items[$key]['data'] = $model->getPointGoodsList($item);
             } else if ($item['type'] === 'sharingGoods') {
                 $items[$key]['data'] = $model->getSharingGoodsList($item);
             } else if ($item['type'] === 'coupon') {
@@ -93,6 +95,44 @@ class WxappPage extends WxappPageModel
                 'image' => $goods['image'][0]['file_path'],
                 'goods_price' => $goods['sku'][0]['goods_price'],
                 'line_price' => $goods['sku'][0]['line_price'],
+                'exchange_points' => $goods['exchange_points']
+            ];
+        }
+        return $data;
+    }
+
+    /**
+     * 积分商品组件：获取积分商品列表
+     * @param $item
+     * @return array
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
+    private function getPointGoodsList($item)
+    {
+        // 获取商品数据
+        $model = new Goods;
+        if ($item['params']['source'] === 'choice') {
+            // 数据来源：手动
+            $goodsIds = array_column($item['data'], 'goods_id');
+            $goodsList = $model->getListByIds($goodsIds, 10);
+        } else {
+            // 数据来源：自动
+            $goodsList = $model->getList(10, $item['params']['auto']['category'], '','point',
+                $item['params']['auto']['goodsSort'], false, $item['params']['auto']['showNum']);
+        }
+        if ($goodsList->isEmpty()) return [];
+        // 格式化商品列表
+        $data = [];
+        foreach ($goodsList as $goods) {
+            $data[] = [
+                'goods_id' => $goods['goods_id'],
+                'goods_name' => $goods['goods_name'],
+                'image' => $goods['image'][0]['file_path'],
+                'goods_price' => $goods['sku'][0]['goods_price'],
+                'line_price' => $goods['sku'][0]['line_price'],
+                'exchange_points' => $goods['exchange_points']
             ];
         }
         return $data;

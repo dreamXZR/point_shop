@@ -8,16 +8,16 @@
                 <div class="widget-body am-fr">
                     <div class="am-u-sm-12 am-u-md-6 am-u-lg-6">
                         <div class="am-form-group">
-                            <div class="am-btn-toolbar">
-                                <?php if (checkPrivilege('wxapp.page/add')): ?>
-                                    <div class="am-btn-group am-btn-group-xs">
-                                        <a class="am-btn am-btn-default am-btn-success am-radius"
-                                           href="<?= url('wxapp.page/add') ?>">
-                                            <span class="am-icon-plus"></span> 新增
-                                        </a>
-                                    </div>
-                                <?php endif; ?>
-                            </div>
+<!--                            <div class="am-btn-toolbar">-->
+<!--                                --><?php //if (checkPrivilege('wxapp.page/add')): ?>
+<!--                                    <div class="am-btn-group am-btn-group-xs">-->
+<!--                                        <a class="am-btn am-btn-default am-btn-success am-radius"-->
+<!--                                           href="--><?//= url('wxapp.page/add') ?><!--">-->
+<!--                                            <span class="am-icon-plus"></span> 新增-->
+<!--                                        </a>-->
+<!--                                    </div>-->
+<!--                                --><?php //endif; ?>
+<!--                            </div>-->
                         </div>
                     </div>
                     <div class="am-scrollable-horizontal am-u-sm-12">

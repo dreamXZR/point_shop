@@ -7,14 +7,14 @@ use app\store\model\Delivery;
 use app\store\model\Goods as GoodsModel;
 
 /**
- * 商品管理控制器
+ * 积分商品管理控制器
  * Class Goods
  * @package app\store\controller
  */
 class PointGoods extends Controller
 {
     /**
-     * 商品列表(出售中)
+     * 积分商品列表
      * @param null $goods_status
      * @param null $category_id
      * @param string $goods_name
@@ -32,7 +32,7 @@ class PointGoods extends Controller
     }
 
     /**
-     * 添加商品
+     * 添加积分商品
      * @return array|mixed
      * @throws \think\exception\PDOException
      */

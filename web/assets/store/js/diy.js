@@ -170,7 +170,8 @@
                     onSelectGoods: function (item) {
                         var uris = {
                             goods: 'goods/lists&status=10',
-                            sharingGoods: 'sharing.goods/lists&status=10'
+                            sharingGoods: 'sharing.goods/lists&status=10',
+                            pointGoods: 'point_goods/lists&status=10'
                         };
                         $.selectData({
                             title: '选择商品',
@@ -178,6 +179,7 @@
                             duplicate: false,
                             dataIndex: 'goods_id',
                             done: function (data) {
+                                console.log(data);
                                 data.forEach(function (itm) {
                                     item.data.push(itm)
                                 });

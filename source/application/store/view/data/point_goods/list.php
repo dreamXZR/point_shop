@@ -23,7 +23,7 @@
             <th>商品ID</th>
             <th>商品图片</th>
             <th>商品名称</th>
-<!--            <th>商品分类</th>-->
+            <th>商品积分</th>
             <th>添加时间</th>
         </tr>
         </thead>
@@ -39,6 +39,7 @@
                             'goods_image' => $item['image'][0]['file_path'],
                             'goods_price' => $item['sku'][0]['goods_price'],
                             'line_price' => $item['sku'][0]['line_price'],
+                            'exchange_points' => $item['exchange_points'],
                         ], JSON_UNESCAPED_SLASHES) ?>' type="checkbox">
                     </label>
                 </td>
@@ -53,7 +54,7 @@
                 <td class="am-text-middle">
                     <p class="item-title"><?= $item['goods_name'] ?></p>
                 </td>
-<!--                <td class="am-text-middle">--><?//= $item['category']['name'] ?><!--</td>-->
+                <td class="am-text-middle"><?= $item['exchange_points'] ?></td>
                 <td class="am-text-middle"><?= $item['create_time'] ?></td>
             </tr>
         <?php endforeach; else: ?>

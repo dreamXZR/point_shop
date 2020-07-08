@@ -334,6 +334,79 @@ class WxappPage extends BaseModel
                     ]
                 ]
             ],
+            'pointGoods' => [
+                'name' => '积分商品组',
+                'type' => 'pointGoods',
+                'params' => [
+                    'source' => 'auto', // choice; auto
+                    'auto' => [
+                        'category' => 0,
+                        'goodsSort' => 'all', // all; sales; price
+                        'showNum' => 6
+                    ]
+                ],
+                'style' => [
+                    'background' => '#F6F6F6',
+                    'display' => 'list', // list; slide
+                    'column' => '2',
+                    'show' => [
+                        'goodsName' => '1',
+                        'goodsPrice' => '1',
+                        'linePrice' => '1',
+                        'exchange_points' => '1'
+                    ]
+                ],
+                // '自动获取' => 默认数据
+                'defaultData' => [
+                    [
+                        'goods_name' => '此处显示商品名称',
+                        'image' => self::$base_url . 'assets/store/img/diy/goods/01.png',
+                        'goods_price' => '99.00',
+                        'line_price' => '139.00',
+                        'exchange_points'=>'99',
+                    ],
+                    [
+                        'goods_name' => '此处显示商品名称',
+                        'image' => self::$base_url . 'assets/store/img/diy/goods/01.png',
+                        'goods_price' => '99.00',
+                        'line_price' => '139.00',
+                        'exchange_points'=>'99',
+                    ],
+                    [
+                        'goods_name' => '此处显示商品名称',
+                        'image' => self::$base_url . 'assets/store/img/diy/goods/01.png',
+                        'goods_price' => '99.00',
+                        'line_price' => '139.00',
+                        'exchange_points'=>'99',
+                    ],
+                    [
+                        'goods_name' => '此处显示商品名称',
+                        'image' => self::$base_url . 'assets/store/img/diy/goods/01.png',
+                        'goods_price' => '99.00',
+                        'line_price' => '139.00',
+                        'exchange_points'=>'99',
+                    ]
+                ],
+                // '手动选择' => 默认数据
+                'data' => [
+                    [
+                        'goods_name' => '此处显示商品名称',
+                        'image' => self::$base_url . 'assets/store/img/diy/goods/01.png',
+                        'goods_price' => '99.00',
+                        'line_price' => '139.00',
+                        'exchange_points'=>'99',
+                        'is_default' => true
+                    ],
+                    [
+                        'goods_name' => '此处显示商品名称',
+                        'image' => self::$base_url . 'assets/store/img/diy/goods/01.png',
+                        'goods_price' => '99.00',
+                        'line_price' => '139.00',
+                        'exchange_points'=>'99',
+                        'is_default' => true
+                    ]
+                ]
+            ],
             'coupon' => [
                 'name' => '优惠券组',
                 'type' => 'coupon',
