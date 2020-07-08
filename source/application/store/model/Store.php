@@ -104,7 +104,7 @@ class Store extends StoreModel
      */
     private function getGoodsTotal()
     {
-        return number_format($this->GoodsModel->getGoodsTotal());
+        return number_format($this->GoodsModel->getGoodsTotal(['is_point_goods'=>0]));
     }
 
     /**

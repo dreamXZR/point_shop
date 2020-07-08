@@ -216,11 +216,13 @@
                                                 <th class="form-require">
                                                     商品特惠价
                                                 </th>
-                                                <th class="form-require">划线价</th>
+                                                <th class="form-require">
+                                                    划线价
+                                                </th>
                                                 <th class="form-require">
                                                     库存
                                                 </th>
-                                                <th class="form-require">
+                                                <th>
                                                     重量(kg)
                                                 </th>
                                             </tr>
@@ -247,11 +249,11 @@
                                                 </td>
                                                 <td>
                                                     <input type="number" min="0" class="ipt-w80" name="goods_price"
-                                                           v-model="item.form.goods_price">
+                                                           v-model="item.form.goods_price" required>
                                                 </td>
                                                 <td>
                                                     <input type="number" min="0" class="ipt-w80" name="line_price"
-                                                           v-model="item.form.line_price">
+                                                           v-model="item.form.line_price" required>
                                                 </td>
                                                 <td>
                                                     <input type="number" min="0" class="ipt-w80" name="stock_num"
@@ -259,7 +261,7 @@
                                                 </td>
                                                 <td>
                                                     <input type="number" min="0" class="ipt-w80" name="goods_weight"
-                                                           v-model="item.form.goods_weight" required>
+                                                           v-model="item.form.goods_weight" >
                                                 </td>
                                             </tr>
                                             </tbody>
@@ -282,19 +284,19 @@
                                     </div>
                                 </div>
                                 <div class="am-form-group">
-                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label">商品特惠价格 </label>
+                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">商品特惠价格 </label>
                                     <div class="am-u-sm-9 am-u-end">
                                         <input type="number" min="0" class="tpl-form-input"
                                                name="goods[sku][goods_price]"
-                                               value="<?= $model['sku'][0]['goods_price'] ?>">
+                                               value="<?= $model['sku'][0]['goods_price'] ?>" required>
                                     </div>
                                 </div>
                                 <div class="am-form-group">
-                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label">商品划线价 </label>
+                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">商品划线价 </label>
                                     <div class="am-u-sm-9 am-u-end">
                                         <input type="number" min="0" class="tpl-form-input"
                                                name="goods[sku][line_price]"
-                                               value="<?= $model['sku'][0]['line_price'] ?>">
+                                               value="<?= $model['sku'][0]['line_price'] ?>" required>
                                     </div>
                                 </div>
                                 <div class="am-form-group">
@@ -305,7 +307,7 @@
                                     </div>
                                 </div>
                                 <div class="am-form-group">
-                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">商品重量(Kg) </label>
+                                    <label class="am-u-sm-3 am-u-lg-2 am-form-label ">商品重量(Kg) </label>
                                     <div class="am-u-sm-9 am-u-end">
                                         <input type="number" class="tpl-form-input" name="goods[sku][goods_weight]"
                                                value="<?= $model['sku'][0]['goods_weight'] ?>" required>

@@ -83,7 +83,7 @@
                                 <th>商品ID</th>
                                 <th>商品图片</th>
                                 <th>商品名称</th>
-                                <th>商品分类</th>
+<!--                                <th>商品分类</th>-->
                                 <th>商品排序</th>
                                 <th>兑换积分</th>
                                 <th>商品状态</th>
@@ -105,7 +105,7 @@
                                     <td class="am-text-middle">
                                         <p class="item-title"><?= $item['goods_name'] ?></p>
                                     </td>
-                                    <td class="am-text-middle"><?= $item['category']['name'] ?></td>
+<!--                                    <td class="am-text-middle">--><?//= $item['category']['name'] ?><!--</td>-->
                                     <td class="am-text-middle"><?= $item['goods_sort'] ?></td>
                                     <td class="am-text-middle"><?= $item['exchange_points'] ?></td>
                                     <td class="am-text-middle">

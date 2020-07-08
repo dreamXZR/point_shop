@@ -8,13 +8,8 @@
                             <div class="widget-head am-cf">
                                 <div class="widget-title am-fl">编辑管理员</div>
                             </div>
-                            <div class="am-form-group">
-                                <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">用户名 </label>
-                                <div class="am-u-sm-9 am-u-end">
-                                    <input type="text" class="tpl-form-input" name="user[user_name]"
-                                           value="<?= $model['user_name'] ?>" placeholder="请输入用户名" required>
-                                </div>
-                            </div>
+                            <input type="hidden"  name="user[user_name]"
+                                   value="<?= $model['user_name'] ?>" placeholder="请输入用户名">
                             <div class="am-form-group">
                                 <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">登录密码 </label>
                                 <div class="am-u-sm-9 am-u-end">

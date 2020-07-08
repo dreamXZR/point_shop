@@ -8,7 +8,7 @@
                 <div class="widget-body am-fr">
                     <div class="tips am-margin-bottom-sm am-u-sm-12">
                         <div class="pre">
-                            <p> 注：商品分类最多添加2级，分类图片可参考
+                            <p> 注：商品分类最多添加2级
 
                         </div>
                     </div>

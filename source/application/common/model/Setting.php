@@ -143,7 +143,7 @@ class Setting extends BaseModel
                         'aliyun' => [
                             'AccessKeyId' => '',
                             'AccessKeySecret' => '',
-                            'sign' => '萤火科技',
+                            'sign' => '积分商城',
                             'order_pay' => [
                                 'is_enable' => '0',
                                 'template_code' => '',

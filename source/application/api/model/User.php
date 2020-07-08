@@ -165,7 +165,7 @@ class User extends UserModel
                 'url' => 'pages/pointExchange/index',
             ],
             'shop_settled' => [
-                'name' => '店家入驻',
+                'name' => '商家自营',
                 'url' => 'pages/dealer/index/index',
                 'icon' => 'home'
             ],

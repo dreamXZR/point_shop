@@ -22,14 +22,18 @@ class Goods extends Controller
      * @return mixed
      * @throws \think\exception\DbException
      */
-    public function index($goods_status = null, $category_id = null, $goods_name = '')
+    public function index($goods_status = null, $category_id = null, $goods_name = '',$sortType = 'all',$sortPrice = false,$shop_id = 0)
     {
         // 商品分类
-        $catgory = Category::getCacheTree();
+        //$catgory = Category::getCacheTree();
+        //商家列表
+        $shop = (new \app\store\model\store\Shop())->field('shop_id,shop_name')->where(['is_delete'=>0,'status'=>1])->select();
+        //后台人员信息
+        $admin_user = Session::get('yoshop_store.user');
         // 商品列表
         $model = new GoodsModel;
-        $list = $model->getList($goods_status, $category_id, $goods_name);
-        return $this->fetch('index', compact('list', 'catgory'));
+        $list = $model->getList($goods_status, $category_id, $goods_name,'goods',$sortType,$sortPrice,$shop_id);
+        return $this->fetch('index', compact('list', 'shop','admin_user'));
     }
 
     /**
@@ -141,6 +145,21 @@ class Goods extends Controller
             return $this->renderError('删除失败');
         }
         return $this->renderSuccess('删除成功');
+    }
+
+    /**
+     * 下架商品
+     * @param $goods_id
+     * @return array
+     */
+    public function takeoff($goods_id)
+    {
+        // 商品详情
+        $model = GoodsModel::detail($goods_id);
+        if (!$model->takeoff()) {
+            return $this->renderError('下架失败');
+        }
+        return $this->renderSuccess('下架成功');
     }
 
 }

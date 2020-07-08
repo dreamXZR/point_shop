@@ -146,6 +146,15 @@ class Goods extends GoodsModel
     }
 
     /**
+     * 下架商品
+     * @return false|int
+     */
+    public function takeoff()
+    {
+        return $this->save(['goods_status' => 20]);
+    }
+
+    /**
      * 获取当前商品总数
      * @param array $where
      * @return int|string

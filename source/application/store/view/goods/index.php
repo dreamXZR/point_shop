@@ -24,6 +24,21 @@
                             </div>
                             <div class="am-u-sm-12 am-u-md-9">
                                 <div class="am fr">
+                                    <?php if ($admin_user['store_shop_id'] == null) : ?>
+                                    <div class="am-form-group am-fl">
+                                        <?php $shop_id = $request->get('shop_id') ?: null; ?>
+                                        <select name="shop_id"
+                                                data-am-selected="{btnSize: 'sm', placeholder: '所属店铺'}">
+                                            <option value=""></option>
+                                            <?php if (isset($shop)): foreach ($shop as $first): ?>
+
+                                                <option value="<?= $first['shop_id'] ?>"
+                                                    <?= $shop_id == $first['shop_id'] ? 'selected' : '' ?>>
+                                                    <?= $first['shop_name'] ?></option>
+                                            <?php endforeach; endif; ?>
+                                        </select>
+                                    </div>
+                                    <?php endif; ?>
                                     <div class="am-form-group am-fl">
                                         <?php $goods_status = $request->get('goods_status') ?: null; ?>
                                         <select name="goods_status"
@@ -107,6 +122,12 @@
                                                     <i class="am-icon-trash"></i> 删除
                                                 </a>
                                             <?php endif; ?>
+                                            <?php if (checkPrivilege('point_goods/takeoff')): ?>
+                                                <a href="javascript:;" class="item-takeoff tpl-table-black-operation-del"
+                                                   data-id="<?= $item['goods_id'] ?>">
+                                                    <i class="am-icon-trash"></i> 下架
+                                                </a>
+                                            <?php endif; ?>
                                         </div>
                                     </td>
                                 </tr>
@@ -159,6 +180,10 @@
         // 删除元素
         var url = "<?= url('goods/delete') ?>";
         $('.item-delete').delete('goods_id', url);
+
+        //下架商品
+        var url = "<?= url('goods/takeoff') ?>";
+        $('.item-takeoff').operate('goods_id', url,'是否下架该商品？');
 
     });
 </script>

@@ -13,7 +13,6 @@ class Banner extends Controller
 {
     //轮播图分类
     protected $banner_type_arr = [
-        1 => '首页轮播图',
         2 => '店铺轮播图',
     ];
 

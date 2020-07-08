@@ -43,7 +43,7 @@ class Setting extends SettingModel
                 $this->saveValues($key, $values);
             $this->commit();
             // 删除系统设置缓存
-            Cache::rm('dealer_setting_' . self::$wxapp_id);
+            Cache::rm('dealer_setting_' . config('mini_weixin.wxapp_id'));
             return true;
         } catch (\Exception $e) {
             $this->error = $e->getMessage();
@@ -71,7 +71,7 @@ class Setting extends SettingModel
             'key' => $key,
             'describe' => $this->describe[$key],
             'values' => $values,
-            'wxapp_id' => self::$wxapp_id,
+            'wxapp_id' => config('mini_weixin.wxapp_id'),
         ]);
     }
 

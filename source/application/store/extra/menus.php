@@ -508,6 +508,10 @@ return [
                 'name' => '上传设置',
                 'index' => 'setting/storage',
             ],
+            [
+                'name' => '其他设置',
+                'index' => 'setting.dealer.setting/index',
+            ],
 //            [
 //                'name' => '小票打印机',
 //                'submenu' => [

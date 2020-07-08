@@ -194,11 +194,13 @@
                                                 <th class="form-require">
                                                     商品特惠价格
                                                 </th>
-                                                <th class="form-require">划线价</th>
+                                                <th class="form-require">
+                                                    划线价
+                                                </th>
                                                 <th class="form-require">
                                                     库存
                                                 </th>
-                                                <th class="form-require">
+                                                <th>
                                                     重量(kg)
                                                 </th>
                                             </tr>
@@ -225,11 +227,11 @@
                                                 </td>
                                                 <td>
                                                     <input type="number" min="0" class="ipt-w80" name="goods_price"
-                                                           v-model="item.form.goods_price">
+                                                           v-model="item.form.goods_price" required>
                                                 </td>
                                                 <td>
                                                     <input type="number" min="0" class="ipt-w80" name="line_price"
-                                                           v-model="item.form.line_price">
+                                                           v-model="item.form.line_price" required>
                                                 </td>
                                                 <td>
                                                     <input type="number" min="0" class="ipt-w80" name="stock_num"
@@ -237,7 +239,7 @@
                                                 </td>
                                                 <td>
                                                     <input type="number" min="0" class="ipt-w80" name="goods_weight"
-                                                           v-model="item.form.goods_weight" required>
+                                                           v-model="item.form.goods_weight" >
                                                 </td>
                                             </tr>
                                             </tbody>
