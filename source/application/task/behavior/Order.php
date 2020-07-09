@@ -30,26 +30,27 @@ class Order
             return new OrderModel and false;
         }
         $this->model = $model;
+        $this->model->startTrans();
+        try {
+            $config = Setting::getItem('trade',config('mini_weixin.wxapp_id'));
+            // 未支付订单自动关闭
+            $this->close($config['order']['close_days']);
+            // 已发货订单自动确认收货
+            $this->receive($config['order']['receive_days']);
+            // 订单的积分计算
+            $this->calculatePoints($config['order']['refund_days']);
+            $this->model->commit();
+        } catch (\Exception $e) {
+            $this->model->rollback();
+        }
 //        if (!$model::$wxapp_id) {
 //            return false;
 //        }
 
-        if (!Cache::has('__task_space__order__' .config('mini_weixin.wxapp_id'))) {
-            $this->model->startTrans();
-            try {
-                $config = Setting::getItem('trade',config('mini_weixin.wxapp_id'));
-                // 未支付订单自动关闭
-                $this->close($config['order']['close_days']);
-                // 已发货订单自动确认收货
-                $this->receive($config['order']['receive_days']);
-                // 订单的积分计算
-                $this->calculatePoints($config['order']['refund_days']);
-                $this->model->commit();
-            } catch (\Exception $e) {
-                $this->model->rollback();
-            }
-            Cache::set('__task_space__order__' . config('mini_weixin.wxapp_id'), time(), 3600);
-        }
+        //if (!Cache::has('__task_space__order__' .config('mini_weixin.wxapp_id'))) {
+
+            //Cache::set('__task_space__order__' . config('mini_weixin.wxapp_id'), time(), 3600);
+        //}
         return true;
     }
 

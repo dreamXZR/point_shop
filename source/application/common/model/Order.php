@@ -37,7 +37,7 @@ class Order extends BaseModel
         parent::init();
         // 监听订单处理事件
         $static = new static;
-        Hook::listen('order', $static);
+        //Hook::listen('order', $static);
     }
 
     /**
