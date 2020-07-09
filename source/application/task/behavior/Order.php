@@ -18,6 +18,8 @@ class Order
     /* @var \app\task\model\Order $model */
     private $model;
 
+    public $error = '';
+
     /**
      * 执行函数
      * @param $model
@@ -40,8 +42,11 @@ class Order
             // 订单的积分计算
             $this->calculatePoints($config['order']['refund_days']);
             $this->model->commit();
+            return true;
         } catch (\Exception $e) {
+            $this->error = $e->getMessage();
             $this->model->rollback();
+            return false;
         }
 //        if (!$model::$wxapp_id) {
 //            return false;

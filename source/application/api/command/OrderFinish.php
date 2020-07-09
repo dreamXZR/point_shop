@@ -4,12 +4,11 @@
 namespace app\api\command;
 
 
-use app\common\model\Order;
 use think\console\Command;
 use think\console\Input;
 use think\console\Output;
 
-class Test extends Command
+class OrderFinish extends Command
 {
     protected function configure()
     {
@@ -19,7 +18,12 @@ class Test extends Command
     protected function execute(Input $input, Output $output)
     {
         $order = new \app\task\behavior\Order();
-        $order->run(new Order());
-        $output->writeln("finish");
+        $result = $order->run(new \app\task\model\Order());
+        if($result){
+            $output->writeln('finish');
+        }else{
+            $output->writeln($order->error);
+        }
+
     }
 }

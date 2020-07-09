@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'app\api\command\Test',
+    'app\api\command\OrderFinish',
 ];
 
 
