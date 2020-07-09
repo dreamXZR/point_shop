@@ -67,6 +67,10 @@
 <!--                                    <p class="item-icon"><i class="iconfont icon-shangpin5"></i></p>-->
 <!--                                    <p>拼团商品</p>-->
 <!--                                </nav>-->
+                                <nav class="special" @click="onAddItem('seckillGoods')">
+                                    <p class="item-icon"><i class="iconfont icon-shangpin5"></i></p>
+                                    <p>限时优惠</p>
+                                </nav>
                                 <nav class="special" @click="onAddItem('shop')">
                                     <p class="item-icon"><i class="iconfont icon-mendian"></i></p>
                                     <p>线下门店</p>
@@ -501,6 +505,50 @@
                                     </div>
                                 </template>
 
+                                <!-- diy元素: 限时优惠组 -->
+                                <template v-else-if="item.type == 'seckillGoods'">
+                                    <div @click.stop="onEditer(index)">
+                                        <div class="drag optional" :class="{selected:index === selectedIndex}">
+                                            <div class="diy-sharingGoods" :style="{background: item.style.background }">
+                                                <div class="goods-item dis-flex" v-for="(goods, index) in item.data">
+                                                    <!-- 商品图片 -->
+                                                    <div class="goods-item_left">
+                                                        <img :src="goods.image">
+                                                    </div>
+                                                    <div class="goods-item_right">
+                                                        <!-- 商品名称 -->
+                                                        <div v-if="item.style.show.goodsName"
+                                                             class="goods-item_title twolist-hidden">
+                                                            <span>{{ goods.goods_name }}</span>
+                                                        </div>
+                                                        <div class="goods-item_desc">
+                                                            <!-- 商品卖点 -->
+                                                            <div v-if="item.style.show.sellingPoint"
+                                                                 class="desc-selling_point am-text-truncate">
+                                                                <span>{{ goods.selling_point }}</span>
+                                                            </div>
+                                                            <!-- 优惠信息信息 -->
+                                                            <div class="desc-situation">
+                                                                <span class="x-color-999">活动时间：{{ goods.time }}</span>
+                                                            </div>
+                                                            <!-- 商品价格 -->
+                                                            <div class="desc_footer">
+                                                                <span class="price_x"
+                                                                      v-if="item.style.show.sharingPrice">¥{{ goods.goods_price }}</span>
+                                                                <span class="price_y x-color-999"
+                                                                      v-if="item.style.show.linePrice && goods.line_price > 0">¥{{ goods.line_price }}</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="btn-settlement">去抢购</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="btn-edit-del">
+                                                <div class="btn-del" @click.stop="onDeleleItem(index)">删除</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </template>
                                 <!-- diy元素: 线下门店 -->
                                 <template v-else-if="item.type == 'shop'">
                                     <div @click.stop="onEditer(index)">
@@ -1370,23 +1418,23 @@
                                     <!-- 自动获取 -->
                                     <div class="switch-source"
                                          v-show="curItem.params.source == 'auto'">
-                                        <div class="am-form-group">
-                                            <label class="am-u-sm-3 am-form-label am-text-xs">商品分类 </label>
-                                            <div class="am-u-sm-8 am-u-end">
-                                                <select v-model="curItem.params.auto.category"
-                                                        data-am-selected="{btnSize: 'sm',  placeholder:'全部分类', maxHeight: 400}">
-                                                    <option value="0"> -- 全部分类 --</option>
-                                                    <template v-for="first in opts.catgory">
-                                                        <option :value="first.category_id"> {{ first.name }}</option>
-                                                        <template v-if="first.child">
-                                                            <option v-for="two in first.child" :value="two.category_id">
-                                                                　{{ two.name }}
-                                                            </option>
-                                                        </template>
-                                                    </template>
-                                                </select>
-                                            </div>
-                                        </div>
+<!--                                        <div class="am-form-group">-->
+<!--                                            <label class="am-u-sm-3 am-form-label am-text-xs">商品分类 </label>-->
+<!--                                            <div class="am-u-sm-8 am-u-end">-->
+<!--                                                <select v-model="curItem.params.auto.category"-->
+<!--                                                        data-am-selected="{btnSize: 'sm',  placeholder:'全部分类', maxHeight: 400}">-->
+<!--                                                    <option value="0"> -- 全部分类 --</option>-->
+<!--                                                    <template v-for="first in opts.catgory">-->
+<!--                                                        <option :value="first.category_id"> {{ first.name }}</option>-->
+<!--                                                        <template v-if="first.child">-->
+<!--                                                            <option v-for="two in first.child" :value="two.category_id">-->
+<!--                                                                　{{ two.name }}-->
+<!--                                                            </option>-->
+<!--                                                        </template>-->
+<!--                                                    </template>-->
+<!--                                                </select>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
                                         <div class="am-form-group">
                                             <label class="am-u-sm-3 am-form-label am-text-xs"> 商品排序 </label>
                                             <div class="am-u-sm-8 am-u-end">
@@ -1518,23 +1566,23 @@
                                     <!-- 自动获取 -->
                                     <div class="switch-source"
                                          v-show="curItem.params.source == 'auto'">
-                                        <div class="am-form-group">
-                                            <label class="am-u-sm-3 am-form-label am-text-xs">商品分类 </label>
-                                            <div class="am-u-sm-8 am-u-end">
-                                                <select v-model="curItem.params.auto.category"
-                                                        data-am-selected="{btnSize: 'sm',  placeholder:'全部分类', maxHeight: 400}">
-                                                    <option value="0"> -- 全部分类 --</option>
-                                                    <template v-for="first in opts.catgory">
-                                                        <option :value="first.category_id"> {{ first.name }}</option>
-                                                        <template v-if="first.child">
-                                                            <option v-for="two in first.child" :value="two.category_id">
-                                                                　{{ two.name }}
-                                                            </option>
-                                                        </template>
-                                                    </template>
-                                                </select>
-                                            </div>
-                                        </div>
+<!--                                        <div class="am-form-group">-->
+<!--                                            <label class="am-u-sm-3 am-form-label am-text-xs">商品分类 </label>-->
+<!--                                            <div class="am-u-sm-8 am-u-end">-->
+<!--                                                <select v-model="curItem.params.auto.category"-->
+<!--                                                        data-am-selected="{btnSize: 'sm',  placeholder:'全部分类', maxHeight: 400}">-->
+<!--                                                    <option value="0"> -- 全部分类 --</option>-->
+<!--                                                    <template v-for="first in opts.catgory">-->
+<!--                                                        <option :value="first.category_id"> {{ first.name }}</option>-->
+<!--                                                        <template v-if="first.child">-->
+<!--                                                            <option v-for="two in first.child" :value="two.category_id">-->
+<!--                                                                　{{ two.name }}-->
+<!--                                                            </option>-->
+<!--                                                        </template>-->
+<!--                                                    </template>-->
+<!--                                                </select>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
                                         <div class="am-form-group">
                                             <label class="am-u-sm-3 am-form-label am-text-xs"> 显示数量 </label>
                                             <div class="am-u-sm-8 am-u-end">
@@ -1762,6 +1810,128 @@
                                         <label class="am-checkbox-inline">
                                             <input type="checkbox"
                                                    v-model="curItem.style.show.linePrice"> 划线价格
+                                        </label>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!--编辑器: 限时优惠商品组-->
+                        <div id="tpl_editor_sharingGoods" v-if="curItem.type == 'seckillGoods'">
+                            <div class="editor-title"><span>{{ curItem.name }}</span></div>
+                            <form class="am-form tpl-form-line-form">
+                                <!--商品数据-->
+                                <div class="j-switch-box" data-item-class="switch-source">
+                                    <div class="am-form-group">
+                                        <label class="am-u-sm-3 am-form-label am-text-xs">商品来源 </label>
+                                        <div class="am-u-sm-8 am-u-end">
+                                            <label class="am-radio-inline">
+                                                <input type="radio" value="auto"
+                                                       v-model="curItem.params.source"> 自动获取
+                                            </label>
+                                            <label class="am-radio-inline">
+                                                <input type="radio" value="choice"
+                                                       v-model="curItem.params.source"> 手动选择
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <!--手动选择-->
+                                    <div class="switch-source __choice" v-show="curItem.params.source == 'choice'">
+                                        <div class="form-items __goods am-cf">
+                                            <draggable :list="curItem.data"
+                                                       :options="{ animation: 120, filter: 'input', preventOnFilter: false }">
+                                                <div v-for="(goods, index) in curItem.data"
+                                                     class="form-item drag">
+                                                    <i class="iconfont icon-shanchu item-delete" data-no-confirm="true"
+                                                       @click="onEditorDeleleData(index,selectedIndex)"></i>
+                                                    <div class="item-inner">
+                                                        <div class="data-image">
+                                                            <img :src="goods.image" alt="">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </draggable>
+                                        </div>
+                                        <div class="j-selectGoods form-item-add" @click.stop="onSelectGoods(curItem)">
+                                            <i class="fa fa-plus"></i> 选择商品
+                                        </div>
+                                    </div>
+                                    <!--自动获取-->
+                                    <div class="switch-source __auto" v-show="curItem.params.source !== 'choice'">
+<!--                                        <div class="am-form-group">-->
+<!--                                            <label class="am-u-sm-3 am-form-label am-text-xs">商品分类 </label>-->
+<!--                                            <div class="am-u-sm-8 am-u-end">-->
+<!--                                                <select v-model="curItem.params.auto.category"-->
+<!--                                                        data-am-selected="{btnSize: 'sm',  placeholder:'全部分类', maxHeight: 400}">-->
+<!--                                                    <option value="0"> -- 全部分类 --</option>-->
+<!--                                                    <template v-for="first in opts.sharingCatgory">-->
+<!--                                                        <option :value="first.category_id"> {{ first.name }}</option>-->
+<!--                                                        <template v-if="first.child">-->
+<!--                                                            <option v-for="two in first.child" :value="two.category_id">-->
+<!--                                                                　{{ two.name }}-->
+<!--                                                            </option>-->
+<!--                                                        </template>-->
+<!--                                                    </template>-->
+<!--                                                </select>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+                                        <div class="am-form-group">
+                                            <label class="am-u-sm-3 am-form-label am-text-xs">商品排序 </label>
+                                            <div class="am-u-sm-8 am-u-end">
+                                                <label class="am-radio-inline">
+                                                    <input type="radio" value="all"
+                                                           v-model="curItem.params.auto.goodsSort">
+                                                    综合
+                                                </label>
+                                                <label class="am-radio-inline">
+                                                    <input type="radio" value="sales"
+                                                           v-model="curItem.params.auto.goodsSort">
+                                                    销量
+                                                </label>
+                                                <label class="am-radio-inline">
+                                                    <input type="radio" value="price"
+                                                           v-model="curItem.params.auto.goodsSort">
+                                                    价格
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="am-form-group">
+                                            <label class="am-u-sm-3 am-form-label am-text-xs">显示数量 </label>
+                                            <div class="am-u-sm-8 am-u-end">
+                                                <input class="tpl-form-input" type="number" min="1"
+                                                       v-model="curItem.params.auto.showNum">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--分割线-->
+                                <hr data-am-widget="divider" style="" class="am-divider am-divider-dashed"/>
+                                <!--组件样式-->
+                                <div class="am-form-group">
+                                    <label class="am-u-sm-3 am-form-label am-text-xs">背景颜色 </label>
+                                    <div class="am-u-sm-8 am-u-end">
+                                        <input class="" type="color"
+                                               v-model="curItem.style.background">
+                                        <button type="button" class="btn-resetColor am-btn am-btn-xs"
+                                                @click.stop="onEditorResetColor(curItem.style, 'background', '#f3f3f3')">
+                                            重置
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="am-form-group">
+                                    <label class="am-u-sm-3 am-form-label am-text-xs">显示内容 </label>
+                                    <div class="am-u-sm-8 am-u-end">
+                                        <label class="am-checkbox-inline">
+                                            <input type="checkbox" value="1"
+                                                   v-model="curItem.style.show.sellingPoint"> 商品卖点
+                                        </label>
+                                        <label class="am-checkbox-inline">
+                                            <input type="checkbox" value="1"
+                                                   v-model="curItem.style.show.sharingPrice"> 优惠价格
+                                        </label>
+                                        <label class="am-checkbox-inline">
+                                            <input type="checkbox"
+                                                   v-model="curItem.style.show.linePrice"> 原价格
                                         </label>
                                     </div>
                                 </div>

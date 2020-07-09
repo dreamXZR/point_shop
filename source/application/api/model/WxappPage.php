@@ -51,7 +51,9 @@ class WxappPage extends WxappPageModel
                 $items[$key]['data'] = $model->getPointGoodsList($item);
             } else if ($item['type'] === 'sharingGoods') {
                 $items[$key]['data'] = $model->getSharingGoodsList($item);
-            } else if ($item['type'] === 'coupon') {
+            }else if ($item['type'] === 'seckillGoods') {
+                $items[$key]['data'] = $model->getSeckillGoodsList($item);
+            }  else if ($item['type'] === 'coupon') {
                 $items[$key]['data'] = $model->getCouponList($user, $item);
             } else if ($item['type'] === 'article') {
                 $items[$key]['data'] = $model->getArticleList($item);
@@ -82,8 +84,8 @@ class WxappPage extends WxappPageModel
             $goodsList = $model->getListByIds($goodsIds, 10);
         } else {
             // 数据来源：自动
-            $goodsList = $model->getList(10, $item['params']['auto']['category'], '',
-                $item['params']['auto']['goodsSort'], false, $item['params']['auto']['showNum']);
+            $goodsList = $model->getList(10, $item['params']['auto']['category'], '','goods',
+                $item['params']['auto']['goodsSort'], false,0, $item['params']['auto']['showNum']);
         }
         if ($goodsList->isEmpty()) return [];
         // 格式化商品列表
@@ -120,7 +122,7 @@ class WxappPage extends WxappPageModel
         } else {
             // 数据来源：自动
             $goodsList = $model->getList(10, $item['params']['auto']['category'], '','point',
-                $item['params']['auto']['goodsSort'], false, $item['params']['auto']['showNum']);
+                $item['params']['auto']['goodsSort'], false,0, $item['params']['auto']['showNum']);
         }
         if ($goodsList->isEmpty()) return [];
         // 格式化商品列表
@@ -134,6 +136,50 @@ class WxappPage extends WxappPageModel
                 'line_price' => $goods['sku'][0]['line_price'],
                 'exchange_points' => $goods['exchange_points']
             ];
+        }
+        return $data;
+    }
+
+    /**
+     * 限时优惠商品组件：获取限时优惠商品列表
+     * @param $item
+     * @return array
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
+    private function getSeckillGoodsList($item)
+    {
+        // 获取商品数据
+        $model = new Goods;
+        if ($item['params']['source'] === 'choice') {
+            // 数据来源：手动
+            $goodsIds = array_column($item['data'], 'goods_id');
+            $goodsList = $model->getListByIds($goodsIds, 10);
+        } else {
+            // 数据来源：自动
+            $goodsList = $model->getList(10, $item['params']['auto']['category'], '','seckill',
+                $item['params']['auto']['goodsSort'], false,0, $item['params']['auto']['showNum']);
+        }
+        if ($goodsList->isEmpty()) return [];
+        // 格式化商品列表
+        $data = [];
+        foreach ($goodsList as $goods) {
+
+            $goods_data = [
+                'goods_id' => $goods['goods_id'],
+                'goods_name' => $goods['goods_name'],
+                'selling_point' =>$goods['selling_point'],
+                'image' => $goods['image'][0]['file_path'],
+                'goods_price' => $goods['sku'][0]['goods_price'],
+                'line_price' => $goods['sku'][0]['line_price'],
+            ];
+            if($goods['end_at'] - $goods['start_at'] < 86400){
+                $goods_data['time'] = date('H:i',$goods['start_at']).' - '.date('H:i',$goods['end_at']);
+            }else{
+                $goods_data['time'] = date('m月d日',$goods['start_at']).' - '.date('m月d日',$goods['end_at']);
+            }
+            $data[] = $goods_data;
         }
         return $data;
     }

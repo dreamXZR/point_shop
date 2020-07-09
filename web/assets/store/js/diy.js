@@ -171,7 +171,8 @@
                         var uris = {
                             goods: 'goods/lists&status=10',
                             sharingGoods: 'sharing.goods/lists&status=10',
-                            pointGoods: 'point_goods/lists&status=10'
+                            pointGoods: 'point_goods/lists&status=10',
+                            seckillGoods:'seckill_goods/lists&status=10',
                         };
                         $.selectData({
                             title: '选择商品',

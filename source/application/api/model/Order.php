@@ -63,6 +63,16 @@ class Order extends OrderModel
         if ($goods_num > $goods['goods_sku']['stock_num']) {
             $this->setError('很抱歉，商品库存不足');
         }
+        //是否为限时优惠商品
+        $current_time = time();
+        if($goods['is_seckill_goods'] == 1){
+            if($goods['start_at']>$current_time){
+                $this->setError('很抱歉，抢购时间还未开始');
+            }
+            if($current_time>$goods['end_at']){
+                $this->setError('很抱歉，该商品抢购已结束');
+            }
+        }
         // 返回的数据
         $returnData = [];
         // 商品单价

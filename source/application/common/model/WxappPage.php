@@ -501,6 +501,83 @@ class WxappPage extends BaseModel
                     ]
                 ]
             ],
+            'seckillGoods' => [
+                'name' => '限时优惠组',
+                'type' => 'seckillGoods',
+                'params' => [
+                    'source' => 'auto', // choice; auto
+                    'auto' => [
+                        'category' => 0,
+                        'goodsSort' => 'all', // all; sales; price
+                        'showNum' => 6
+                    ]
+                ],
+                'style' => [
+                    'background' => '#F6F6F6',
+                    'show' => [
+                        'goodsName' => '1',
+                        'sellingPoint' => '1',
+                        'sharingPrice' => '1',
+                        'linePrice' => '1'
+                    ]
+                ],
+                // '自动获取' => 默认数据
+                'defaultData' => [
+                    [
+                        'goods_name' => '此处是限时优惠商品',
+                        'image' => self::$base_url . 'assets/store/img/diy/goods/01.png',
+                        'selling_point' => '此款商品美观大方 性价比较高 不容错过',
+                        'sharing_price' => '99.00',
+                        'line_price' => '139.00',
+                        'time' => '9.1-9.2',
+                    ],
+                    [
+                        'goods_name' => '此处是限时优惠商品',
+                        'image' => self::$base_url . 'assets/store/img/diy/goods/01.png',
+                        'selling_point' => '此款商品美观大方 性价比较高 不容错过',
+                        'goods_price' => '99.00',
+                        'line_price' => '139.00',
+                        'time' => '9.1-9.2',
+                    ],
+                    [
+                        'goods_name' => '此处是限时优惠商品',
+                        'image' => self::$base_url . 'assets/store/img/diy/goods/01.png',
+                        'selling_point' => '此款商品美观大方 性价比较高 不容错过',
+                        'sharing_price' => '99.00',
+                        'line_price' => '139.00',
+                        'time' => '9.1-9.2',
+                    ],
+                    [
+                        'goods_name' => '此处是限时优惠商品',
+                        'image' => self::$base_url . 'assets/store/img/diy/goods/01.png',
+                        'selling_point' => '此款商品美观大方 性价比较高 不容错过',
+                        'sharing_price' => '99.00',
+                        'line_price' => '139.00',
+                        'time' => '9.1-9.2',
+                    ]
+                ],
+                // '手动选择' => 默认数据
+                'data' => [
+                    [
+                        'goods_name' => '此处是限时优惠商品',
+                        'image' => self::$base_url . 'assets/store/img/diy/goods/01.png',
+                        'selling_point' => '此款商品美观大方 性价比较高 不容错过',
+                        'sharing_price' => '99.00',
+                        'line_price' => '139.00',
+                        'is_default' => true,
+                        'time' => '9.1-9.2',
+                    ],
+                    [
+                        'goods_name' => '此处是限时优惠商品',
+                        'image' => self::$base_url . 'assets/store/img/diy/goods/01.png',
+                        'selling_point' => '此款商品美观大方 性价比较高 不容错过',
+                        'sharing_price' => '99.00',
+                        'line_price' => '139.00',
+                        'is_default' => true,
+                        'time' => '9.1-9.2',
+                    ]
+                ]
+            ],
             'shop' => [
                 'name' => '线下门店',
                 'type' => 'shop',
