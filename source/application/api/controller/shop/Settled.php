@@ -49,7 +49,7 @@ class Settled extends Controller
             // 分销商用户信息
             'dealer' => $this->dealer,
             // 背景图
-            'background' => $this->setting['background']['values']['index'],
+            'background' => request()->domain().'/assets/api/dealer-bg.png',
             // 页面文字
             'words' => $this->setting['words']['values'],
         ]);
