@@ -69,7 +69,7 @@ class Settled extends Controller
             // 当前是否在申请中
             'is_applying' => $this->isApplying(),
             // 背景图
-            'background' => $this->setting['background']['values']['apply'],
+            'background' => request()->domain().'/assets/api/dealer-bg.png',
             // 页面文字
             'words' => $this->setting['words']['values'],
             // 申请协议
@@ -116,7 +116,7 @@ class Settled extends Controller
             // 结算设置
             'settlement' => $this->setting['settlement']['values'],
             // 背景图
-            'background' => $this->setting['background']['values']['withdraw_apply'],
+            'background' => request()->domain().'/assets/api/dealer-bg.png',
             // 页面文字
             'words' => $this->setting['words']['values'],
         ]);
