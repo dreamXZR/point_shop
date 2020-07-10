@@ -27,6 +27,10 @@ class Goods extends GoodsModel
         'update_time'
     ];
 
+    protected $append = [
+        'time'
+    ];
+
     /**
      * 商品详情：HTML实体转换回普通字符
      * @param $value
@@ -101,6 +105,20 @@ class Goods extends GoodsModel
                 'query' => \request()->request()
             ]);
         return $list;
+    }
+
+    public function getTimeAttr($value,$data)
+    {
+        if($data['is_seckill_goods'] != 1){
+            return false;
+        }
+        $current_time = time();
+        if($data['start_at']>$current_time){
+            return date("m月d H:i",$data['start_at']);
+        }
+        if($data['start_at']<$current_time && $data['end_at']>$current_time){
+            return gmdate("H小时i分",$data['end_at']-$current_time);
+        }
     }
 
 }

@@ -88,7 +88,7 @@ class ShopClassify extends CategoryModel
     {
         $model = new static;
         if (!Cache::get('shop_classify')) {
-            $data = $model->with(['image'])->order(['sort' => 'asc', 'create_time' => 'asc'])->select();
+            $data = $model->order(['sort' => 'asc', 'create_time' => 'asc'])->select();
             $all = !empty($data) ? $data->toArray() : [];
             $tree = [];
             foreach ($all as $first) {

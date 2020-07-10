@@ -154,6 +154,49 @@
                                 </div>
                             </li>
                             <li class="link-item">
+                                <div class="row page-name">店铺列表</div>
+                                <div class="row am-cf">
+                                    <div class="am-fl">地址：</div>
+                                    <div class="am-fl">
+                                        <span class="x-color-green">pages/shoplist/shoplist</span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="link-item">
+                                <div class="row page-name">限时优惠</div>
+                                <div class="row am-cf">
+                                    <div class="am-fl">地址：</div>
+                                    <div class="am-fl">
+                                        <span class="x-color-green">pages/seckill/index</span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="link-item">
+                                <div class="row page-name">限时优惠商品详情</div>
+                                <div class="row am-cf">
+                                    <div class="am-fl">地址：</div>
+                                    <div class="am-fl">
+                                        <span class="x-color-green">pages/seckill/seckillGoods/index</span>
+                                    </div>
+                                </div>
+                                <div class="row am-cf">
+                                    <div class="am-fl">参数：</div>
+                                    <div class="am-fl">
+                                        <p class="param">
+                                            <span class="x-color-green">goods_id</span>
+                                            <span>商品ID</span>
+                                            <span class="x-color-red">　--必填</span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row am-cf">
+                                    <div class="am-fl">例如：</div>
+                                    <div class="am-fl">
+                                        <span class="x-color-c-gray-5f">pages/seckill/seckillGoods/index?goods_id=10001</span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="link-item">
                                 <div class="row page-name">商家入驻</div>
                                 <div class="row am-cf">
                                     <div class="am-fl">地址：</div>
