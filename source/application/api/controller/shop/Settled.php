@@ -32,7 +32,7 @@ class Settled extends Controller
         $shop = new Shop();
         $this->dealer = $shop->where(['user_id'=>$this->user['user_id']])->find();
         // 入驻店铺设置
-        $this->setting = Setting::getAll();
+        $this->setting = Setting::getAll(config('mini_weixin.wxapp_id'));
     }
 
     /**
