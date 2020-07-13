@@ -53,7 +53,7 @@ class Poster extends Base
         // 2. 下载用户头像
         //$avatarUrl = $this->saveTempImage($wxappId, $this->dealer['user']['avatarUrl'], 'avatar');
         // 3. 下载小程序码
-        $qrcode = $this->saveQrcode($wxappId, '','pages/outlinePay/index??shop_id='.$this->dealer['shop_id'],$this->getPosterPath());
+        $qrcode = $this->saveQrcode($wxappId, 'shop_id='.$this->dealer['shop_id'],'pages/outlinePay/index',$this->getPosterPath());
         // 4. 拼接海报图
         return $this->getPosterUrl();
     }

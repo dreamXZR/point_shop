@@ -53,20 +53,20 @@
                             </div>
 
                             <div class="widget-head am-cf">
-                                <div class="widget-title am-fl">秒杀设置</div>
+                                <div class="widget-title am-fl">活动时间设置</div>
                             </div>
                             <div class="am-form-group">
-                                <label class="am-u-sm-2 am-form-label form-require">秒杀开始时间 </label>
+                                <label class="am-u-sm-2 am-form-label form-require">活动开始时间 </label>
                                 <div class="am-u-sm-10">
                                     <input type="text" name="goods[start_at]" class="layui-input" id="start_at" required>
-                                    <small>秒杀开始时间</small>
+                                    <small>活动开始时间</small>
                                 </div>
                             </div>
                             <div class="am-form-group">
-                                <label class="am-u-sm-2 am-form-label form-require"> 秒杀结束时间 </label>
+                                <label class="am-u-sm-2 am-form-label form-require"> 活动结束时间 </label>
                                 <div class="am-u-sm-10">
                                     <input type="text" name="goods[end_at]" class="layui-input" id="end_at" required>
-                                    <small>注：秒杀结束时间要大于开始时间</small>
+                                    <small>注：活动结束时间要大于活动开始时间</small>
                                 </div>
                             </div>
 
@@ -356,10 +356,17 @@
                                 </div>
                             </div>
                             <div class="am-form-group">
-                                <label class="am-u-sm-3 am-u-lg-2 am-form-label">购买可获得积分</label>
+                                <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">购买可获得积分</label>
                                 <div class="am-u-sm-9 am-u-end">
                                     <input type="number" min="0" class="tpl-form-input" name="goods[exchange_points]"
                                            value="0">
+                                </div>
+                            </div>
+                            <div class="am-form-group">
+                                <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">每次可购买数量</label>
+                                <div class="am-u-sm-9 am-u-end">
+                                    <input type="number" min="0" class="tpl-form-input" name="goods[buy_num_limit]"
+                                           value="0" required>
                                 </div>
                             </div>
                             <div class="am-form-group">

@@ -378,10 +378,17 @@
                                 </div>
                             </div>
                             <div class="am-form-group">
-                                <label class="am-u-sm-3 am-u-lg-2 am-form-label">购买可获得积分</label>
+                                <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">购买可获得积分</label>
                                 <div class="am-u-sm-9 am-u-end">
                                     <input type="number" min="0" class="tpl-form-input" name="goods[exchange_points]"
                                            value="<?= $model['exchange_points'] ?>">
+                                </div>
+                            </div>
+                            <div class="am-form-group">
+                                <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">每次可购买数量</label>
+                                <div class="am-u-sm-9 am-u-end">
+                                    <input type="number" min="0" class="tpl-form-input" name="goods[buy_num_limit]"
+                                           value="<?= $model['buy_num_limit'] ?>" required>
                                 </div>
                             </div>
                             <div class="am-form-group">
