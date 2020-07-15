@@ -30,9 +30,9 @@ class Referee extends RefereeModel
         // 分销商基本设置
         $setting = Setting::getItem('basic');
         // 是否开启分销功能
-        if (!$setting['is_open']) {
-            return false;
-        }
+//        if (!$setting['is_open']) {
+//            return false;
+//        }
         // 自分享
         if ($user_id == $referee_id) {
             return false;
@@ -78,7 +78,7 @@ class Referee extends RefereeModel
     private function add($dealer_id, $user_id, $level = 1)
     {
         // 新增推荐关系
-        $wxapp_id = self::$wxapp_id;
+        $wxapp_id = config('mini_weixin.wxapp_id');
         $create_time = time();
         $this->insert(compact('dealer_id', 'user_id', 'level', 'wxapp_id', 'create_time'));
         // 记录分销商成员数量

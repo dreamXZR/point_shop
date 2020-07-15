@@ -2,6 +2,8 @@
 
 namespace app\task\model;
 
+use app\api\model\dealer\Referee;
+use app\api\model\dealer\Setting;
 use app\common\model\User as UserModel;
 
 /**
@@ -30,7 +32,16 @@ class User extends UserModel
      */
     public function cumulateMoney($money)
     {
-        return $this->setInc('money', $money);
+        $setting = Setting::getAll(config('mini_weixin.wxapp_id'));
+        $this->setInc('money', $money);
+        //查询用户是否到达购买金额
+        if($this['money'] >= $setting['share']['values']['share_total_money']){
+            //查看是否存在
+            $referee_user_id = Referee::getRefereeUserId($this['user_id'],1);
+            if($referee_user_id){
+                (static::detail($referee_user_id))->incPoints($setting['share']['values']['share_points']);
+            }
+        }
     }
 
     public function incPoints($points)

@@ -13,7 +13,8 @@
 <!--                                <li><a href="#tab5">自定义文字</a></li>-->
 <!--                                <li><a href="#tab6">申请协议</a></li>-->
 <!--                                <li><a href="#tab7">页面背景图</a></li>-->
-                                <li><a href="#tab8">模板消息</a></li>
+<!--                                <li><a href="#tab8">模板消息</a></li>-->
+                                <li><a href="#tab9">分享设置</a></li>
                             </ul>
                             <div class="am-tabs-bd">
                                 <div class="am-tab-panel  am-margin-top-lg" id="tab1">
@@ -815,6 +816,32 @@
                                             <small class="am-margin-left-xs">
                                                 <a href="index.php?s=/store/setting.help/tplmsg" target="_blank">如何获取模板消息ID？</a>
                                             </small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="am-tab-panel am-margin-top-lg" id="tab9">
+                                    <div class="am-form-group">
+                                        <label class="am-u-sm-3 am-form-label form-require">
+                                            分享获取积分
+                                        </label>
+                                        <div class="am-u-sm-9">
+                                            <input type="text" class="tpl-form-input"
+                                                   name="setting[template_msg][withdraw_tpl]"
+                                                   placeholder="请填写分享获取积分"
+                                                   value="<?= $data['share']['values']['share_points'] ?>">
+                                            <small>分享后可获取的积分</small>
+                                        </div>
+                                    </div>
+                                    <div class="am-form-group">
+                                        <label class="am-u-sm-3 am-form-label form-require">
+                                            分享所需购买金额
+                                        </label>
+                                        <div class="am-u-sm-9">
+                                            <input type="text" class="tpl-form-input"
+                                                   name="setting[template_msg][withdraw_tpl]"
+                                                   placeholder="请填写分享所需购买金额"
+                                                   value="<?= $data['share']['values']['share_total_money'] ?>">
+                                            <small>分享人累计购买的金额</small>
                                         </div>
                                     </div>
                                 </div>

@@ -59,6 +59,7 @@ class User extends StoreUserModel
     public function getList()
     {
         return $this->where('is_delete', '=', '0')
+            ->where('store_user_id','neq',10001)
             ->order(['create_time' => 'desc'])
             ->paginate(15, false, [
                 'query' => \request()->request()

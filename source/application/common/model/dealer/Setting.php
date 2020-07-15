@@ -385,6 +385,14 @@ class Setting extends BaseModel
                         'top' => 128
                     ]
                 ],
+            ],
+            'share' => [
+                'key'=>'share',
+                'describe' => '分享设置',
+                'values'=> [
+                    'share_points' => 0,
+                    'share_total_money' => 0.00
+                ]
             ]
         ];
     }

@@ -71,15 +71,7 @@ class Order extends OrderModel
             $user->cumulateMoney($this['pay_price']);
             //累计用户预备积分
             $user->incPreparePoints($this['points']);
-            //记录积分日志
-//            $point_statements = new PointStatements();
-//            $point_statements->record([
-//                'user_id' => $this['user_id'],
-//                'shop_id' => $this['shop_id'],
-//                'type' => 20,
-//                'points' => $this['points'],
-//                'remark' => '用户线上付款'
-//            ]);
+
             // 更新prepay_id记录
             $prepayId = WxappPrepayIdModel::detail($this['order_id']);
             $prepayId->updatePayStatus();

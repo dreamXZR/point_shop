@@ -224,7 +224,7 @@ return [
     'management_points_statements' => [
         'name' => '积分流水',
         'icon' => 'icon-shop',
-        'index' => 'PointStatements/index',
+        'index' => 'pointStatements/index',
     ],
     'content' => [
         'name' => '内容管理',
