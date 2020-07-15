@@ -43,26 +43,26 @@ class Referee extends RefereeModel
             return false;
         }
         // 判断推荐人是否为分销商
-        if (!User::isDealerUser($referee_id)) {
-            return false;
-        }
+//        if (!User::isDealerUser($referee_id)) {
+//            return false;
+//        }
         // 新增关系记录
         $model = new self;
         $model->add($referee_id, $user_id, 1);
         // # 记录二级推荐关系
-        if ($setting['level'] >= 2) {
-            // 二级分销商id
-            $referee_2_id = self::getRefereeUserId($referee_id, 1, true);
-            // 新增关系记录
-            $referee_2_id > 0 && $model->add($referee_2_id, $user_id, 2);
-        }
+//        if ($setting['level'] >= 2) {
+//            // 二级分销商id
+//            $referee_2_id = self::getRefereeUserId($referee_id, 1, true);
+//            // 新增关系记录
+//            $referee_2_id > 0 && $model->add($referee_2_id, $user_id, 2);
+//        }
         // # 记录三级推荐关系
-        if ($setting['level'] == 3) {
-            // 三级分销商id
-            $referee_3_id = self::getRefereeUserId($referee_id, 2, true);
-            // 新增关系记录
-            $referee_3_id > 0 && $model->add($referee_3_id, $user_id, 3);
-        }
+//        if ($setting['level'] == 3) {
+//            // 三级分销商id
+//            $referee_3_id = self::getRefereeUserId($referee_id, 2, true);
+//            // 新增关系记录
+//            $referee_3_id > 0 && $model->add($referee_3_id, $user_id, 3);
+//        }
         return true;
     }
 
@@ -82,7 +82,7 @@ class Referee extends RefereeModel
         $create_time = time();
         $this->insert(compact('dealer_id', 'user_id', 'level', 'wxapp_id', 'create_time'));
         // 记录分销商成员数量
-        User::setMemberInc($dealer_id, $level);
+        //User::setMemberInc($dealer_id, $level);
         return true;
     }
 

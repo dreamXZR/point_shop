@@ -50,6 +50,8 @@ class Auth
         'setting.help/*',
         // 腾讯地图坐标选取器
         'shop/getpoint',
+        'shop.point_statements/index',
+        'point_statements/index'
     ];
 
     /** @var array $accessUrls 商家用户权限url */
