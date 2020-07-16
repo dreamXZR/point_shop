@@ -62,7 +62,7 @@ class Express extends BaseModel
             'express_no' => $express_no
         ];
         // 实例化快递100类
-        $config = Setting::getItem('store');
+        $config = Setting::getItem('store',config('mini_weixin.wxapp_id'));
         $Kuaidi100 = new Kuaidi100($config['kuaidi100']);
         // 请求查询接口
         $data['list'] = $Kuaidi100->query($express_code, $express_no);
