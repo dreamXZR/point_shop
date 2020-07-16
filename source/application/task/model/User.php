@@ -39,7 +39,8 @@ class User extends UserModel
             //查看是否存在
             $referee_user_id = Referee::getRefereeUserId($this['user_id'],1);
             if($referee_user_id){
-                (static::detail($referee_user_id))->incPoints($setting['share']['values']['share_points']);
+                $referee_user = static::detail($referee_user_id);
+                $referee_user->incPoints($setting['share']['values']['share_points']);
             }
         }
     }
