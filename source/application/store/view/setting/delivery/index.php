@@ -42,6 +42,7 @@
                                         <td class="am-text-middle"><?= $item['sort'] ?></td>
                                         <td class="am-text-middle"><?= $item['create_time'] ?></td>
                                         <td class="am-text-middle">
+                                            <?php if ($item['store_shop_id']!=0): ?>
                                             <div class="tpl-table-black-operation">
                                                 <?php if (checkPrivilege('setting.delivery/edit')): ?>
                                                     <a href="<?= url('setting.delivery/edit',
@@ -57,6 +58,7 @@
                                                     </a>
                                                 <?php endif; ?>
                                             </div>
+                                            <?php endif; ?>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>

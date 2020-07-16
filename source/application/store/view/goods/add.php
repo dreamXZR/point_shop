@@ -17,30 +17,6 @@
                                            value="" required>
                                 </div>
                             </div>
-<!--                            <div class="am-form-group">-->
-<!--                                <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">商品分类 </label>-->
-<!--                                <div class="am-u-sm-9 am-u-end">-->
-<!--                                    <select name="goods[category_id]" required-->
-<!--                                            data-am-selected="{searchBox: 1, btnSize: 'sm',-->
-<!--                                             placeholder:'请选择商品分类', maxHeight: 400}">-->
-<!--                                        <option value=""></option>-->
-<!--                                        --><?php //if (isset($catgory)): foreach ($catgory as $first): ?>
-<!--                                            <option value="--><?//= $first['category_id'] ?><!--">--><?//= $first['name'] ?><!--</option>-->
-<!--                                            --><?php //if (isset($first['child'])): foreach ($first['child'] as $two): ?>
-<!--                                                <option value="--><?//= $two['category_id'] ?><!--">-->
-<!--                                                    　　--><?//= $two['name'] ?><!--</option>-->
-<!--                                                --><?php //if (isset($two['child'])): foreach ($two['child'] as $three): ?>
-<!--                                                    <option value="--><?//= $three['category_id'] ?><!--">-->
-<!--                                                        　　　--><?//= $three['name'] ?><!--</option>-->
-<!--                                                --><?php //endforeach; endif; ?>
-<!--                                            --><?php //endforeach; endif; ?>
-<!--                                        --><?php //endforeach; endif; ?>
-<!--                                    </select>-->
-<!--                                    <small class="am-margin-left-xs">-->
-<!--                                        <a href="--><?//= url('goods.category/add') ?><!--">去添加</a>-->
-<!--                                    </small>-->
-<!--                                </div>-->
-<!--                            </div>-->
                             <div class="am-form-group">
                                 <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">商品图片 </label>
                                 <div class="am-u-sm-9 am-u-end">
@@ -331,6 +307,13 @@
                                 <label class="am-u-sm-3 am-u-lg-2 am-form-label">购买获取积分</label>
                                 <div class="am-u-sm-9 am-u-end">
                                     <input type="number" class="tpl-form-input" name="goods[exchange_points]"
+                                           value="0">
+                                </div>
+                            </div>
+                            <div class="am-form-group">
+                                <label class="am-u-sm-3 am-u-lg-2 am-form-label">商品初始销量</label>
+                                <div class="am-u-sm-9 am-u-end">
+                                    <input type="number" class="tpl-form-input" name="goods[sales_initial]"
                                            value="0">
                                 </div>
                             </div>

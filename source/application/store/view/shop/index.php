@@ -60,8 +60,8 @@
 <!--                                           </span>-->
 <!--                                    </td>-->
                                     <td class="am-text-middle">
-                                            <span class="am-badge am-badge-<?= $item['status'] ? 'success' : 'warning' ?>">
-                                               <?= $item['status'] ? '启用' : '禁用' ?>
+                                            <span class="am-badge am-badge-<?= $item['admin_status'] ? 'success' : 'warning' ?>">
+                                               <?= $item['admin_status'] ? '启用' : '禁用' ?>
                                            </span>
                                     </td>
                                     <td class="am-text-middle"><?= $item['create_time'] ?></td>

@@ -3,6 +3,7 @@
 namespace app\store\controller\apps\seckill;
 
 use app\store\controller\Controller;
+use app\store\model\Delivery;
 use app\store\model\Delivery as DeliveryModel;
 use app\store\model\Goods as GoodsModel;
 use app\store\model\Category as CategoryModel;
@@ -44,7 +45,7 @@ class Goods extends Controller
             // 商品分类
             //$catgory = CategoryModel::getCacheTree();
             // 配送模板
-            $delivery = DeliveryModel::getAll();
+            $delivery = (new Delivery)->getList();
             return $this->fetch('add', compact( 'delivery'));
         }
         $post_data = $this->postData('goods');
@@ -78,7 +79,7 @@ class Goods extends Controller
             // 商品分类
             //$catgory = CategoryModel::getCacheTree();
             // 配送模板
-            $delivery = DeliveryModel::getAll();
+            $delivery = (new Delivery)->getList();
             // 商品sku数据
             $specData = 'null';
             if ($model['spec_type'] == 20) {
@@ -115,7 +116,7 @@ class Goods extends Controller
             // 商品分类
             $catgory = CategoryModel::getCacheTree();
             // 配送模板
-            $delivery = DeliveryModel::getAll();
+            $delivery = (new Delivery)->getList();
             // 商品sku数据
             $specData = 'null';
             if ($model['spec_type'] == 20) {
@@ -144,7 +145,7 @@ class Goods extends Controller
             // 商品分类
             //$catgory = CategoryModel::getCacheTree();
             // 配送模板
-            $delivery = DeliveryModel::getAll();
+            $delivery = (new Delivery)->getList();
             // 商品sku数据
             $specData = 'null';
             if ($model['spec_type'] == 20) {
@@ -199,6 +200,36 @@ class Goods extends Controller
             return $this->renderError('删除失败');
         }
         return $this->renderSuccess('删除成功');
+    }
+
+    /**
+     * 禁用商品
+     * @param $goods_id
+     * @return array
+     */
+    public function takeoff($goods_id)
+    {
+        // 商品详情
+        $model = GoodsModel::detail($goods_id);
+        if (!$model->takeoff()) {
+            return $this->renderError('禁用失败');
+        }
+        return $this->renderSuccess('禁用成功');
+    }
+
+    /**
+     * 启用商品
+     * @param $goods_id
+     * @return array
+     */
+    public function takeon($goods_id)
+    {
+        // 商品详情
+        $model = GoodsModel::detail($goods_id);
+        if (!$model->takeon()) {
+            return $this->renderError('启用失败');
+        }
+        return $this->renderSuccess('启用成功');
     }
 
 }

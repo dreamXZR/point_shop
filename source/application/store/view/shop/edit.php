@@ -73,13 +73,13 @@
                                 <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require"> 门店状态 </label>
                                 <div class="am-u-sm-9 am-u-end">
                                     <label class="am-radio-inline">
-                                        <input type="radio" name="shop[status]" value="1" data-am-ucheck
-                                            <?= $model['status'] == 1 ? 'checked' : '' ?>>
+                                        <input type="radio" name="shop[admin_status]" value="1" data-am-ucheck
+                                            <?= $model['admin_status'] == 1 ? 'checked' : '' ?>>
                                         启用
                                     </label>
                                     <label class="am-radio-inline">
-                                        <input type="radio" name="shop[status]" value="0" data-am-ucheck
-                                            <?= $model['status'] == 0 ? 'checked' : '' ?>>
+                                        <input type="radio" name="shop[admin_status]" value="0" data-am-ucheck
+                                            <?= $model['admin_status'] == 0 ? 'checked' : '' ?>>
                                         禁用
                                     </label>
                                 </div>

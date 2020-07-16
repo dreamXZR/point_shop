@@ -74,6 +74,7 @@ class User extends UserModel
         Session::set('yoshop_admin.user', [
             'admin_user_id' => $this['admin_user_id'],
             'user_name' => $data['user_name'],
+            'store_shop_id'=>$data['store_shop_id']
         ]);
         return true;
     }

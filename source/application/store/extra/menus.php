@@ -208,7 +208,7 @@ return [
             ],
             [
                 'name' => '商家充值流水',
-                'index' => 'shop.pointStatements/index',
+                'index' => 'shop.point_statements/index',
             ],
 //            [
 //                'name' => '订单核销记录',
@@ -224,7 +224,7 @@ return [
     'management_points_statements' => [
         'name' => '积分流水',
         'icon' => 'icon-shop',
-        'index' => 'pointStatements/index',
+        'index' => 'point_statements/index',
     ],
     'content' => [
         'name' => '内容管理',

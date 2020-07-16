@@ -42,6 +42,7 @@ class Shop extends ShopModel
         $where = [
             'is_delete' => 0,
             'status' => 1,
+            'admin_status'=>1
         ];
         if($shop_classify_id){
             $where['shop_classify_id'] = $shop_classify_id;

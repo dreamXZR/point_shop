@@ -113,7 +113,9 @@ class Goods extends BaseModel
     )
     {
         // 筛选条件
-        $filter = [];
+        $filter = [
+            'is_delete' => 0
+        ];
         $category_id > 0 && $filter['category_id'] = ['IN', Category::getSubCategoryId($category_id)];
         $status > 0 && $filter['goods_status'] = $status;
         !empty($search) && $filter['goods_name'] = ['like', '%' . trim($search) . '%'];
@@ -157,7 +159,6 @@ class Goods extends BaseModel
                 "$maxPriceSql AS goods_max_price"
             ])
             ->with(['category', 'image.file', 'sku'])
-            ->where('is_delete', '=', 0)
             ->where($filter)
             ->order($sort)
             ->paginate($listRows, false, [

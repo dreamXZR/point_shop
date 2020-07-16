@@ -124,12 +124,12 @@
                                     <label class="am-radio-inline">
                                         <input type="radio" name="shop[status]" value="1" data-am-ucheck
                                             <?= $model['status'] == 1 ? 'checked' : '' ?>>
-                                        启用
+                                        上线
                                     </label>
                                     <label class="am-radio-inline">
                                         <input type="radio" name="shop[status]" value="0" data-am-ucheck
                                             <?= $model['status'] == 0 ? 'checked' : '' ?>>
-                                        禁用
+                                        下线
                                     </label>
                                 </div>
                             </div>

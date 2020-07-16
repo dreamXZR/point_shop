@@ -146,12 +146,21 @@ class Goods extends GoodsModel
     }
 
     /**
-     * 下架商品
+     * 禁用商品
      * @return false|int
      */
     public function takeoff()
     {
-        return $this->save(['goods_status' => 20]);
+        return $this->save(['admin_goods_status' => 20]);
+    }
+
+    /**
+     * 启用商品
+     * @return false|int
+     */
+    public function takeon()
+    {
+        return $this->save(['admin_goods_status' => 10]);
     }
 
     /**

@@ -12,7 +12,7 @@
                                 <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">轮播图分类 </label>
                                 <div class="am-u-sm-9 am-u-end">
                                     <select name="banner[image_type]"
-                                            data-am-selected="{searchBox: 1, btnSize: 'sm'}">
+                                            data-am-selected="{searchBox: 1, btnSize: 'sm'}" required>
                                         <option value="0">请选择</option>
                                         <?php if (isset($list)): foreach ($list as $k =>$v): ?>
                                             <option value="<?= $k ?>">

@@ -17,34 +17,6 @@
                                            value="<?= $model['goods_name'] ?>" required>
                                 </div>
                             </div>
-<!--                            <div class="am-form-group">-->
-<!--                                <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">商品分类 </label>-->
-<!--                                <div class="am-u-sm-9 am-u-end">-->
-<!--                                    <select name="goods[category_id]" required-->
-<!--                                            data-am-selected="{searchBox: 1, btnSize: 'sm',-->
-<!--                                             placeholder:'请选择商品分类', maxHeight: 400}">-->
-<!--                                        <option value=""></option>-->
-<!--                                        --><?php //if (isset($catgory)): foreach ($catgory as $first): ?>
-<!--                                            <option value="--><?//= $first['category_id'] ?><!--"-->
-<!--                                                --><?//= $model['category_id'] == $first['category_id'] ? 'selected' : '' ?><!-->-->
-<!--                                                --><?//= $first['name'] ?><!--</option>-->
-<!--                                            --><?php //if (isset($first['child'])): foreach ($first['child'] as $two): ?>
-<!--                                                <option value="--><?//= $two['category_id'] ?><!--"-->
-<!--                                                    --><?//= $model['category_id'] == $two['category_id'] ? 'selected' : '' ?><!-->-->
-<!--                                                    　　--><?//= $two['name'] ?><!--</option>-->
-<!--                                                --><?php //if (isset($two['child'])): foreach ($two['child'] as $three): ?>
-<!--                                                    <option value="--><?//= $three['category_id'] ?><!--"-->
-<!--                                                        --><?//= $model['category_id'] == $three['category_id'] ? 'selected' : '' ?><!-->-->
-<!--                                                        　　　--><?//= $three['name'] ?><!--</option>-->
-<!--                                                --><?php //endforeach; endif; ?>
-<!--                                            --><?php //endforeach; endif; ?>
-<!--                                        --><?php //endforeach; endif; ?>
-<!--                                    </select>-->
-<!--                                    <small class="am-margin-left-xs">-->
-<!--                                        <a href="--><?//= url('goods.category/add') ?><!--">去添加</a>-->
-<!--                                    </small>-->
-<!--                                </div>-->
-<!--                            </div>-->
                             <div class="am-form-group">
                                 <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">商品图片 </label>
                                 <div class="am-u-sm-9 am-u-end">
@@ -356,6 +328,13 @@
                                 </div>
                             </div>
                             <div class="am-form-group">
+                                <label class="am-u-sm-3 am-u-lg-2 am-form-label">商品初始销量</label>
+                                <div class="am-u-sm-9 am-u-end">
+                                    <input type="number" class="tpl-form-input" name="goods[sales_initial]"
+                                           value="<?= $model['sales_initial'] ?>">
+                                </div>
+                            </div>
+                            <div class="am-form-group">
                                 <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">商品排序 </label>
                                 <div class="am-u-sm-9 am-u-end">
                                     <input type="number" class="tpl-form-input" name="goods[goods_sort]"
@@ -364,24 +343,6 @@
                                 </div>
                             </div>
 
-<!--                            <div class="widget-head am-cf">-->
-<!--                                <div class="widget-title am-fl">分销设置</div>-->
-<!--                            </div>-->
-<!--                            <div class="am-form-group">-->
-<!--                                <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">是否开启单独分销 </label>-->
-<!--                                <div class="am-u-sm-9 am-u-end">-->
-<!--                                    <label class="am-radio-inline">-->
-<!--                                        <input type="radio" name="goods[is_ind_dealer]" value="0" data-am-ucheck-->
-<!--                                            --><?//= $model['is_ind_dealer'] == false ? 'checked' : '' ?><!-->-->
-<!--                                        关闭-->
-<!--                                    </label>-->
-<!--                                    <label class="am-radio-inline">-->
-<!--                                        <input type="radio" name="goods[is_ind_dealer]" value="1" data-am-ucheck-->
-<!--                                            --><?//= $model['is_ind_dealer'] == true ? 'checked' : '' ?><!-->-->
-<!--                                        开启-->
-<!--                                    </label>-->
-<!--                                </div>-->
-<!--                            </div>-->
                             <div class="widget-dealer__content <?= $model['is_ind_dealer'] == false ? 'hide' : '' ?>">
                                 <div class="am-form-group">
                                     <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">分销佣金类型 </label>

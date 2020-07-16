@@ -13,6 +13,7 @@ use think\Model;
 class Banner extends Model
 {
     protected $name = 'banner';
+
     /**
      * 添加新记录
      * @param $data
@@ -20,6 +21,11 @@ class Banner extends Model
      */
     public function add($data)
     {
+        if (!isset($data['images']) || empty($data['images'])) {
+            $this->error = '请上传轮播图片';
+            return false;
+        }
+
 
         if (!empty($data['image'])) {
             $data['image_url'] = UploadFile::getFildIdByName($data['image']);
@@ -72,6 +78,11 @@ class Banner extends Model
     public function banner()
     {
         return $this->hasOne("app\\store\\model\\UploadFile", 'file_id', 'image_id');
+    }
+
+    public function getError()
+    {
+        return $this->error;
     }
 
 }

@@ -12,7 +12,7 @@
                             <input type="hidden" name="s" value="/<?= $request->pathinfo() ?>">
                             <div class="am-u-sm-12 am-u-md-3">
                                 <div class="am-form-group">
-                                    <?php if (checkPrivilege('apps.sharing.goods/add')): ?>
+                                    <?php if (checkPrivilege('apps.seckill.goods/add')): ?>
                                         <div class="am-btn-group am-btn-group-xs">
                                             <a class="am-btn am-btn-default am-btn-success"
                                                href="<?= url('apps.seckill.goods/add') ?>">
@@ -96,10 +96,10 @@
                                     <td class="am-text-middle"><?= $item['goods_sort'] ?></td>
                                     <td class="am-text-middle">
                                            <span class="j-state am-badge x-cur-p
-                                           am-badge-<?= $item['goods_status']['value'] == 10 ? 'success' : 'warning' ?>"
+                                           am-badge-<?= $item['admin_goods_status'] == 10 && $item['goods_status']['value'] == 10 ? 'success' : 'warning' ?>"
                                                  data-id="<?= $item['goods_id'] ?>"
                                                  data-state="<?= $item['goods_status']['value'] ?>">
-                                               <?= $item['goods_status']['text'] ?>
+                                               <?= $item['admin_goods_status'] == 10 ? $item['goods_status']['text']:'后台禁用' ?>
                                            </span>
                                     </td>
                                     <td class="am-text-middle"><?= $item['create_time'] ?></td>
@@ -116,6 +116,20 @@
                                                    data-id="<?= $item['goods_id'] ?>">
                                                     <i class="am-icon-trash"></i> 删除
                                                 </a>
+                                            <?php endif; ?>
+                                            <?php if (checkPrivilege('apps.seckill.goods/admin_goods')): ?>
+                                                <?php if ($item['admin_goods_status'] == 10): ?>
+                                                    <a href="javascript:;" class="item-takeoff tpl-table-black-operation-del"
+                                                       data-id="<?= $item['goods_id'] ?>">
+                                                        后台禁用
+                                                    </a>
+                                                <?php endif; ?>
+                                                <?php if ($item['admin_goods_status'] == 20): ?>
+                                                    <a href="javascript:;" class="item-takeon tpl-table-black-operation-green"
+                                                       data-id="<?= $item['goods_id'] ?>">
+                                                        后台启用
+                                                    </a>
+                                                <?php endif; ?>
                                             <?php endif; ?>
                                         </div>
                                     </td>
@@ -214,6 +228,14 @@
         // 删除元素
         var url = "<?= url('apps.seckill.goods/delete') ?>";
         $('.item-delete').delete('goods_id', url);
+
+        //禁用商品
+        var url = "<?= url('apps.seckill.goods/takeoff') ?>";
+        $('.item-takeoff').operate('goods_id', url,'是否禁用该商品？');
+
+        //启用商品
+        var url = "<?= url('apps.seckill.goods/takeon') ?>";
+        $('.item-takeon').operate('goods_id', url,'是否启用该商品？');
 
     });
 </script>
