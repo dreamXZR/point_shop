@@ -54,6 +54,9 @@ class Goods extends Controller
         if($post_data['end_at']<$post_data['start_at']){
             return $this->renderError('秒杀时间填写错误');
         }
+        if($post_data['buy_num_limit']<=0){
+            return $this->renderError('每次可购买数量需大于0');
+        }
         $post_data['is_seckill_goods'] = 1;
         $model = new GoodsModel;
         if ($model->add($post_data)) {
@@ -93,6 +96,9 @@ class Goods extends Controller
         $post_data['end_at'] = strtotime( $post_data['end_at']);
         if($post_data['end_at']<$post_data['start_at']){
             return $this->renderError('秒杀时间填写错误');
+        }
+        if($post_data['buy_num_limit']<=0){
+            return $this->renderError('每次可购买数量需大于0');
         }
         $post_data['is_seckill_goods'] = 1;
         $model = new GoodsModel;
@@ -158,6 +164,9 @@ class Goods extends Controller
         $post_data['end_at'] = strtotime( $post_data['end_at']);
         if($post_data['end_at']<$post_data['start_at']){
             return $this->renderError('秒杀时间填写错误');
+        }
+        if($post_data['buy_num_limit']<=0){
+            return $this->renderError('每次可购买数量需大于0');
         }
         // 更新记录
         if ($model->edit($post_data)) {

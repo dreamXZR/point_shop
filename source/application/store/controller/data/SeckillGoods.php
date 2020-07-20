@@ -37,7 +37,10 @@ class SeckillGoods extends Controller
      */
     public function lists($status = null)
     {
-        $list = $this->model->getList($status,0,'','seckill');
+        $shop_id = (new \app\store\model\store\Shop())
+            ->where(['is_delete'=>0,'status'=>1,'admin_status'=>1])
+            ->column('shop_id');
+        $list = $this->model->getList($status,0,'','seckill','all',false,$shop_id);
         return $this->fetch('list', compact('list'));
     }
 

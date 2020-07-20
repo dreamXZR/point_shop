@@ -10,7 +10,7 @@
 <!--                                <li><a href="#tab2">分销商条件</a></li>-->
 <!--                                <li><a href="#tab3">佣金设置</a></li>-->
                                 <li class="am-active"><a href="#tab4">提现结算</a></li>
-<!--                                <li><a href="#tab5">自定义文字</a></li>-->
+                                <li><a href="#tab5">自定义文字</a></li>
 <!--                                <li><a href="#tab6">申请协议</a></li>-->
 <!--                                <li><a href="#tab7">页面背景图</a></li>-->
 <!--                                <li><a href="#tab8">模板消息</a></li>-->

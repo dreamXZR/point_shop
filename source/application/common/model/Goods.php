@@ -133,7 +133,7 @@ class Goods extends BaseModel
             $filter['shop_id'] = $admin_user['store_shop_id'];
         }
         if($shop_id){
-            $filter['shop_id'] = $shop_id;
+            $filter['shop_id'] = ['in',$shop_id];
         }
         // 排序规则
         $sort = [];

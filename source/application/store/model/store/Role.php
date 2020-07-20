@@ -138,7 +138,7 @@ class Role extends RoleModel
      */
     private function getAll()
     {
-        $data = $this->order(['sort' => 'asc', 'create_time' => 'asc'])->select();
+        $data = $this->where('role_name','neq','商家角色')->order(['sort' => 'asc', 'create_time' => 'asc'])->select();
         return $data ? $data->toArray() : [];
     }
 

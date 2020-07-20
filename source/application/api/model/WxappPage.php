@@ -84,8 +84,11 @@ class WxappPage extends WxappPageModel
             $goodsList = $model->getListByIds($goodsIds, 10);
         } else {
             // 数据来源：自动
+            $shop_id = (new ShopModel())
+                ->where(['is_delete'=>0,'status'=>1,'admin_status'=>1])
+                ->column('shop_id');
             $goodsList = $model->getList(10, $item['params']['auto']['category'], '','goods',
-                $item['params']['auto']['goodsSort'], false,0, $item['params']['auto']['showNum']);
+                $item['params']['auto']['goodsSort'], false,implode(',',$shop_id), $item['params']['auto']['showNum']);
         }
         if ($goodsList->isEmpty()) return [];
         // 格式化商品列表
@@ -158,8 +161,11 @@ class WxappPage extends WxappPageModel
             $goodsList = $model->getListByIds($goodsIds, 10);
         } else {
             // 数据来源：自动
+            $shop_id = (new ShopModel())
+                ->where(['is_delete'=>0,'status'=>1,'admin_status'=>1])
+                ->column('shop_id');
             $goodsList = $model->getList(10, $item['params']['auto']['category'], '','seckill',
-                $item['params']['auto']['goodsSort'], false,0, $item['params']['auto']['showNum']);
+                $item['params']['auto']['goodsSort'], false,implode(',',$shop_id), $item['params']['auto']['showNum']);
         }
         if ($goodsList->isEmpty()) return [];
         // 格式化商品列表

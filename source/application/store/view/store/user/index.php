@@ -27,6 +27,7 @@
                                 <th>管理员ID</th>
                                 <th>用户名</th>
                                 <th>姓名</th>
+                                <th>角色</th>
                                 <th>添加时间</th>
                                 <th>操作</th>
                             </tr>
@@ -37,12 +38,13 @@
                                     <td class="am-text-middle"><?= $item['store_user_id'] ?></td>
                                     <td class="am-text-middle"><?= $item['user_name'] ?></td>
                                     <td class="am-text-middle"><?= $item['real_name'] ?></td>
+                                    <td class="am-text-middle"><?= $item['role'][0]['role_name'] ?></td>
                                     <td class="am-text-middle"><?= $item['create_time'] ?></td>
                                     <td class="am-text-middle">
                                         <div class="tpl-table-black-operation">
                                             <?php if (($store['user']['store_user_id'] != $item['store_user_id'])
                                                 && !$item['is_super']): ?>
-                                                <?php if (checkPrivilege('store.user/edit')): ?>
+                                                <?php if (checkPrivilege('store.user/edit') && $item['role'][0]['role_name']!='商家角色'): ?>
                                                     <a href="<?= url('store.user/edit', ['user_id' => $item['store_user_id']]) ?>">
                                                         <i class="am-icon-pencil"></i> 编辑
                                                     </a>

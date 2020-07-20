@@ -85,7 +85,7 @@ class Goods extends GoodsModel
             $filter['shop_id'] = $admin_user['store_shop_id'];
         }
         if($shop_id){
-            $filter['shop_id'] = $shop_id;
+            $filter['shop_id'] = ['in',$shop_id];
         }
         // 排序规则
         $sort = [];
@@ -144,7 +144,7 @@ class Goods extends GoodsModel
             'admin_goods_status'=>10,
             'is_delete' => 0
         ];
-        if($status == 'on-going'){
+        if($status == 'on-going' || empty($status)){
             $filter['start_at'] = ['<',time()];
             $filter['end_at'] = ['>',time()];
         }else if($status == 'not-started'){

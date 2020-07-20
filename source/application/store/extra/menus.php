@@ -486,15 +486,15 @@ return [
                 'name' => '短信通知',
                 'index' => 'setting/sms'
             ],
-            [
-                'name' => '模板消息',
-                'index' => 'setting/tplmsg',
-                'uris' => [
-                    'setting/tplmsg',
-                    'setting.help/tplmsg'
-
-                ],
-            ],
+//            [
+//                'name' => '模板消息',
+//                'index' => 'setting/tplmsg',
+//                'uris' => [
+//                    'setting/tplmsg',
+//                    'setting.help/tplmsg'
+//
+//                ],
+//            ],
             [
                 'name' => '退货地址',
                 'index' => 'setting.address/index',

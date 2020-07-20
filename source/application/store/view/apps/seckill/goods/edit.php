@@ -400,24 +400,6 @@
                                 </div>
                             </div>
 
-<!--                            <div class="widget-head am-cf">-->
-<!--                                <div class="widget-title am-fl">分销设置</div>-->
-<!--                            </div>-->
-<!--                            <div class="am-form-group">-->
-<!--                                <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">是否开启单独分销 </label>-->
-<!--                                <div class="am-u-sm-9 am-u-end">-->
-<!--                                    <label class="am-radio-inline">-->
-<!--                                        <input type="radio" name="goods[is_ind_dealer]" value="0" data-am-ucheck-->
-<!--                                            --><?//= $model['is_ind_dealer'] == false ? 'checked' : '' ?><!-->-->
-<!--                                        关闭-->
-<!--                                    </label>-->
-<!--                                    <label class="am-radio-inline">-->
-<!--                                        <input type="radio" name="goods[is_ind_dealer]" value="1" data-am-ucheck-->
-<!--                                            --><?//= $model['is_ind_dealer'] == true ? 'checked' : '' ?><!-->-->
-<!--                                        开启-->
-<!--                                    </label>-->
-<!--                                </div>-->
-<!--                            </div>-->
                             <div class="widget-dealer__content <?= $model['is_ind_dealer'] == false ? 'hide' : '' ?>">
                                 <div class="am-form-group">
                                     <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">分销佣金类型 </label>

@@ -60,6 +60,7 @@ class User extends StoreUserModel
     {
         return $this->where('is_delete', '=', '0')
             ->where('store_user_id','neq',10001)
+            ->with('role')
             ->order(['create_time' => 'desc'])
             ->paginate(15, false, [
                 'query' => \request()->request()
