@@ -42,21 +42,21 @@ class UserAddress extends UserAddressModel
     public function add($user, $data)
     {
         // 整理地区信息
-        $region = explode(',', $data['region']);
-        $province_id = Region::getIdByName($region[0], 1);
-        $city_id = Region::getIdByName($region[1], 2, $province_id);
-        $region_id = Region::getIdByName($region[2], 3, $city_id);
+//        $region = explode(',', $data['region']);
+//        $province_id = Region::getIdByName($region[0], 1);
+//        $city_id = Region::getIdByName($region[1], 2, $province_id);
+//        $region_id = Region::getIdByName($region[2], 3, $city_id);
         // 添加收货地址
         $this->startTrans();
         try {
             $this->allowField(true)->save([
                 'name' => $data['name'],
                 'phone' => $data['phone'],
-                'province_id' => $province_id,
-                'city_id' => $city_id,
-                'region_id' => $region_id,
+                'region' => $data['region'],
+                'latitude' => $data['latitude'],
+                'longitude' => $data['longitude'],
+                'address' => $data['address'],
                 'detail' => $data['detail'],
-                'district' => ($region_id === 0 && !empty($region[2])) ? $region[2] : '',
                 'user_id' => $user['user_id'],
             ]);
             // 设为默认收货地址
@@ -79,18 +79,18 @@ class UserAddress extends UserAddressModel
     public function edit($data)
     {
         // 添加收货地址
-        $region = explode(',', $data['region']);
-        $province_id = Region::getIdByName($region[0], 1);
-        $city_id = Region::getIdByName($region[1], 2, $province_id);
-        $region_id = Region::getIdByName($region[2], 3, $city_id);
+//        $region = explode(',', $data['region']);
+//        $province_id = Region::getIdByName($region[0], 1);
+//        $city_id = Region::getIdByName($region[1], 2, $province_id);
+//        $region_id = Region::getIdByName($region[2], 3, $city_id);
         return $this->allowField(true)->save([
             'name' => $data['name'],
             'phone' => $data['phone'],
-            'province_id' => $province_id,
-            'city_id' => $city_id,
-            'region_id' => $region_id,
+            'region' => $data['region'],
+            'latitude' => $data['latitude'],
+            'longitude' => $data['longitude'],
+            'address' => $data['address'],
             'detail' => $data['detail'],
-            'district' => ($region_id === 0 && !empty($region[2])) ? $region[2] : '',
         ]);
     }
 

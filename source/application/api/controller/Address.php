@@ -54,8 +54,7 @@ class Address extends Controller
     {
         $user = $this->getUser();
         $detail = UserAddress::detail($user['user_id'],$address_id);
-        $region = array_values($detail['region']);
-        return $this->renderSuccess(compact('detail', 'region'));
+        return $this->renderSuccess(compact('detail'));
     }
 
     /**
