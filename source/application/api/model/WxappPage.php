@@ -32,7 +32,7 @@ class WxappPage extends WxappPageModel
      * @throws \think\db\exception\ModelNotFoundException
      * @throws \think\exception\DbException
      */
-    public static function getPageData($user, $page_id = null)
+    public static function getPageData($user, $page_id = null,$select_shop_id = null)
     {
         // 页面详情
         $detail = $page_id > 0 ? parent::detail($page_id) : parent::getHomePage();

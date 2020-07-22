@@ -20,10 +20,10 @@ class Page extends Controller
      * @throws \think\db\exception\ModelNotFoundException
      * @throws \think\exception\DbException
      */
-    public function index($page_id = null)
+    public function index($page_id = null,$select_shop_id = null)
     {
         // 页面元素
-        $data = WxappPage::getPageData($this->getUser(false), $page_id);
+        $data = WxappPage::getPageData($this->getUser(false), $page_id,$select_shop_id);
         return $this->renderSuccess($data);
     }
 

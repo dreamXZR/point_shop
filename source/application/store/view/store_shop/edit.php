@@ -111,6 +111,13 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="am-form-group">
+                                <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require"> 配送范围 </label>
+                                <div class="am-u-sm-9 am-u-end">
+                                    <input type="number" class="tpl-form-input" name="shop[distribution_region]"
+                                           placeholder="请输入配送范围(周围公里数)" value="<?= $model['distribution_region'] ?>" required>
+                                </div>
+                            </div>
                             <div class="am-form-group am-padding-top">
                                 <label class="am-u-sm-3 am-u-lg-2 am-form-label"> 门店简介 </label>
                                 <div class="am-u-sm-9 am-u-end">

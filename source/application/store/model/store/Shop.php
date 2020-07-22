@@ -52,9 +52,10 @@ class Shop extends ShopModel
     public function edit($data,$is_store_shop = true)
     {
         //验证
-//        if (!$this->validateForm($data)) {
-//            return false;
-//        }
+        if ($data['distribution_region']<=0) {
+            $this->error = '配送范围请填写大于零的数';
+            return false;
+        }
         //
         if($is_store_shop){
             return $this->allowField(true)->save($this->createData($data)) !== false;
