@@ -112,4 +112,18 @@ class User extends Controller
         }
         return $this->fetch('renew', compact('model'));
     }
+
+    /**
+     * 重置商户密码
+     */
+    public function resetPassword($user_id)
+    {
+        $model = StoreUserModel::detail($user_id);
+        if ($model->save([
+            'password' => yoshop_hash('123456')
+        ])) {
+            return $this->renderSuccess('重置成功');
+        }
+        return $this->renderError('重置失败');
+    }
 }

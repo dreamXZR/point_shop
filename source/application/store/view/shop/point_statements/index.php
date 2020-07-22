@@ -7,6 +7,38 @@
                 </div>
                 <div class="widget-body am-fr">
                     <!-- 工具栏 -->
+                    <div class="page_toolbar am-margin-bottom-xs am-cf">
+                        <form class="toolbar-form" action="">
+                            <input type="hidden" name="s" value="/<?= $request->pathinfo() ?>">
+                            <div class="am-u-sm-12 am-u-md-9" style="float: right;">
+                                <div class="am fr">
+                                    <?php if ($admin_user['store_shop_id'] == null) : ?>
+                                        <div class="am-form-group am-fl">
+                                            <?php $shop_id = $request->get('shop_id') ?: null; ?>
+                                            <select name="shop_id"
+                                                    data-am-selected="{btnSize: 'sm', placeholder: '店铺名称'}">
+                                                <option value=""></option>
+                                                <?php if (isset($shop)): foreach ($shop as $first): ?>
+
+                                                    <option value="<?= $first['shop_id'] ?>"
+                                                        <?= $shop_id == $first['shop_id'] ? 'selected' : '' ?>>
+                                                        <?= $first['shop_name'] ?></option>
+                                                <?php endforeach; endif; ?>
+                                            </select>
+                                        </div>
+                                        <div class="am-form-group am-fl">
+                                            <div class="am-input-group am-input-group-sm tpl-form-border-form">
+                                                <div class="am-input-group-btn">
+                                                    <button class="am-btn am-btn-default am-icon-search"
+                                                            type="submit"></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                     <div class="am-scrollable-horizontal am-u-sm-12">
                         <table width="100%" class="am-table am-table-compact am-table-striped
                          tpl-table-black am-text-nowrap">

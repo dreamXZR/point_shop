@@ -57,6 +57,9 @@ class Order extends BaseModel
         if ($data['pay_status'] == 10) {
             return '待付款';
         }
+        if($data['delivery_status'] == 10 && $data['delivery_type'] == 20){
+            return '已付款，请自提';
+        }
         // 订单类型：单独购买
         if ($data['delivery_status'] == 10) {
             return '已付款，待发货';

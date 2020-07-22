@@ -33,6 +33,11 @@ class User extends BaseModel
         return $this->belongsToMany('Role', 'StoreUserRole');
     }
 
+    public function shop()
+    {
+        return $this->belongsTo('Shop','store_shop_id','shop_id');
+    }
+
     /**
      * 验证用户名是否重复
      * @param $user_name
