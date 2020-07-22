@@ -27,7 +27,7 @@ class Goods extends Controller
         // 商品分类
         //$catgory = Category::getCacheTree();
         //商家列表
-        $shop = (new \app\store\model\store\Shop())->field('shop_id,shop_name')->where(['is_delete'=>0,'status'=>1])->select();
+        $shop = (new \app\store\model\store\Shop())->field('shop_id,shop_name')->select();
         //后台人员信息
         $admin_user = Session::get('yoshop_store.user');
         // 商品列表

@@ -28,6 +28,7 @@
                                 <th>用户名</th>
                                 <th>姓名</th>
                                 <th>角色</th>
+                                <th>店铺</th>
                                 <th>添加时间</th>
                                 <th>操作</th>
                             </tr>
@@ -39,6 +40,7 @@
                                     <td class="am-text-middle"><?= $item['user_name'] ?></td>
                                     <td class="am-text-middle"><?= $item['real_name'] ?></td>
                                     <td class="am-text-middle"><?= $item['role'][0]['role_name'] ?></td>
+                                    <td class="am-text-middle"><?= $item['shop']['shop_name'] ?></td>
                                     <td class="am-text-middle"><?= $item['create_time'] ?></td>
                                     <td class="am-text-middle">
                                         <div class="tpl-table-black-operation">
@@ -54,6 +56,13 @@
                                                        class="item-delete tpl-table-black-operation-del"
                                                        data-id="<?= $item['store_user_id'] ?>">
                                                         <i class="am-icon-trash"></i> 删除
+                                                    </a>
+                                                <?php endif; ?>
+                                                <?php if (checkPrivilege('store.user/resetPassword')&& $item['role'][0]['role_name'] =='商家角色'): ?>
+                                                    <a href="javascript:void(0);"
+                                                       class="item-reset tpl-table-black-operation-default"
+                                                       data-id="<?= $item['store_user_id'] ?>">
+                                                        <i></i> 重置密码
                                                     </a>
                                                 <?php endif; ?>
                                             <?php endif; ?>
@@ -85,6 +94,10 @@
         // 删除元素
         var url = "<?= url('store.user/delete') ?>";
         $('.item-delete').delete('user_id', url, '删除后不可恢复，确定要删除吗？');
+
+        // 重置密码
+        var url = "<?= url('store.user/resetPassword') ?>";
+        $('.item-reset').operate('user_id', url, '是否要重置该商户的登录密码？');
 
     });
 </script>

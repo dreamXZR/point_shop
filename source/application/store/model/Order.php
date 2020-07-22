@@ -390,13 +390,12 @@ class Order extends OrderModel
 //            $shop = Shop::get($this['shop_id']);
 //            $shop->incPoints($this['points']);
             Db::commit();
-            return true;
         }catch (\Exception $e) {
             // 回滚事务
             Db::rollback();
+            $this->error = $e->getMessage();
             return false;
         }
-
 
         return $this->save(['order_status' => $data['is_cancel'] ? 20 : 10]) !== false;
     }

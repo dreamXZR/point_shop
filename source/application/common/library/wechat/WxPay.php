@@ -116,17 +116,19 @@ class WxPay extends WxBase
         // 格式化返回结果
         $prepay = $this->fromXml($result);
         // 请求失败
-        if ($prepay['return_code'] === 'FAIL') {
+        if ($prepay['return_code'] == 'FAIL') {
             throw new BaseException(['msg' => 'return_msg: ' . $prepay['return_msg']]);
         }
-        if ($prepay['result_code'] === 'FAIL') {
+        if ($prepay['result_code'] == 'FAIL') {
             throw new BaseException(['msg' => 'err_code_des: ' . $prepay['err_code_des']]);
         }
-        if($prepay['return_code'] === 'SUCCESS'){
+
+        if($prepay['return_code'] == 'SUCCESS'){
             //修改订单状态
-            (new Order())->where(['transaction_id'=>$transaction_id])->save(['order_status' => 20, 'is_refund' => 1]);
+           // (new Order())->where(['transaction_id'=>$transaction_id])->save(['order_status' => 20]);
+            return true;
         }
-        return true;
+
     }
 
     /**

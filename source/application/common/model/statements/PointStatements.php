@@ -35,12 +35,15 @@ class PointStatements extends BaseModel
             ]);
     }
 
-    public function getShopRechargeList()
+    public function getShopRechargeList($shop_id)
     {
         $where = ['type'=>30];
         $store_shop_id = $this->admin_user['store_shop_id'];
         if($store_shop_id){
             $where['shop_id'] = $store_shop_id;
+        }
+        if($shop_id>0){
+            $where['shop_id'] = $shop_id;
         }
         return $this->where($where)
             ->with('shop')

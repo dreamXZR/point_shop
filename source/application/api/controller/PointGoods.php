@@ -137,7 +137,7 @@ class PointGoods extends Controller
     }
 
     private function make_coupon_card() {
-        $code = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $code = 'ABCDEFGHIJKLMNPQRSTUVWXYZ';
         $rand = $code[rand(0,25)]
             .strtoupper(dechex(date('m')))
             .date('d').substr(time(),-5)
@@ -145,7 +145,7 @@ class PointGoods extends Controller
             .sprintf('%02d',rand(0,99));
         for(
             $a = md5( $rand, true ),
-            $s = '0123456789ABCDEFGHIJKLMNOPQRSTUV',
+            $s = '123456789ABCDEFGHIJKLMNPQRSTUV',
             $d = '',
             $f = 0;
             $f < 8;
