@@ -413,14 +413,14 @@ $detail = isset($detail) ? $detail : null;
                                     am-text-nowrap am-margin-bottom-xs">
                                     <tbody>
                                     <tr>
-                                        <th>物流公司</th>
-                                        <th>物流单号</th>
+<!--                                        <th>物流公司</th>-->
+<!--                                        <th>物流单号</th>-->
                                         <th>发货状态</th>
                                         <th>发货时间</th>
                                     </tr>
                                     <tr>
-                                        <td><?= $detail['express']['express_name'] ?></td>
-                                        <td><?= $detail['express_no'] ?></td>
+<!--                                        <td>--><?//= $detail['express']['express_name'] ?><!--</td>-->
+<!--                                        <td>--><?//= $detail['express_no'] ?><!--</td>-->
                                         <td>
                                              <span class="am-badge
                                             <?= $detail['delivery_status']['value'] == 20 ? 'am-badge-success' : '' ?>">
@@ -433,6 +433,24 @@ $detail = isset($detail) ? $detail : null;
                                     </tbody>
                                 </table>
                             </div>
+
+                            <?php if (checkPrivilege('order/delivery_completed') &&$detail['order_status']['value'] != 30): ?>
+                                <div class="widget-head am-cf">
+                                    <div class="widget-title am-fl">配送信息</div>
+                                </div>
+                                <!-- 送货完成 -->
+                                <form id="delivery" class="my-form am-form tpl-form-line-form" method="post"
+                                      action="<?= url('order/delivery_completed', ['order_id' => $detail['order_id']]) ?>">
+                                    <input type="hidden" class="tpl-form-input" name="order[express_no]">
+                                    <div class="am-form-group">
+                                        <div class="am-u-sm-9 am-u-sm-push-3 am-margin-top-lg">
+                                            <button type="submit" class="j-submit am-btn am-btn-sm am-btn-secondary">
+                                                确认送货完成
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            <?php endif; ?>
                         <?php endif; ?>
                     <?php endif; ?>
 

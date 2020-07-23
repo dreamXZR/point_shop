@@ -88,6 +88,15 @@ class Order extends OrderModel
         } elseif ($delivery == DeliveryTypeEnum::EXTRACT) {
             $shop_id > 0 && $returnData['extract_shop'] = ShopModel::detail($shop_id);
         }
+        //判断是否在店家的配送范围
+        if(!$user['address']->isEmpty() && $delivery == 10){
+            $address = $user['address_default'];
+            //店铺信息
+            $shop_info  = ShopModel::detail(current($goodsList)['shop_id']);
+            if(getdistance($shop_info['longitude'],$shop_info['latitude'],$address['longitude'],$address['latitude'])>$shop_info['distribution_region']*1000){
+                $this->error = '该地址不在商家配送范围,请重新选择送货地址';
+            }
+        }
         // 可用优惠券列表
        // $couponList = UserCoupon::getUserCouponList($user['user_id'], $goodsTotalPrice);
         return array_merge([

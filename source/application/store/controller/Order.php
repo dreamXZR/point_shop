@@ -112,6 +112,20 @@ class Order extends Controller
     }
 
     /**
+     * 确认送货完成
+     * @param $order_id
+     * @throws \think\exception\DbException
+     */
+    public function delivery_completed($order_id)
+    {
+        $model = OrderModel::detail($order_id);
+        if ($model->delivery_completed()) {
+            return $this->renderSuccess('确认成功');
+        }
+        return $this->renderError($model->getError() ?: '确认失败');
+    }
+
+    /**
      * 修改订单价格
      * @param $order_id
      * @return array

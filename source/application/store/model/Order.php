@@ -244,6 +244,17 @@ class Order extends OrderModel
         return $status;
     }
 
+    public function delivery_completed($sendMsg = true)
+    {
+        $status = $this->save([
+            'receipt_status' => 20,
+            'order_status' => 30,
+        ]);
+        // 发送消息通知
+        ($status && $sendMsg) && $this->deliveryMessage($this['order_id']);
+        return $status;
+    }
+
     /**
      * 确认发货后发送消息通知
      * @param $order_id
