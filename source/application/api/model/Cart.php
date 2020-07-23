@@ -3,8 +3,8 @@
 namespace app\api\model;
 
 use app\api\model\store\Shop;
-use think\Cache;
 use app\api\model\store\Shop as ShopModel;
+use think\Cache;
 use app\common\enum\OrderType as OrderTypeEnum;
 use app\common\enum\DeliveryType as DeliveryTypeEnum;
 use app\common\service\delivery\Express as ExpressService;
@@ -52,6 +52,7 @@ class Cart
      * @param string $cartIds 购物车id集
      * @param int $delivery 配送方式
      * @param int $shop_id 自提门店id
+     *  @param int $select_shop_id 选中的shop_id
      * @return array
      * @throws \think\Exception
      * @throws \think\db\exception\DataNotFoundException
@@ -61,13 +62,14 @@ class Cart
     public function getList(
         $cartIds = null,
         $delivery = DeliveryTypeEnum::EXPRESS,
-        $shop_id = 0
+        $shop_id = 0,
+        $select_shop_id = 0
     )
     {
         // 返回的数据
         $returnData = [];
         // 获取购物车商品列表
-        $goodsList = $this->getGoodsList($cartIds);
+        $goodsList = $this->getGoodsList($cartIds,$select_shop_id);
         // 订单商品总数量
         $orderTotalNum = array_sum(array_column($goodsList, 'total_num'));
         // 订单商品总金额
@@ -78,6 +80,16 @@ class Cart
         } elseif ($delivery == DeliveryTypeEnum::EXTRACT) {
             $shop_id > 0 && $returnData['extract_shop'] = ShopModel::detail($shop_id);
         }
+        //判断是否在店家的配送范围
+        if(!$this->user['address']->isEmpty() && $delivery == 10){
+            $address = $this->user['address_default'];
+            //店铺信息
+            $shop_info  = ShopModel::detail(current($goodsList)['shop_id']);
+            if(getdistance($shop_info['longitude'],$shop_info['latitude'],$address['longitude'],$address['latitude'])>$shop_info['distribution_region']*1000){
+                $this->error = '该地址不在商家配送范围,请重新选择送货地址';
+            }
+        }
+
         // 可用优惠券列表
         //$couponList = UserCoupon::getUserCouponList($this->user['user_id'], $orderTotalPrice);
         return array_merge([
@@ -134,12 +146,22 @@ class Cart
     /**
      * 获取购物车列表
      * @param string|null $cartIds 购物车索引集 (为null时则获取全部)
+     * @param $select_shop_id 选中的shop_id(为0时则不去筛选)
      * @return array
      */
-    private function getCartList($cartIds = null)
+    private function getCartList($cartIds = null,$select_shop_id = 0)
     {
-        if (is_null($cartIds)) return $this->cart;
+
         $cartList = [];
+        if($select_shop_id>0){
+            foreach ($this->cart as $index=>$item){
+                if($item['shop_id'] == $select_shop_id){
+                    $cartList[$index] = $item;
+                }
+            }
+            return $cartList;
+        }
+        if (is_null($cartIds)) return $this->cart;
         $indexArr = (strpos($cartIds, ',') !== false) ? explode(',', $cartIds) : [$cartIds];
         foreach ($indexArr as $index) {
             isset($this->cart[$index]) && $cartList[$index] = $this->cart[$index];
@@ -150,18 +172,19 @@ class Cart
     /**
      * 获取购物车中的商品列表
      * @param $cartIds
+     * @param int $select_shop_id 选中的shop_id
      * @return array|bool
      * @throws \think\Exception
      * @throws \think\db\exception\DataNotFoundException
      * @throws \think\db\exception\ModelNotFoundException
      * @throws \think\exception\DbException
      */
-    private function getGoodsList($cartIds)
+    private function getGoodsList($cartIds,$select_shop_id)
     {
         // 购物车商品列表
         $goodsList = [];
         // 获取购物车列表
-        $cartList = $this->getCartList($cartIds);
+        $cartList = $this->getCartList($cartIds,$select_shop_id);
         if (empty($cartList)) return $goodsList;
         // 购物车中所有商品id集
         $goodsIds = array_unique(array_column($cartList, 'goods_id'));
@@ -219,14 +242,6 @@ class Cart
      */
     public function add($goods_id, $goods_num, $goods_sku_id,$shop_id = 0)
     {
-        //判断是否是不同店铺商品
-        foreach ($this->cart as $v){
-            if($shop_id != 0 && $v['shop_id'] != $shop_id){
-                $this->setError('很抱歉，购物车存在其他店铺商品');
-                return false;
-            }
-
-        }
         // 购物车商品索引
         $index = $goods_id . '_' . $goods_sku_id;
         // 商品信息

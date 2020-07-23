@@ -373,30 +373,31 @@ $detail = isset($detail) ? $detail : null;
                                 <!-- 去发货 -->
                                 <form id="delivery" class="my-form am-form tpl-form-line-form" method="post"
                                       action="<?= url('order/delivery', ['order_id' => $detail['order_id']]) ?>">
-                                    <div class="am-form-group">
-                                        <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">物流公司 </label>
-                                        <div class="am-u-sm-9 am-u-end am-padding-top-xs">
-                                            <select name="order[express_id]"
-                                                    data-am-selected="{btnSize: 'sm', maxHeight: 240}" required>
-                                                <option value=""></option>
-                                                <?php if (isset($expressList)): foreach ($expressList as $expres): ?>
-                                                    <option value="<?= $expres['express_id'] ?>">
-                                                        <?= $expres['express_name'] ?></option>
-                                                <?php endforeach; endif; ?>
-                                            </select>
-                                            <div class="help-block am-margin-top-xs">
-                                                <small>可在 <a href="<?= url('setting.express/index') ?>" target="_blank">物流公司列表</a>
-                                                    中设置
-                                                </small>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="am-form-group">
-                                        <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">物流单号 </label>
-                                        <div class="am-u-sm-9 am-u-end">
-                                            <input type="text" class="tpl-form-input" name="order[express_no]" required>
-                                        </div>
-                                    </div>
+<!--                                    <div class="am-form-group">-->
+<!--                                        <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">物流公司 </label>-->
+<!--                                        <div class="am-u-sm-9 am-u-end am-padding-top-xs">-->
+<!--                                            <select name="order[express_id]"-->
+<!--                                                    data-am-selected="{btnSize: 'sm', maxHeight: 240}" required>-->
+<!--                                                <option value=""></option>-->
+<!--                                                --><?php //if (isset($expressList)): foreach ($expressList as $expres): ?>
+<!--                                                    <option value="--><?//= $expres['express_id'] ?><!--">-->
+<!--                                                        --><?//= $expres['express_name'] ?><!--</option>-->
+<!--                                                --><?php //endforeach; endif; ?>
+<!--                                            </select>-->
+<!--                                            <div class="help-block am-margin-top-xs">-->
+<!--                                                <small>可在 <a href="--><?//= url('setting.express/index') ?><!--" target="_blank">物流公司列表</a>-->
+<!--                                                    中设置-->
+<!--                                                </small>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                    <div class="am-form-group">-->
+<!--                                        <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">物流单号 </label>-->
+<!--                                        <div class="am-u-sm-9 am-u-end">-->
+<!--                                            <input type="text" class="tpl-form-input" name="order[express_no]" required>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+                                    <input type="hidden" class="tpl-form-input" name="order[express_no]">
                                     <div class="am-form-group">
                                         <div class="am-u-sm-9 am-u-sm-push-3 am-margin-top-lg">
                                             <button type="submit" class="j-submit am-btn am-btn-sm am-btn-secondary">

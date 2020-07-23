@@ -21,11 +21,11 @@ class Goods extends Controller
      * @return mixed
      * @throws \think\exception\DbException
      */
-    public function lists($status = null, $category_id = null, $search = '',$shop_id = 0)
+    public function lists($status = null, $category_id = null, $search = '',$select_shop_id = 0)
     {
         // 商品列表
         $model = new GoodsModel;
-        $list = $model->getSeckillList($status, $category_id, $search,'seckill',$shop_id);
+        $list = $model->getSeckillList($status, $category_id, $search,'seckill',$select_shop_id);
         return $this->renderSuccess([
             'list' => $list
         ]);

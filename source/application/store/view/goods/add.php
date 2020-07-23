@@ -304,6 +304,20 @@
                                 </div>
                             </div>
                             <div class="am-form-group">
+                                <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">是否首页展示 </label>
+                                <div class="am-u-sm-9 am-u-end">
+                                    <label class="am-radio-inline">
+                                        <input type="radio" name="goods[is_index_show]" value="0" data-am-ucheck
+                                               checked>
+                                        否
+                                    </label>
+                                    <label class="am-radio-inline">
+                                        <input type="radio" name="goods[is_index_show]" value="1" data-am-ucheck>
+                                        是
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="am-form-group">
                                 <label class="am-u-sm-3 am-u-lg-2 am-form-label">购买获取积分</label>
                                 <div class="am-u-sm-9 am-u-end">
                                     <input type="number" class="tpl-form-input" name="goods[exchange_points]"

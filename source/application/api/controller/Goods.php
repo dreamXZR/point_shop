@@ -26,7 +26,7 @@ class Goods extends Controller
     {
         $model = new GoodsModel;
 
-        $shop_id = request()->get('shop_id') ?: 0;
+        $shop_id = request()->get('select_shop_id') ?: 0;
         $category_id = request()->get('category_id') ?: 0;
         $search = request()->get('search') ?: '';
         $sortType = request()->get('sortType') ?: 'all';

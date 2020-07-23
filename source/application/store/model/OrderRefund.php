@@ -82,9 +82,9 @@ class OrderRefund extends OrderRefundModel
                 $model->add($this['order_refund_id'], $data['address_id']);
             }
             // 订单详情
-            $order = Order::detail($this['order_id']);
+            //$order = Order::detail($this['order_id']);
             // 发送模板消息
-            (new Message)->refund(self::detail($this['order_refund_id']), $order['order_no']);
+           // (new Message)->refund(self::detail($this['order_refund_id']), $order['order_no']);
             // 事务提交
             $this->commit();
             return true;

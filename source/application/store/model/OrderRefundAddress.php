@@ -26,7 +26,6 @@ class OrderRefundAddress extends OrderRefundAddressModel
             'name' => $detail['name'],
             'phone' => $detail['phone'],
             'detail' => $detail['detail'],
-            'wxapp_id' => self::$wxapp_id
         ]);
     }
 

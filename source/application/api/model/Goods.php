@@ -60,7 +60,8 @@ class Goods extends GoodsModel
         $sortType = 'all',
         $sortPrice = false,
         $shop_id = 0,
-        $listRows = 15
+        $listRows = 15,
+        $is_index_show = null
     )
     {
         // 筛选条件
@@ -86,6 +87,9 @@ class Goods extends GoodsModel
         }
         if($shop_id){
             $filter['shop_id'] = ['in',$shop_id];
+        }
+        if($is_index_show){
+            $filter['is_index_show'] = 1;
         }
         // 排序规则
         $sort = [];

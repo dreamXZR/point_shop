@@ -234,8 +234,8 @@ class Order extends OrderModel
         }
         // 更新订单状态
         $status = $this->save([
-            'express_id' => $data['express_id'],
-            'express_no' => $data['express_no'],
+//            'express_id' => $data['express_id'],
+//            'express_no' => $data['express_no'],
             'delivery_status' => 20,
             'delivery_time' => time(),
         ]);

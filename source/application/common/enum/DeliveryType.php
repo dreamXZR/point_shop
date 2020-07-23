@@ -22,7 +22,7 @@ class DeliveryType extends EnumBasics
     public static function getTypeName()
     {
         return [
-            self::EXPRESS => '快递配送',
+            self::EXPRESS => '商家配送',
             self::EXTRACT => '上门自提',
         ];
     }

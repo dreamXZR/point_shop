@@ -299,3 +299,23 @@ function getGuidV4($trim = true)
         $rbrace;
     return $guidv4;
 }
+
+/**
+ * 根据两点经纬度计算距离
+ * @param $lng1
+ * @param $lat1
+ * @param $lng2
+ * @param $lat2
+ * @return float|int
+ */
+function getdistance($lng1, $lat1, $lng2, $lat2) {
+    // 将角度转为狐度
+    $radLat1 = deg2rad($lat1); //deg2rad()函数将角度转换为弧度
+    $radLat2 = deg2rad($lat2);
+    $radLng1 = deg2rad($lng1);
+    $radLng2 = deg2rad($lng2);
+    $a = $radLat1 - $radLat2;
+    $b = $radLng1 - $radLng2;
+    $s = 2 * asin(sqrt(pow(sin($a / 2), 2) + cos($radLat1) * cos($radLat2) * pow(sin($b / 2), 2))) * 6378.137 * 1000;
+    return $s;
+}

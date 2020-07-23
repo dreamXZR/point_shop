@@ -72,6 +72,7 @@
                                 <th>积分</th>
                                 <th>商品排序</th>
                                 <th>商品状态</th>
+                                <th>是否首页展示</th>
                                 <th>添加时间</th>
                                 <th>操作</th>
                             </tr>
@@ -102,6 +103,7 @@
                                                <?= $item['admin_goods_status'] == 10 ? $item['goods_status']['text']:'后台禁用' ?>
                                            </span>
                                     </td>
+                                    <td class="am-text-middle"><?= $item['is_index_show'] ? '是':'否' ?></td>
                                     <td class="am-text-middle"><?= $item['create_time'] ?></td>
                                     <td class="am-text-middle">
                                         <div class="tpl-table-black-operation">

@@ -3,6 +3,7 @@
 namespace app\api\controller;
 
 use app\api\model\Cart as CartModel;
+use app\common\enum\DeliveryType as DeliveryTypeEnum;
 
 /**
  * 购物车管理
@@ -37,9 +38,12 @@ class Cart extends Controller
      * @throws \think\db\exception\ModelNotFoundException
      * @throws \think\exception\DbException
      */
-    public function lists()
+    public function lists($select_shop_id = 0)
     {
-        return $this->renderSuccess($this->model->getList());
+        if($select_shop_id == 0){
+            return $this->renderError(['请选择店铺']);
+        }
+        return $this->renderSuccess($this->model->getList(null,DeliveryTypeEnum::EXPRESS,0,$select_shop_id));
     }
 
     /**

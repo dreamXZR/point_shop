@@ -46,13 +46,13 @@ class WxappPage extends WxappPageModel
             if ($item['type'] === 'window') {
                 $items[$key]['data'] = array_values($item['data']);
             } else if ($item['type'] === 'goods') {
-                $items[$key]['data'] = $model->getGoodsList($item);
+                $items[$key]['data'] = $model->getGoodsList($item,$select_shop_id);
             }else if ($item['type'] === 'pointGoods') {
                 $items[$key]['data'] = $model->getPointGoodsList($item);
             } else if ($item['type'] === 'sharingGoods') {
-                $items[$key]['data'] = $model->getSharingGoodsList($item);
+                $items[$key]['data'] = $model->getSharingGoodsList($item,$select_shop_id);
             }else if ($item['type'] === 'seckillGoods') {
-                $items[$key]['data'] = $model->getSeckillGoodsList($item);
+                $items[$key]['data'] = $model->getSeckillGoodsList($item,$select_shop_id);
             }  else if ($item['type'] === 'coupon') {
                 $items[$key]['data'] = $model->getCouponList($user, $item);
             } else if ($item['type'] === 'article') {
@@ -74,7 +74,7 @@ class WxappPage extends WxappPageModel
      * @throws \think\db\exception\ModelNotFoundException
      * @throws \think\exception\DbException
      */
-    private function getGoodsList($item)
+    private function getGoodsList($item,$select_shop_id)
     {
         // 获取商品数据
         $model = new Goods;
@@ -84,11 +84,8 @@ class WxappPage extends WxappPageModel
             $goodsList = $model->getListByIds($goodsIds, 10);
         } else {
             // 数据来源：自动
-            $shop_id = (new ShopModel())
-                ->where(['is_delete'=>0,'status'=>1,'admin_status'=>1])
-                ->column('shop_id');
             $goodsList = $model->getList(10, $item['params']['auto']['category'], '','goods',
-                $item['params']['auto']['goodsSort'], false,implode(',',$shop_id), $item['params']['auto']['showNum']);
+                $item['params']['auto']['goodsSort'], false,$select_shop_id, $item['params']['auto']['showNum'],true);
         }
         if ($goodsList->isEmpty()) return [];
         // 格式化商品列表
@@ -151,7 +148,7 @@ class WxappPage extends WxappPageModel
      * @throws \think\db\exception\ModelNotFoundException
      * @throws \think\exception\DbException
      */
-    private function getSeckillGoodsList($item)
+    private function getSeckillGoodsList($item,$select_shop_id)
     {
         // 获取商品数据
         $model = new Goods;
@@ -161,11 +158,8 @@ class WxappPage extends WxappPageModel
             $goodsList = $model->getListByIds($goodsIds, 10);
         } else {
             // 数据来源：自动
-            $shop_id = (new ShopModel())
-                ->where(['is_delete'=>0,'status'=>1,'admin_status'=>1])
-                ->column('shop_id');
             $goodsList = $model->getList(10, $item['params']['auto']['category'], '','seckill',
-                $item['params']['auto']['goodsSort'], false,implode(',',$shop_id), $item['params']['auto']['showNum']);
+                $item['params']['auto']['goodsSort'], false,$select_shop_id, $item['params']['auto']['showNum'],true);
         }
         if ($goodsList->isEmpty()) return [];
         // 格式化商品列表
@@ -198,7 +192,7 @@ class WxappPage extends WxappPageModel
      * @throws \think\db\exception\ModelNotFoundException
      * @throws \think\exception\DbException
      */
-    private function getSharingGoodsList($item)
+    private function getSharingGoodsList($item,$select_shop_id)
     {
         // 获取商品数据
         $model = new SharingGoodsModel;
