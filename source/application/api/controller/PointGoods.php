@@ -2,6 +2,7 @@
 
 namespace app\api\controller;
 
+use app\api\model\DeliveryAddress;
 use app\api\model\GoodsSku;
 use app\api\model\statements\UserPointStatements;
 use app\store\model\PointGoods as GoodsModel;
@@ -63,16 +64,13 @@ class PointGoods extends Controller
      * @throws \app\common\exception\BaseException
      * @throws \think\exception\DbException
      */
-    public function exchange($goods_id,$goods_num,$goods_sku_id)
+    public function exchange($goods,$goods_num,$order_id)
     {
         $user = $this->getUser();
-        $goods = \app\api\model\Goods::detail($goods_id);
         // 判断商品是否下架
-        if (!$goods || $goods['is_delete'] || $goods['goods_status']['value'] != 10) {
+        if (!$goods || $goods['goods_status']['value'] != 10) {
             return $this->renderError('很抱歉，商品信息不存在或已下架');
         }
-        // 商品sku信息
-        $goods['goods_sku'] = $goods->getGoodsSku($goods_sku_id);
         // 判断商品库存
         if ($goods_num > $goods['goods_sku']['stock_num']) {
             return $this->renderError('很抱歉，商品库存不足');
@@ -84,17 +82,7 @@ class PointGoods extends Controller
         //商品兑换
         Db::startTrans();
         try {
-            //记录兑换信息
-            $exhangeModel = new UserExchange();
-            $exhangeModel->save([
-                'user_id' => $user['user_id'],
-                'point_goods_id' => $goods_id,
-                'point_goods_sku_id' => $goods_sku_id,
-                'exchange_number' => $goods_num,
-                'exchange_points' => $goods_num * $goods['exchange_points'],
-                'exchange_code' => $this->make_coupon_card(),
-                'goods_remarks' => $goods['goods_name'].' '.$goods['goods_sku']['goods_attr'],
-            ]);
+
             //用户积分记录
             $user_log = new UserPointStatements();
             $user_log->save([
@@ -103,19 +91,31 @@ class PointGoods extends Controller
                 'points' => $goods_num * $goods['exchange_points'],
                 'remark' => '用户积分兑换'
             ]);
-            //消减用户库存
+            //消减用户积分
             $user->decrPoints($goods_num * $goods['exchange_points']);
             //消减商品库存
             $this->updateGoodsStockNum([$goods],$goods_num);
+            //订单状态修改
+            \app\api\model\Order::update(['pay_status'=>20],['order_id'=>$order_id]);
             // 提交事务
             Db::commit();
             return $this->renderError('兑换成功');
         }catch (\Exception $e) {
             // 回滚事务
             Db::rollback();
-            return $this->renderError('很抱歉，兑换失败请重试');
+            return $this->renderError($e->getMessage().'很抱歉，兑换失败请重试');
         }
 
+    }
+
+    /**
+     * 获取积分商品自提地址
+     */
+    public function addressList($longitude = '', $latitude = '',$search = '')
+    {
+        $model = new DeliveryAddress();
+        $list = $model->getList($longitude, $latitude,$search);
+        return $this->renderSuccess(compact('list'));
     }
 
     /**

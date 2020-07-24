@@ -117,6 +117,35 @@ class Order extends Controller
         return $this->renderError($model->getError() ?: '订单创建失败');
     }
 
+    public function exchangeNow(
+        $goods_id,
+        $goods_num,
+        $goods_sku_id,
+        $delivery,
+        $shop_id = 0,
+        $coupon_id = null,
+        $remark = ''
+    )
+    {
+        // 商品结算信息
+        $model = new OrderModel;
+        $order = $model->getExchangeNow($this->user, $goods_id, $goods_num, $goods_sku_id, $delivery,$shop_id);
+        if (!$this->request->isPost()) {
+            return $this->renderSuccess($order);
+        }
+        if ($model->hasError()) {
+            return $this->renderError($model->getError());
+        }
+        // 创建订单
+        if ($order_id = $model->createOrder($this->user['user_id'], $order, $coupon_id, $remark)) {
+            //积分兑换
+            $goods = $order['goods_list'][0];
+           return (new PointGoods())->exchange($goods,$goods['total_num'],$order_id);
+        }
+        $error = $model->getError() ?: '订单创建失败';
+        return $this->renderError($error);
+    }
+
     /**
      * 构建微信支付
      * @param $order

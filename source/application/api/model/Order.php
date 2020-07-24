@@ -116,6 +116,62 @@ class Order extends OrderModel
         ], $returnData);
     }
 
+    public function getExchangeNow(
+        $user,
+        $goods_id,
+        $goods_num,
+        $goods_sku_id,
+        $delivery,
+        $shop_id =0
+    )
+    {
+        // 商品信息
+        /* @var Goods $goods */
+        $goods = Goods::detail($goods_id);
+        // 判断商品是否下架
+        if (!$goods || $goods['is_delete'] || $goods['goods_status']['value'] != 10) {
+            throw new BaseException(['msg' => '很抱歉，商品信息不存在或已下架']);
+        }
+        // 商品sku信息
+        $goods['goods_sku'] = $goods->getGoodsSku($goods_sku_id);
+        // 判断商品库存
+        if ($goods_num > $goods['goods_sku']['stock_num']) {
+            $this->setError('很抱歉，商品库存不足');
+        }
+        // 返回的数据
+        $returnData = [];
+        // 商品单价
+        $goods['goods_price'] = $goods['goods_sku']['goods_price'];
+        // 商品总价
+        $goods['total_num'] = $goods_num;
+        $goods['total_price'] = $goodsTotalPrice = bcmul($goods['goods_price'], $goods_num, 2);
+        // 商品详情
+        $goodsList = [$goods['goods_id'] => $goods->toArray()];
+        // 处理配送方式
+        if ($delivery == DeliveryTypeEnum::EXPRESS) {
+            $this->orderExpress($returnData, $user, $goodsList, $goodsTotalPrice);
+        } elseif ($delivery == DeliveryTypeEnum::EXTRACT) {
+            $shop_id > 0 && $returnData['extract_shop'] = DeliveryAddress::detail($shop_id);
+        }
+        // 可用优惠券列表
+        // $couponList = UserCoupon::getUserCouponList($user['user_id'], $goodsTotalPrice);
+        return array_merge([
+            'goods_list' => array_values($goodsList),   // 商品详情
+            'order_total_num' => $goods_num,            // 商品总数量
+            'order_total_price' => $goodsTotalPrice,    // 商品总金额 (不含运费)
+            'order_pay_price' => $goodsTotalPrice,      // 订单总金额 (含运费)
+            'delivery' => $delivery,                    // 配送类型
+            // 'coupon_list' => array_values($couponList), // 优惠券列表
+            'address' => $user['address_default'],      // 默认地址
+            'exist_address' => !$user['address']->isEmpty(),    // 是否存在收货地址
+            'express_price' => '0.00',      // 配送费用
+            'intra_region' => true,         // 当前用户收货城市是否存在配送规则中
+            'extract_shop' => [],           // 自提门店信息
+            'has_error' => $this->hasError(),
+            'error_msg' => $this->getError(),
+        ], $returnData);
+    }
+
     /**
      * 订单配送-快递配送
      * @param $returnData
@@ -125,6 +181,11 @@ class Order extends OrderModel
      */
     private function orderExpress(&$returnData, $user, $goodsList, $goodsTotalPrice)
     {
+        //是否为积分商品的判断
+       if(current($goodsList)['is_point_goods']){
+           $returnData['order_pay_price'] = 0;
+           return;
+       }
         // 当前用户收货城市id
         $cityId = $user['address_default'] ? $user['address_default']['city_id'] : null;
         // 初始化配送服务类
@@ -191,7 +252,7 @@ class Order extends OrderModel
             //DealerOrderModel::createOrder($detail);
             // 事务提交
             $this->commit();
-            return true;
+            return $this['order_id'];
         } catch (\Exception $e) {
             $this->rollback();
             $this->error = $e->getMessage();
@@ -410,7 +471,9 @@ class Order extends OrderModel
     public function getList($user_id, $type = 'all')
     {
         // 筛选条件
-        $filter = [];
+        $filter = [
+            'shop_id' => ['neq',0]
+        ];
         // 订单数据类型
         switch ($type) {
             case 'all':

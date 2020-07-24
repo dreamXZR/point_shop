@@ -109,6 +109,15 @@ return [
                     'point_goods.exchange/index',
                 ],
             ],
+            [
+                'name' => '配送地址',
+                'index' => 'point_goods.address/index',
+                'uris' => [
+                    'point_goods.address/index',
+                    'point_goods.address/add',
+                    'point_goods.address/edit',
+                ],
+            ],
         ],
     ],
     'order' => [
