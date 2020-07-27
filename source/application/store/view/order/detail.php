@@ -225,9 +225,8 @@ $detail = isset($detail) ? $detail : null;
                                     <td><?= $detail['address']['name'] ?></td>
                                     <td><?= $detail['address']['phone'] ?></td>
                                     <td>
-                                        <?= $detail['address']['region']['province'] ?>
-                                        <?= $detail['address']['region']['city'] ?>
-                                        <?= $detail['address']['region']['region'] ?>
+                                        <?= $detail['address']['address'] ?>
+                                        <?= $detail['address']['region'] ?>
                                         <?= $detail['address']['detail'] ?>
                                     </td>
                                 </tr>

@@ -3,6 +3,7 @@
 namespace app\api\controller\shop;
 
 use app\api\controller\Controller;
+use app\api\model\Order as OrderModel;
 use app\common\service\Order as OrderService;
 use app\common\enum\OrderType as OrderTypeEnum;
 use app\api\model\store\shop\Clerk as ClerkModel;
@@ -26,6 +27,31 @@ class Order extends Controller
     {
         parent::_initialize();
         $this->user = $this->getUser();   // 用户信息
+    }
+
+
+    /**
+     * 商家店铺订单列表
+     * @param $dataType
+     * @param $shop_id
+     * @return array
+     * @throws \think\exception\DbException
+     */
+    public function lists($dataType,$shop_id)
+    {
+        $model = new OrderModel;
+        $list = $model->getShopOrderList($shop_id, $dataType);
+        return $this->renderSuccess(compact('list'));
+    }
+
+
+    /**
+     * 订单发货
+     */
+    public function delivery($order_id)
+    {
+         OrderModel::update(['delivery_status'=>20],['order_id'=>$order_id]);
+         return $this->renderSuccess('操作成功');
     }
 
     /**

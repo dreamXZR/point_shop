@@ -65,6 +65,24 @@ class Shop extends ShopModel
         return $data;
     }
 
+    public function getShortOne( $longitude = '', $latitude = '')
+    {
+        $where = [
+            'is_delete' => 0,
+            'status' => 1,
+            'admin_status'=>1
+        ];
+        // 获取门店列表数据
+        $data = $this->where($where)
+            ->order(['sort' => 'asc', 'create_time' => 'desc'])
+            ->select();
+        // 根据距离排序
+        if (!empty($longitude) && !empty($latitude)) {
+            return $this->sortByDistance($data, $longitude, $latitude)[0];
+        }
+        return $data[0];
+    }
+
     /**
      * 根据距离排序
      * @param string $longitude

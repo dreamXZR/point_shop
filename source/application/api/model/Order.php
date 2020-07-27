@@ -457,6 +457,8 @@ class Order extends OrderModel
             'province_id' => $address['province_id'],
             'city_id' => $address['city_id'],
             'region_id' => $address['region_id'],
+            'region' => $address['region'],
+            'address' => $address['address'],
             'detail' => $address['detail'],
         ]);
     }
@@ -500,6 +502,52 @@ class Order extends OrderModel
         }
         return $this->with(['goods.image'])
             ->where('user_id', '=', $user_id)
+            ->where($filter)
+            ->order(['create_time' => 'desc'])
+            ->paginate(15, false, [
+                'query' => \request()->request()
+            ]);
+    }
+
+    /**
+     * 店铺中心订单列表
+     * @param $user_id
+     * @param string $type
+     * @return \think\Paginator
+     * @throws \think\exception\DbException
+     */
+    public function getShopOrderList($shop_id, $type = 'all')
+    {
+        // 筛选条件
+        $filter = [
+            'shop_id' => $shop_id,
+            'delivery_type' => 10
+        ];
+        // 订单数据类型
+        switch ($type) {
+            case 'all':
+                break;
+            case 'payment';
+                $filter['pay_status'] = 10;
+                $filter['order_status'] = 10;
+                break;
+            case 'delivery';
+                $filter['pay_status'] = 20;
+                $filter['delivery_status'] = 10;
+                $filter['order_status'] = 10;
+                break;
+            case 'received';
+                $filter['pay_status'] = 20;
+                $filter['delivery_status'] = 20;
+                $filter['receipt_status'] = 10;
+                $filter['order_status'] = 10;
+                break;
+            case 'comment';
+                $filter['is_comment'] = 0;
+                $filter['order_status'] = 30;
+                break;
+        }
+        return $this->with(['goods.image'])
             ->where($filter)
             ->order(['create_time' => 'desc'])
             ->paginate(15, false, [

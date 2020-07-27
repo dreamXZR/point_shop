@@ -29,6 +29,20 @@ class Shop extends Controller
     }
 
     /**
+     * 获取距离用户最近的店铺
+     * @param string $longitude
+     * @param string $latitude
+     * @param string $search
+     */
+    public function getShortOne($longitude = '', $latitude = '')
+    {
+        $model = new ShopModel;
+        $list = $model->getShortOne($longitude, $latitude);
+        return $this->renderSuccess(compact('list'));
+
+    }
+
+    /**
      * 门店详情
      * @param $shop_id
      * @return array
