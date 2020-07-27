@@ -40,6 +40,13 @@ class Order extends Controller
     public function lists($dataType)
     {
         $model = new OrderModel;
+        $list = $model->getPointList($this->user['user_id'], $dataType);
+        return $this->renderSuccess(compact('list'));
+    }
+
+    public function pointLists($dataType)
+    {
+        $model = new OrderModel;
         $list = $model->getList($this->user['user_id'], $dataType);
         return $this->renderSuccess(compact('list'));
     }

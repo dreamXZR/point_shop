@@ -32,8 +32,32 @@ class Order extends OrderModel
         // 检索查询
         $this->setWhere($query);
         // 获取数据列表
+        $filter = $this->transferDataType($dataType);
+        $filter['shop_id'] = ['neq',0];
         return $this->with(['goods.image', 'address', 'user'])
-            ->where($this->transferDataType($dataType))
+            ->where($filter)
+            ->order(['create_time' => 'desc'])
+            ->paginate(10, false, [
+                'query' => Request::instance()->request()
+            ]);
+    }
+
+    /**
+     * 积分订单列表
+     * @param string $dataType
+     * @param array $query
+     * @return \think\Paginator
+     * @throws \think\exception\DbException
+     */
+    public function getPointList($dataType, $query = [])
+    {
+        // 检索查询
+        $this->setWhere($query);
+        // 获取数据列表
+        $filter = $this->transferDataType($dataType);
+        $filter['shop_id'] = ['eq',0];
+        return $this->with(['goods.image', 'address', 'user'])
+            ->where($filter)
             ->order(['create_time' => 'desc'])
             ->paginate(10, false, [
                 'query' => Request::instance()->request()
@@ -233,12 +257,20 @@ class Order extends OrderModel
             return false;
         }
         // 更新订单状态
-        $status = $this->save([
-//            'express_id' => $data['express_id'],
-//            'express_no' => $data['express_no'],
-            'delivery_status' => 20,
-            'delivery_time' => time(),
-        ]);
+        if(isset($data['express_id'])){
+            $status = $this->save([
+                'express_id' => $data['express_id'],
+                'express_no' => $data['express_no'],
+                'delivery_status' => 20,
+                'delivery_time' => time(),
+            ]);
+        }else{
+            $status = $this->save([
+                'delivery_status' => 20,
+                'delivery_time' => time(),
+            ]);
+        }
+
         // 发送消息通知
         ($status && $sendMsg) && $this->deliveryMessage($this['order_id']);
         return $status;

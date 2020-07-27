@@ -3,6 +3,7 @@
 namespace app\store\model;
 
 use app\common\model\DeliveryAddress as DeliveryAddressModel;
+use Lvht\GeoHash;
 use think\Session;
 
 /**
@@ -62,7 +63,7 @@ class DeliveryAddress extends DeliveryAddressModel
      */
     public function add($data)
     {
-        return $this->allowField(true)->save($data);
+        return $this->allowField(true)->save($this->createData($data));
     }
 
     /**
@@ -73,7 +74,7 @@ class DeliveryAddress extends DeliveryAddressModel
     public function edit($data)
     {
 
-        return $this->allowField(true)->save($data);
+        return $this->allowField(true)->save($this->createData($data));
     }
 
     /**
@@ -83,6 +84,23 @@ class DeliveryAddress extends DeliveryAddressModel
     public function remove()
     {
         return $this->save(['is_delete' => 1]);
+    }
+
+    /**
+     * 创建数据
+     * @param array $data
+     * @return array
+     */
+    private function createData($data)
+    {
+        // 格式化坐标信息
+        $coordinate = explode(',', $data['coordinate']);
+        $data['latitude'] = $coordinate[0];
+        $data['longitude'] = $coordinate[1];
+        // 生成geohash
+        $Geohash = new Geohash;
+        $data['geohash'] = $Geohash->encode($data['longitude'], $data['latitude']);
+        return $data;
     }
 
 }

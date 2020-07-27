@@ -474,16 +474,10 @@ class Order extends OrderModel
     {
         // 筛选条件
         $filter = [
-            'shop_id' => ['neq',0]
+            'shop_id' => ['eq',0]
         ];
         // 订单数据类型
         switch ($type) {
-            case 'all':
-                break;
-            case 'payment';
-                $filter['pay_status'] = 10;
-                $filter['order_status'] = 10;
-                break;
             case 'delivery';
                 $filter['pay_status'] = 20;
                 $filter['delivery_status'] = 10;
@@ -548,6 +542,52 @@ class Order extends OrderModel
                 break;
         }
         return $this->with(['goods.image'])
+            ->where($filter)
+            ->order(['create_time' => 'desc'])
+            ->paginate(15, false, [
+                'query' => \request()->request()
+            ]);
+    }
+
+    /**
+     * 用户中心订单列表
+     * @param $user_id
+     * @param string $type
+     * @return \think\Paginator
+     * @throws \think\exception\DbException
+     */
+    public function getPointList($user_id, $type = 'all')
+    {
+        // 筛选条件
+        $filter = [
+            'shop_id' => ['neq',0]
+        ];
+        // 订单数据类型
+        switch ($type) {
+            case 'all':
+                break;
+            case 'payment';
+                $filter['pay_status'] = 10;
+                $filter['order_status'] = 10;
+                break;
+            case 'delivery';
+                $filter['pay_status'] = 20;
+                $filter['delivery_status'] = 10;
+                $filter['order_status'] = 10;
+                break;
+            case 'received';
+                $filter['pay_status'] = 20;
+                $filter['delivery_status'] = 20;
+                $filter['receipt_status'] = 10;
+                $filter['order_status'] = 10;
+                break;
+            case 'comment';
+                $filter['is_comment'] = 0;
+                $filter['order_status'] = 30;
+                break;
+        }
+        return $this->with(['goods.image'])
+            ->where('user_id', '=', $user_id)
             ->where($filter)
             ->order(['create_time' => 'desc'])
             ->paginate(15, false, [
@@ -643,7 +683,9 @@ class Order extends OrderModel
     public function getCount($user_id, $type = 'all')
     {
         // 筛选条件
-        $filter = [];
+        $filter = [
+            'shop_id' => ['neq',0]
+        ];
         // 订单数据类型
         switch ($type) {
             case 'all':

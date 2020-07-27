@@ -4,6 +4,7 @@ namespace app\store\controller\point_goods;
 
 use app\store\controller\Controller;
 use app\store\model\DeliveryAddress as DeliveryAddressModel;
+use Lvht\GeoHash;
 
 /**
  * 积分商品配送地址
@@ -75,5 +76,7 @@ class Address extends Controller
         }
         return $this->renderSuccess('删除成功');
     }
+
+
 
 }

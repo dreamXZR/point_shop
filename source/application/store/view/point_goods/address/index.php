@@ -37,24 +37,24 @@
                             <tbody>
                             <?php if (!$list->isEmpty()): foreach ($list as $item): ?>
                                 <tr>
-                                    <td class="am-text-middle"><?= $item['address_id'] ?></td>
+                                    <td class="am-text-middle"><?= $item['shop_id'] ?></td>
                                     <td class="am-text-middle"><?= $item['name'] ?></td>
                                     <td class="am-text-middle"><?= $item['phone'] ?></td>
-                                    <td class="am-text-middle"><?= $item['detail'] ?></td>
+                                    <td class="am-text-middle"><?= $item['address'] ?></td>
                                     <td class="am-text-middle"><?= $item['sort'] ?></td>
                                     <td class="am-text-middle"><?= $item['create_time'] ?></td>
                                     <td class="am-text-middle">
                                         <div class="tpl-table-black-operation">
                                             <?php if (checkPrivilege('point_goods.address/edit')): ?>
                                                 <a href="<?= url('point_goods.address/edit',
-                                                    ['address_id' => $item['address_id']]) ?>">
+                                                    ['address_id' => $item['shop_id']]) ?>">
                                                     <i class="am-icon-pencil"></i> 编辑
                                                 </a>
                                             <?php endif; ?>
                                             <?php if (checkPrivilege('point_goods.address/delete')): ?>
                                                 <a href="javascript:;"
                                                    class="item-delete tpl-table-black-operation-del"
-                                                   data-id="<?= $item['address_id'] ?>">
+                                                   data-id="<?= $item['shop_id'] ?>">
                                                     <i class="am-icon-trash"></i> 删除
                                                 </a>
                                             <?php endif; ?>

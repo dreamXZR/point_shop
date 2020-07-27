@@ -103,13 +103,6 @@ return [
                 ],
             ],
             [
-                'name' => '积分兑换列表',
-                'index' => 'point_goods.exchange/index',
-                'uris' => [
-                    'point_goods.exchange/index',
-                ],
-            ],
-            [
                 'name' => '配送地址',
                 'index' => 'point_goods.address/index',
                 'uris' => [
@@ -118,6 +111,26 @@ return [
                     'point_goods.address/edit',
                 ],
             ],
+            [
+                'name' => '积分兑换',
+                'index' => 'point_goods.order/delivery_list',
+                'submenu' => [
+                    [
+                        'name' => '待发货',
+                        'index' => 'point_goods.order/delivery_list',
+                    ],
+                    [
+                        'name' => '待收货',
+                        'index' => 'point_goods.order/receipt_list',
+                    ],
+                    [
+                        'name' => '已完成',
+                        'index' => 'point_goods.order/complete_list',
+
+                    ],
+                ]
+            ],
+
         ],
     ],
     'order' => [

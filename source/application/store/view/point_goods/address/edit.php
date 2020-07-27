@@ -48,7 +48,25 @@
                             <div class="am-form-group">
                                 <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require"> 详细地址 </label>
                                 <div class="am-u-sm-9 am-u-end">
-                                    <input type="text" class="tpl-form-input" name="address[detail]" value="<?= $model['detail'] ?>" required>
+                                    <input type="text" class="tpl-form-input" name="address[address]" value="<?= $model['address'] ?>" required>
+                                </div>
+                            </div>
+                            <div class="am-form-group">
+                                <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require"> 门店坐标 </label>
+                                <div class="am-u-sm-9 am-u-end">
+                                    <div class="am-block">
+                                        <input type="text" style="background: none !important;" id="coordinate"
+                                               class="tpl-form-input" name="address[coordinate]"
+                                               placeholder="请选择门店坐标"
+                                               value="<?= $model['longitude'] ?>,<?= $model['latitude'] ?>"
+                                               readonly=""
+                                               required>
+                                    </div>
+                                    <div class="am-block am-padding-top-xs">
+                                        <iframe id="map" src="<?= url('shop/getpoint') ?>"
+                                                width="915"
+                                                height="610"></iframe>
+                                    </div>
                                 </div>
                             </div>
                             <div class="am-form-group">
@@ -83,4 +101,15 @@
         $('#my-form').superForm();
 
     });
+</script>
+<script>
+    /**
+     * 设置坐标
+     */
+    function setCoordinate(value) {
+        var $coordinate = $('#coordinate');
+        $coordinate.val(value);
+        // 触发验证
+        $coordinate.trigger('change');
+    }
 </script>
