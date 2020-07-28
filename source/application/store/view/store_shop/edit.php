@@ -100,7 +100,7 @@
                                         <input type="text" style="background: none !important;" id="coordinate"
                                                class="tpl-form-input" name="shop[coordinate]"
                                                placeholder="请选择门店坐标"
-                                               value="<?= $model['longitude'] ?>,<?= $model['latitude'] ?>"
+                                               value="<?= $model['latitude'] ?>,<?= $model['longitude'] ?>"
                                                readonly=""
                                                required>
                                     </div>
