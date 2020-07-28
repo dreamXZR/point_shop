@@ -1387,10 +1387,10 @@
                                                 <input type="radio" value="auto"
                                                        v-model="curItem.params.source"> 自动获取
                                             </label>
-                                            <label class="am-radio-inline">
-                                                <input type="radio" value="choice"
-                                                       v-model="curItem.params.source"> 手动选择
-                                            </label>
+<!--                                            <label class="am-radio-inline">-->
+<!--                                                <input type="radio" value="choice"-->
+<!--                                                       v-model="curItem.params.source"> 手动选择-->
+<!--                                            </label>-->
                                         </div>
                                     </div>
                                     <!--手动选择-->
@@ -1535,10 +1535,10 @@
                                                 <input type="radio" value="auto"
                                                        v-model="curItem.params.source"> 自动获取
                                             </label>
-                                            <label class="am-radio-inline">
-                                                <input type="radio" value="choice"
-                                                       v-model="curItem.params.source"> 手动选择
-                                            </label>
+<!--                                            <label class="am-radio-inline">-->
+<!--                                                <input type="radio" value="choice"-->
+<!--                                                       v-model="curItem.params.source"> 手动选择-->
+<!--                                            </label>-->
                                         </div>
                                     </div>
                                     <!--手动选择-->
@@ -1829,10 +1829,10 @@
                                                 <input type="radio" value="auto"
                                                        v-model="curItem.params.source"> 自动获取
                                             </label>
-                                            <label class="am-radio-inline">
-                                                <input type="radio" value="choice"
-                                                       v-model="curItem.params.source"> 手动选择
-                                            </label>
+<!--                                            <label class="am-radio-inline">-->
+<!--                                                <input type="radio" value="choice"-->
+<!--                                                       v-model="curItem.params.source"> 手动选择-->
+<!--                                            </label>-->
                                         </div>
                                     </div>
                                     <!--手动选择-->
