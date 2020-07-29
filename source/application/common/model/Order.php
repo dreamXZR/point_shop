@@ -242,49 +242,12 @@ class Order extends BaseModel
         return $data;
     }
 
-//    /**
-//     * 确认核销
-//     * @param int $extractClerkId 核销员id
-//     * @return bool|false|int
-//     */
-//    public function extract($extractClerkId)
-//    {
-//        if (
-//            $this['pay_status']['value'] != 20
-//            || $this['delivery_type']['value'] != DeliveryTypeEnum::EXTRACT
-//            || $this['delivery_status']['value'] == 20
-//            || in_array($this['order_status']['value'], [20, 21])
-//        ) {
-//            $this->error = '该订单不满足核销条件';
-//            return false;
-//        }
-//        $this->transaction(function () use ($extractClerkId) {
-//            // 更新订单状态：已发货、已收货
-//            $this->save([
-//                'extract_clerk_id' => $extractClerkId,  // 核销员
-//                'delivery_status' => 20,
-//                'delivery_time' => time(),
-//                'receipt_status' => 20,
-//                'receipt_time' => time(),
-//                'order_status' => 30
-//            ]);
-//            // 新增订单核销记录
-//            ShopOrder::add(
-//                $this['order_id'],
-//                $this['extract_shop_id'],
-//                $this['extract_clerk_id'],
-//                OrderTypeEnum::MASTER
-//            );
-//        });
-//        return true;
-//    }
-
     /**
      * 确认核销
      * @param int $extractClerkId 核销员id
      * @return bool|false|int
      */
-    public function extract($exchangeCode)
+    public function extract($extractClerkId)
     {
         if (
             $this['pay_status']['value'] != 20
@@ -295,22 +258,59 @@ class Order extends BaseModel
             $this->error = '该订单不满足核销条件';
             return false;
         }
-        if($exchangeCode != $this['exchange_code']){
-            $this->error = '商品核销码错误，请重试';
-            return false;
-        }
-        $this->transaction(function ()  {
+        $this->transaction(function () use ($extractClerkId) {
             // 更新订单状态：已发货、已收货
             $this->save([
+                'extract_clerk_id' => $extractClerkId,  // 核销员
                 'delivery_status' => 20,
                 'delivery_time' => time(),
                 'receipt_status' => 20,
                 'receipt_time' => time(),
                 'order_status' => 30
             ]);
+            // 新增订单核销记录
+            ShopOrder::add(
+                $this['order_id'],
+                $this['extract_shop_id'],
+                $this['extract_clerk_id'],
+                OrderTypeEnum::MASTER
+            );
         });
         return true;
     }
+
+//    /**
+//     * 确认核销
+//     * @param int $extractClerkId 核销员id
+//     * @return bool|false|int
+//     */
+//    public function extract($exchangeCode)
+//    {
+//        if (
+//            $this['pay_status']['value'] != 20
+//            || $this['delivery_type']['value'] != DeliveryTypeEnum::EXTRACT
+//            || $this['delivery_status']['value'] == 20
+//            || in_array($this['order_status']['value'], [20, 21])
+//        ) {
+//            $this->error = '该订单不满足核销条件';
+//            return false;
+//        }
+//        if($exchangeCode != $this['exchange_code']){
+//            $this->error = '商品核销码错误，请重试';
+//            return false;
+//        }
+//        $this->transaction(function ()  {
+//            // 更新订单状态：已发货、已收货
+//            $this->save([
+//                'delivery_status' => 20,
+//                'delivery_time' => time(),
+//                'receipt_status' => 20,
+//                'receipt_time' => time(),
+//                'order_status' => 30
+//            ]);
+//        });
+//        return true;
+//    }
 
     /**
      * 积分分发
