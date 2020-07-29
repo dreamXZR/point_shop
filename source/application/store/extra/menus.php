@@ -224,10 +224,6 @@ return [
                 'name' => '商家充值流水',
                 'index' => 'shop.point_statements/index',
             ],
-//            [
-//                'name' => '订单核销记录',
-//                'index' => 'shop.order/index',
-//            ]
         ]
     ],
     'store_shop' => [
@@ -248,6 +244,10 @@ return [
                     'store_shop.clerk/edit',
                 ]
             ],
+            [
+                'name' => '订单核销记录',
+                'index' => 'store_shop.order/index',
+            ]
         ],
     ],
     'management_points_statements' => [

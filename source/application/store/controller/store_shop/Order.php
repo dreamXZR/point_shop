@@ -1,6 +1,6 @@
 <?php
 
-namespace app\store\controller\shop;
+namespace app\store\controller\store_shop;
 
 use app\store\controller\Controller;
 use app\store\model\store\Shop as ShopModel;
@@ -20,11 +20,11 @@ class Order extends Controller
      * @return mixed
      * @throws \think\exception\DbException
      */
-    public function index($shop_id = 0, $search = '')
+    public function index($search = '')
     {
         // 核销记录列表
         $model = new OrderModel;
-        $list = $model->getList($shop_id, $search);
+        $list = $model->getList($search);
         // 门店列表
         $shopList = (new ShopModel)->getList();
         return $this->fetch('index', compact('list', 'shopList'));
