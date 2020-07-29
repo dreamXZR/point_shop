@@ -66,7 +66,6 @@ class Order extends BaseModel
             'order_type' => $order_type,
             'shop_id' => $shop_id,
             'clerk_id' => $clerk_id,
-            'wxapp_id' => static::$wxapp_id
         ]);
     }
 
