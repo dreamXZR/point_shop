@@ -18,18 +18,6 @@ use app\common\enum\OrderType as OrderTypeEnum;
                             <div class="am-u-sm-12 am-u-md-9 am-u-sm-push-3">
                                 <div class="am fr">
                                     <div class="am-form-group am-fl">
-                                        <select name="shop_id"
-                                                data-am-selected="{btnSize: 'sm', placeholder: '所属门店'}">
-                                            <option value=""></option>
-                                            <?php if (isset($shopList)): foreach ($shopList as $shop): ?>
-                                                <option value="<?= $shop['shop_id'] ?>"
-                                                    <?= $request->get('shop_id') == $shop['shop_id'] ? 'selected' : '' ?>>
-                                                    <?= $shop['shop_name'] ?>
-                                                </option>
-                                            <?php endforeach; endif; ?>
-                                        </select>
-                                    </div>
-                                    <div class="am-form-group am-fl">
                                         <div class="am-input-group am-input-group-sm tpl-form-border-form">
                                             <input type="text" class="am-form-field" name="search"
                                                    placeholder="请输入核销员姓名"
@@ -50,7 +38,6 @@ use app\common\enum\OrderType as OrderTypeEnum;
                             <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>核销门店</th>
                                 <th>核销员</th>
                                 <th>订单号</th>
                                 <th>订单类型</th>
@@ -61,7 +48,6 @@ use app\common\enum\OrderType as OrderTypeEnum;
                             <?php if (!$list->isEmpty()): foreach ($list as $item): ?>
                                 <tr>
                                     <td class="am-text-middle"><?= $item['id'] ?></td>
-                                    <td class="am-text-middle"><?= $item['shop']['shop_name'] ?></td>
                                     <td class="am-text-middle"><?= $item['clerk']['real_name'] ?></td>
                                     <td class="am-text-middle"><?= $item['order']['order_no'] ?></td>
                                     <td class="am-text-middle">
