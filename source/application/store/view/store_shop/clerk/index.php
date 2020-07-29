@@ -12,10 +12,10 @@
                             <input type="hidden" name="s" value="/<?= $request->pathinfo() ?>">
                             <div class="am-u-sm-12 am-u-md-3">
                                 <div class="am-form-group">
-                                    <?php if (checkPrivilege('shop.clerk/add')): ?>
+                                    <?php if (checkPrivilege('store_shop.clerk/add')): ?>
                                         <div class="am-btn-group am-btn-group-xs">
                                             <a class="am-btn am-btn-default am-btn-success"
-                                               href="<?= url('shop.clerk/add') ?>">
+                                               href="<?= url('store_shop.clerk/add') ?>">
                                                 <span class="am-icon-plus"></span> 新增
                                             </a>
                                         </div>
@@ -24,18 +24,6 @@
                             </div>
                             <div class="am-u-sm-12 am-u-md-9">
                                 <div class="am fr">
-                                    <div class="am-form-group am-fl">
-                                        <select name="shop_id"
-                                                data-am-selected="{btnSize: 'sm', placeholder: '所属门店'}">
-                                            <option value=""></option>
-                                            <?php if (isset($shopList)): foreach ($shopList as $shop): ?>
-                                                <option value="<?= $shop['shop_id'] ?>"
-                                                    <?= $request->get('shop_id') == $shop['shop_id'] ? 'selected' : '' ?>>
-                                                    <?= $shop['shop_name'] ?>
-                                                </option>
-                                            <?php endforeach; endif; ?>
-                                        </select>
-                                    </div>
                                     <div class="am-form-group am-fl">
                                         <div class="am-input-group am-input-group-sm tpl-form-border-form">
                                             <input type="text" class="am-form-field" name="search"
@@ -59,7 +47,6 @@
                                 <th>店员ID</th>
                                 <th>微信头像</th>
                                 <th>微信昵称</th>
-                                <th>所属门店</th>
                                 <th>店员姓名</th>
                                 <th>店员手机号</th>
                                 <th>状态</th>
@@ -77,7 +64,6 @@
                                         </a>
                                     </td>
                                     <td class="am-text-middle"><?= $item['user']['nickName'] ?></td>
-                                    <td class="am-text-middle"><?= $item['shop']['shop_name'] ?></td>
                                     <td class="am-text-middle"><?= $item['real_name'] ?></td>
                                     <td class="am-text-middle"><?= $item['mobile'] ?></td>
                                     <td class="am-text-middle">
@@ -88,12 +74,12 @@
                                     <td class="am-text-middle"><?= $item['create_time'] ?></td>
                                     <td class="am-text-middle">
                                         <div class="tpl-table-black-operation">
-                                            <?php if (checkPrivilege('shop.clerk/edit')): ?>
-                                                <a href="<?= url('shop.clerk/edit', ['clerk_id' => $item['clerk_id']]) ?>">
+                                            <?php if (checkPrivilege('store_shop.clerk/edit')): ?>
+                                                <a href="<?= url('store_shop.clerk/edit', ['clerk_id' => $item['clerk_id']]) ?>">
                                                     <i class="am-icon-pencil"></i> 编辑
                                                 </a>
                                             <?php endif; ?>
-                                            <?php if (checkPrivilege('shop.clerk/delete')): ?>
+                                            <?php if (checkPrivilege('store_shop.clerk/delete')): ?>
                                                 <a href="javascript:void(0);"
                                                    class="item-delete tpl-table-black-operation-del"
                                                    data-id="<?= $item['clerk_id'] ?>">
@@ -126,7 +112,7 @@
     $(function () {
 
         // 删除元素
-        var url = "<?= url('shop.clerk/delete') ?>";
+        var url = "<?= url('store_shop.clerk/delete') ?>";
         $('.item-delete').delete('clerk_id', url, '删除后不可恢复，确定要删除吗？');
 
     });

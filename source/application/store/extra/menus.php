@@ -217,15 +217,7 @@ return [
                         'name' => '提现申请',
                         'index' => 'shop.withdraw/index',
                     ],
-//                    [
-//                        'name' => '店员管理',
-//                        'index' => 'shop.clerk/index',
-//                        'uris' => [
-//                            'shop.clerk/index',
-//                            'shop.clerk/add',
-//                            'shop.clerk/edit',
-//                        ]
-//                    ],
+
                 ]
             ],
             [
@@ -242,6 +234,21 @@ return [
         'name' => '门店管理',
         'icon' => 'icon-shop',
         'index' => 'store_shop/edit',
+        'submenu' => [
+            [
+                'name' => '店铺信息',
+                'index' => 'store_shop/edit',
+            ],
+            [
+                'name' => '店员管理',
+                'index' => 'store_shop.clerk/index',
+                'uris' => [
+                    'store_shop.clerk/index',
+                    'store_shop.clerk/add',
+                    'store_shop.clerk/edit',
+                ]
+            ],
+        ],
     ],
     'management_points_statements' => [
         'name' => '积分流水',

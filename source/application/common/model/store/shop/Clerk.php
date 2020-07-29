@@ -12,7 +12,6 @@ use app\common\model\BaseModel;
 class Clerk extends BaseModel
 {
     protected $name = 'store_shop_clerk';
-
     /**
      * 关联用户表
      * @return \think\model\relation\BelongsTo

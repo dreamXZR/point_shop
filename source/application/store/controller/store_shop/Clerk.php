@@ -1,6 +1,6 @@
 <?php
 
-namespace app\store\controller\shop;
+namespace app\store\controller\store_shop;
 
 use app\store\controller\Controller;
 use app\store\model\store\Shop as ShopModel;
@@ -13,6 +13,7 @@ use app\store\model\store\shop\Clerk as ClerkModel;
  */
 class Clerk extends Controller
 {
+
     /**
      * 店员列表
      * @param int $shop_id
@@ -20,11 +21,11 @@ class Clerk extends Controller
      * @return mixed
      * @throws \think\exception\DbException
      */
-    public function index($shop_id = 0, $search = '')
+    public function index($search = '')
     {
         // 店员列表
         $model = new ClerkModel;
-        $list = $model->getList(-1, $shop_id, $search);
+        $list = $model->getList(-1, $search);
         // 门店列表
         $shopList = (new ShopModel)->getList();
         return $this->fetch('index', compact('list', 'shopList'));
@@ -45,7 +46,7 @@ class Clerk extends Controller
         }
         // 新增记录
         if ($model->add($this->postData('clerk'))) {
-            return $this->renderSuccess('添加成功', url('shop.clerk/index'));
+            return $this->renderSuccess('添加成功', url('store_shop.clerk/index'));
         }
         return $this->renderError($model->getError() ?: '添加失败');
     }
@@ -67,7 +68,7 @@ class Clerk extends Controller
         }
         // 新增记录
         if ($model->edit($this->postData('clerk'))) {
-            return $this->renderSuccess('更新成功', url('shop.clerk/index'));
+            return $this->renderSuccess('更新成功', url('store_shop.clerk/index'));
         }
         return $this->renderError($model->getError() ?: '更新失败');
     }

@@ -25,23 +25,6 @@
                                 </div>
                             </div>
                             <div class="am-form-group">
-                                <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require"> 所属门店 </label>
-                                <div class="am-u-sm-9 am-u-end">
-                                    <select name="clerk[shop_id]"
-                                            data-am-selected="{ btnSize: 'sm', placeholder:'请选择', maxHeight: 400}"
-                                            required>
-                                        <option value=""></option>
-                                        <?php if (isset($shopList) && !$shopList->isEmpty()):
-                                            foreach ($shopList as $item): ?>
-                                                <option value="<?= $item['shop_id'] ?>"><?= $item['shop_name'] ?></option>
-                                            <?php endforeach; endif; ?>
-                                    </select>
-                                    <div class="help-block">
-                                        <small>请选择店员所属的门店，用于核销订单</small>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="am-form-group">
                                 <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require"> 店员姓名 </label>
                                 <div class="am-u-sm-9 am-u-end">
                                     <input type="text" class="tpl-form-input" name="clerk[real_name]"
