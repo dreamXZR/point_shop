@@ -79,6 +79,7 @@ class OutlineOrder extends OrderModel
                 'shop_id' => $this['shop_id'],
                 'type' => 10,
                 'order_no' => $this['order_no'],
+                'charge_money' => $this['total_price'],
                 'points' => $this['points'],
                 'remark' => '用户线下付款',
             ]);

@@ -128,7 +128,7 @@ class Goods extends BaseModel
             $filter['is_point_goods'] = 1;
         }
         //判断是商家还是超管
-        $admin_user = Session::get('yoshop_store.user');
+        $admin_user = getAdminUser();
         if($admin_user['store_shop_id']){
             $filter['shop_id'] = $admin_user['store_shop_id'];
         }

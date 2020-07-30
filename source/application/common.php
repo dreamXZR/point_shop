@@ -4,6 +4,7 @@
 
 use think\Request;
 use think\Log;
+use think\Session;
 
 /**
  * 打印调试函数
@@ -298,4 +299,23 @@ function getGuidV4($trim = true)
         substr($charid, 20, 12) .
         $rbrace;
     return $guidv4;
+}
+
+/**
+ * 获取登录账号信息
+ * @return array|mixed|null
+ */
+function getAdminUser()
+{
+    return Session::get('yoshop_store.user');
+}
+
+/**
+ * 判断是商家还是超级管理员
+ */
+function ifSupertube()
+{
+    $admin_user =  getAdminUser();
+
+    return $admin_user['store_shop_id'] ? false : true;
 }

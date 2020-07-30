@@ -65,6 +65,9 @@
                             <thead>
                             <tr>
                                 <th>商品ID</th>
+                                <?php if (ifSupertube()): ?>
+                                    <th>店铺ID</th>
+                                <?php endif; ?>
                                 <th>商品图片</th>
                                 <th>商品名称</th>
                                 <th>活动开始时间</th>
@@ -80,6 +83,9 @@
                             <?php if (!$list->isEmpty()): foreach ($list as $item): ?>
                                 <tr>
                                     <td class="am-text-middle"><?= $item['goods_id'] ?></td>
+                                    <?php if (ifSupertube()): ?>
+                                        <td class="am-text-middle"><?= $item['shop_id'] ?></td>
+                                    <?php endif; ?>
                                     <td class="am-text-middle">
                                         <a href="<?= $item['image'][0]['file_path'] ?>"
                                            title="点击查看大图" target="_blank">
@@ -117,7 +123,7 @@
                                                     <i class="am-icon-trash"></i> 删除
                                                 </a>
                                             <?php endif; ?>
-                                            <?php if (checkPrivilege('apps.seckill.goods/admin_goods')): ?>
+                                            <?php if (ifSupertube()): ?>
                                                 <?php if ($item['admin_goods_status'] == 10): ?>
                                                     <a href="javascript:;" class="item-takeoff tpl-table-black-operation-del"
                                                        data-id="<?= $item['goods_id'] ?>">

@@ -29,4 +29,21 @@ class PointStatements extends PointStatementsModel
                 'query' => \request()->request()
             ]);
     }
+
+    public function getRemarkAttr($value,$data)
+    {
+        if($data['type'] == 10){
+            if($data['charge_money'] == 0){
+                return $value;
+            }
+            return $value.'-- ￥'.$data['charge_money'];
+        }
+        if($data['type'] == 20){
+            return $value."-- 订单号:".$data['order_no'];
+        }
+        if($data['type'] == 30){
+            return $value.'-- ￥'.$data['charge_money'];
+        }
+        return $value;
+    }
 }

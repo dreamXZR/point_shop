@@ -17,26 +17,6 @@
                                            value="<?= $model['goods_name'] ?>" required>
                                 </div>
                             </div>
-<!--                            <div class="am-form-group">-->
-<!--                                <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">商品分类 </label>-->
-<!--                                <div class="am-u-sm-9 am-u-end">-->
-<!--                                    <select name="goods[category_id]" required-->
-<!--                                            data-am-selected="{searchBox: 1, btnSize: 'sm',-->
-<!--                                             placeholder:'请选择商品分类', maxHeight: 400}">-->
-<!--                                        <option value=""></option>-->
-<!--                                        --><?php //if (isset($catgory)): foreach ($catgory as $first): ?>
-<!--                                            <option value="--><?//= $first['category_id'] ?><!--"-->
-<!--                                                --><?//= $model['category_id'] == $first['category_id'] ? 'selected' : '' ?><!-->-->
-<!--                                                --><?//= $first['name'] ?><!--</option>-->
-<!--                                        --><?php //endforeach; endif; ?>
-<!--                                    </select>-->
-<!--                                    --><?php //if (checkPrivilege('apps.sharing.category/add')): ?>
-<!--                                        <small class="am-margin-left-xs">-->
-<!--                                            <a href="--><?//= url('apps.sharing.category/add') ?><!--">去添加</a>-->
-<!--                                        </small>-->
-<!--                                    --><?php //endif; ?>
-<!--                                </div>-->
-<!--                            </div>-->
                             <div class="am-form-group">
                                 <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">商品图片 </label>
                                 <div class="am-u-sm-9 am-u-end">
