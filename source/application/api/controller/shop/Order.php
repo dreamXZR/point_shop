@@ -84,7 +84,7 @@ class Order extends Controller
         // 订单详情
         $order = OrderService::getOrderDetail($order_id, $order_type);
         // 验证是否为该门店的核销员
-        $ClerkModel = ClerkModel::detail(['user_id' => $this->user['user_id']]);
+        $ClerkModel = ClerkModel::detail(['user_id' => $this->user['user_id'],'shop_id'=>$order['shop_id']]);
         if (!$ClerkModel->checkUser($order['extract_shop_id'])) {
             return $this->renderError($ClerkModel->getError());
         }

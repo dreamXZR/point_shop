@@ -101,10 +101,10 @@ class Clerk extends ClerkModel
                 $this->error = '请选择会员';
                 return false;
             }
-            if (self::detail(['user_id' => $data['user_id'], 'is_delete' => 0])) {
-                $this->error = '该会员已经是店员，无需重复添加';
-                return false;
-            }
+//            if (self::detail(['user_id' => $data['user_id'], 'is_delete' => 0])) {
+//                $this->error = '该会员已经是店员，无需重复添加';
+//                return false;
+//            }
         }
         return true;
     }
