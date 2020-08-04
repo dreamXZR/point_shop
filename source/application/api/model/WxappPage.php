@@ -272,7 +272,7 @@ class WxappPage extends WxappPageModel
     private function getShopInfo($select_shop_id)
     {
         $shop = new ShopModel();
-        $data = $shop->field('shop_id,shop_name')->find($select_shop_id);
+        $data = $shop->field('shop_id,shop_name')->where(['shop_id'=>$select_shop_id])->find();
         return $data;
     }
 
