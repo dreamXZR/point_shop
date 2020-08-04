@@ -61,6 +61,8 @@ class WxappPage extends WxappPageModel
                 $items[$key]['data'] = $model->getSpecialList($item);
             } else if ($item['type'] === 'shop') {
                 $items[$key]['data'] = $model->getShopList($item);
+            } else if ($item['type'] === 'shopinfo') {
+                $items[$key]['data'] = $model->getShopInfo($select_shop_id);
             }
         }
         return ['page' => $items['page'], 'items' => $items];
@@ -265,6 +267,13 @@ class WxappPage extends WxappPageModel
         $model = new Article;
         $articleList = $model->getList($item['params']['auto']['category'], $item['params']['auto']['showNum']);
         return $articleList->isEmpty() ? [] : $articleList->toArray()['data'];
+    }
+
+    private function getShopInfo($select_shop_id)
+    {
+        $shop = new ShopModel();
+        $data = $shop->field('shop_id,shop_name')->find($select_shop_id);
+        return $data;
     }
 
     /**
