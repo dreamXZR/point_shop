@@ -36,6 +36,10 @@
                                     <p class="item-icon"><i class="iconfont icon-toutiao"></i></p>
                                     <p>头条快报</p>
                                 </nav>
+                                <nav class="special" @click="onAddItem('shopinfo')">
+                                    <p class="item-icon"><i class="iconfont icon-toutiao"></i></p>
+                                    <p>店铺信息</p>
+                                </nav>
                             </div>
                             <div class="title">商城组件</div>
                             <div class="navs-components am-cf">
@@ -71,10 +75,10 @@
                                     <p class="item-icon"><i class="iconfont icon-shangpin5"></i></p>
                                     <p>限时优惠</p>
                                 </nav>
-                                <nav class="special" @click="onAddItem('shop')">
-                                    <p class="item-icon"><i class="iconfont icon-mendian"></i></p>
-                                    <p>线下门店</p>
-                                </nav>
+<!--                                <nav class="special" @click="onAddItem('shop')">-->
+<!--                                    <p class="item-icon"><i class="iconfont icon-mendian"></i></p>-->
+<!--                                    <p>线下门店</p>-->
+<!--                                </nav>-->
                             </div>
                             <div class="title">工具组件</div>
                             <div class="navs-components am-cf">
@@ -280,6 +284,33 @@
                                                         <li class="content-item am-text-truncate"
                                                             v-for="item in (item.params.source == 'choice' ? item.data : item.defaultData)">
                                                             <span>{{ item.article_title }}</span>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="special-more">
+                                                    <i class="iconfont icon-xiangyoujiantou"></i>
+                                                </div>
+                                            </div>
+                                            <div class="btn-edit-del">
+                                                <div class="btn-del" @click.stop="onDeleleItem(index)">删除</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </template>
+
+                                <!-- diy元素: 头条快报 -->
+                                <template v-else-if="item.type == 'shopinfo'">
+                                    <div @click.stop="onEditer(index)">
+                                        <div class="drag optional" :class="{selected:index === selectedIndex}">
+                                            <div class="diy-special dis-flex flex-y-center">
+                                                <div class="special-left">
+                                                    <img :src="item.style.image" alt="" style="width: 23px;">
+                                                </div>
+                                                <div class="special-content flex-box"
+                                                     :class="'display_' + item.style.display">
+                                                    <ul class="special-content-list">
+                                                        <li class="content-item am-text-truncate">
+                                                            <span>{{ item.defaultData.shop_name }}</span>
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -1179,7 +1210,25 @@
                                 </div>
                             </form>
                         </div>
-
+                        <!-- 编辑器: 店铺信息 -->
+                        <div id="tpl_editor_special" v-if="curItem.type == 'shopinfo'">
+                            <div class="editor-title"><span>{{ curItem.name }}</span></div>
+                            <form class="am-form tpl-form-line-form">
+                                <hr data-am-widget="divider" class="am-divider am-divider-dashed">
+                                <div class="am-form-group">
+                                    <label class="am-u-sm-3 am-form-label am-text-xs form-require">图片 </label>
+                                    <div class="am-u-sm-8 am-u-end">
+                                        <div class="data-image">
+                                            <img :src="curItem.style.image" style="height: 38px;" alt=""
+                                                 @click="onEditorSelectImage(curItem.style, 'image')">
+                                        </div>
+                                        <div class="help-block am-padding-top-xs">
+                                            <small>建议尺寸140×38</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
                         <!--编辑器: 搜索栏-->
                         <div id="tpl_editor_search" v-if="curItem.type == 'search'">
                             <div class="editor-title"><span>{{ curItem.name }}</span></div>

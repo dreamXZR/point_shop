@@ -214,6 +214,19 @@ class WxappPage extends BaseModel
                 // '手动选择' => 默认数据
                 'data' => []
             ],
+            'shopinfo' => [
+                'name' => '店铺信息',
+                'type' => 'shopinfo',
+                'style' => [
+                    'display' => '1',
+                    'image' => self::$base_url . 'assets/store/img/diy/site.png'
+                ],
+                'defaultData' => [
+
+                    'shop_name' => '店铺名称'
+
+                ],
+            ],
             'notice' => [
                 'name' => '公告组',
                 'type' => 'notice',
